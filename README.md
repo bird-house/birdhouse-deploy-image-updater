@@ -13,3 +13,13 @@ Automatically updates `birdhouse-deploy` docker images as soon as new tags are p
 `bump_version.sh` : Bump version of specific image in repo
 
 
+## Advantages
+
+- Not dependent on Github API, since abstracted in `hub`
+- Does not require a running docker instance
+
+
+## Limitations
+
+- Restricted to Github repositories
+- Restricted to Dockerhub images
