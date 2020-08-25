@@ -1,26 +1,23 @@
 {
-    "version": "0.1",
+    "version": 1,
     "name": "DACCS E2E docker image updater config",
 
-    "github": {
-        "repository": {
-            "name": "birdhouse-deploy",
-            "url": "https://github.com/bird-house/birdhouse-deploy"
-        }
+    "project": {
+        "name": "birdhouse-deploy",
+        "url": "https://github.com/bird-house/birdhouse-deploy",
+        "bump_file": "birdhouse/default.env"
     },
 
-    "dockerhub": {
-        "repositories": [
-            {
-                "name": "finch",
-                "url": "https://hub.docker.com/r/birdhouse/finch",
-                ""
-                ""
-            },
-            {
-                "name": "weaver",
-                "url": "https://hub.docker.com/r/pavics/weaver"
-            }
-        ]
-    }
+    "images": [
+        {
+            "name": "finch",
+            "url": "https://hub.docker.com/r/birdhouse/finch",
+            "bump_tag": "FINCH_IMAGE"
+        },
+        {
+            "name": "weaver",
+            "url": "https://hub.docker.com/r/pavics/weaver",
+            "bump_tag": "WEAVER_IMAGE"
+        }
+    ]
 }
