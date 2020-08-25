@@ -27,7 +27,7 @@ done
 
 
 # # git specifics
-# REPO_URL=https://github.com/bird-house/finch
+# REPO_URL=https://github.com/bird-house/birdhouse-deploy
 # PROJECT_NAME=finch
 # COMMIT_MESSAGE="bump_finch_0.5.3"
 # BRANCH_NAME="bump_finch_0.5.3"
