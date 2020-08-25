@@ -42,14 +42,18 @@ done
 # GITHUB_PASSWORD=""
 
 
+# prepare repo
 git clone $REPO_URL
 cd $PROJECT_NAME
 git checkout -b $BRANCH_NAME
 
-IMAGE_VERSION_LOCATOR=$IMAGE_VERSION_LOCATOR NEW_IMAGE_TAG=$NEW_IMAGE_TAG VERSION_FILE=$VERSION_FILE ./bump_version.sh
+# bumpversion
+./bump_version.sh
 
+# push
 git add -A
 git commit -m $COMMIT_MESSAGE
 git push
 
+# PR
 hub pull-request -m $COMMIT_MESSAGE
