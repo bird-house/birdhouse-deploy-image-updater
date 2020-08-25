@@ -1,5 +1,4 @@
-
-
+#!/bin/bash
 
 if [[ -z $0 ]]
 then

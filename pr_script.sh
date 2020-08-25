@@ -1,4 +1,4 @@
-
+#!/bin/bash
 
 # git specifics
 REPO_URL=https://github.com/bird-house/finch
