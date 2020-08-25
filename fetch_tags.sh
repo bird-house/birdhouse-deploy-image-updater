@@ -6,6 +6,7 @@
 # 1 - parameter error
 # 50 - dockerhub pull error
 # 51 - no valid docker image tag
+# 52 - no old tag file found
 ###
 
 DOCKER_HUB_REPO="birdhouse/finch"
@@ -48,21 +49,27 @@ fi
 OLD_FILENAME=$NAME.old
 OLD_FILEPATH=$DATA_DIR/$OLD_FILENAME
 
+NEW_TAG_FOUND=false
+
 if [ -f "$OLD_FILEPATH" ] && [ -f "$NEW_FILEPATH" ]; then
     DIFF=$(diff $OLD_FILEPATH $NEW_FILEPATH)
 
-    if [ "$DIFF"  == "" ]; then
-        echo "[INFO] No new tag found. Exiting"
-        rm $NEW_FILEPATH
-        exit 0
-    fi
+    # TODO : uncomment after testing
+    # if [ "$DIFF"  == "" ]; then
+    #     echo "[INFO] No new tag found. Exiting"
+    #     rm $NEW_FILEPATH
+    #     exit 0
+    # fi
 
-    # rotate historical files
-    rm $OLD_FILEPATH
-    mv $NEW_FILEPATH $OLD_FILEPATH
+    NEW_TAG_FOUND=true
 else
     echo "[INFO] No old file found to compare with. Skipping diff."
 fi
 
+# rotate historical files
+mv $NEW_FILEPATH $OLD_FILEPATH
 
 # launch pr_script with params
+if [[ $NEW_TAG_FOUND = true ]]; then
+    ./pr_script.sh
+fi
