@@ -11,6 +11,12 @@
 
 DOCKER_HUB_REPO="birdhouse/finch"
 
+if [[ -z "${DOCKER_HUB_REPO}" ]]; then
+  echo "[ERROR] Missing DOCKER_HUB_REPO environment variable. Exiting."
+  exit 1
+fi
+
+
 DATA_DIR="data"
 
 

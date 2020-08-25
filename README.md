@@ -4,7 +4,9 @@
 Automatically updates `birdhouse-deploy` docker images as soon as new tags are pushed.
 
 
-`[cronjob]` : Periodically trigger `fetch_tags.sh`
+`[cronjob]` : Periodically trigger `main.sh`
+<br>
+`` : Iterates images defined in config to call `fetch_tags.sh`
 <br>
 `fetch_tags.sh` : Check DockerHub image tags to trigger `pr_script.sh`
 <br>
