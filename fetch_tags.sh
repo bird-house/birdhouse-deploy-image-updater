@@ -24,6 +24,7 @@ TAG_INDEX=0
 
 while [ "$LATEST_TAG" == "latest" ]
 do
+    # assumption that results are always in the same order, most recent first
     LATEST_TAG=$(wget -q https://registry.hub.docker.com/v2/repositories/$DOCKER_HUB_REPO/tags -O- | jq '.results['$TAG_INDEX'].name' | tr -d \")
     TAG_INDEX=$TAG_INDEX+1
 done
