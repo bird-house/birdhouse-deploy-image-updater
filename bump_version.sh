@@ -27,3 +27,5 @@ do
 done
 
 # TODO implement logic
+
+pwd

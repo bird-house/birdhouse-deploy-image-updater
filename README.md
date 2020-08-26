@@ -3,6 +3,15 @@
 
 STATUS : Experimental
 
+## Requirements
+
+- hub (via brew)
+- jq
+
+.. and for tests ..
+
+- python3
+
 
 Automatically updates `birdhouse-deploy` docker images as soon as new tags are pushed.
 

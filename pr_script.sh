@@ -53,7 +53,7 @@ cd $PROJECT_NAME
 git checkout -b $BRANCH_NAME
 
 # bumpversion
-BUMP_TAG=$BUMP_TAG BUMP_TAG_VALUE=$BUMP_TAG_VALUE BUMP_FILE=$BUMP_FILE ./bump_version.sh
+BUMP_TAG=$BUMP_TAG BUMP_TAG_VALUE=$BUMP_TAG_VALUE BUMP_FILE=$BUMP_FILE ../../bump_version.sh
 
 # push
 git add -A
