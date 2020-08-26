@@ -9,6 +9,9 @@
 # 52 - no old tag file found
 ###
 
+# Sample envionment variables
+# DOCKER_HUB_REPO="birdhouse/finch"
+
 REQUIRED_ENV_VARS='
     DOCKER_HUB_REPO
 '
@@ -17,14 +20,13 @@ REQUIRED_ENV_VARS='
 for env_var in $REQUIRED_ENV_VARS
 do
     if [[ ! -v "${env_var}" ]]; then
-        echo "[ERROR] Missing ${env_var} environment variable. Exiting."
+        echo "[ERROR] [$0] Missing ${env_var} environment variable. Exiting."
         exit 1
     fi
 done
 
-echo "[STEP] [$DOCKER_HUB_REPO] Fetch tags"
+echo "[STEP] [$0] [$DOCKER_HUB_REPO] Fetch tags"
 
-# DOCKER_HUB_REPO="birdhouse/finch"
 DATA_DIR="data"
 
 
@@ -45,7 +47,7 @@ do
 done
 
 if [ "$LATEST_TAG" == "" ]; then
-    echo "[INFO] [$DOCKER_HUB_REPO] No valid tag found."
+    echo "[INFO] [$0] [$DOCKER_HUB_REPO] No valid tag found."
     exit 51
 fi
 
@@ -54,7 +56,7 @@ echo $LATEST_TAG > $NEW_FILEPATH
 
 # make sure data is persisted to file
 if [ ! -f "$NEW_FILEPATH" ]; then
-    echo "[WARNING] [$DOCKER_HUB_REPO] Error when pulling DockerHub data. Exiting."
+    echo "[WARNING] [$0] [$DOCKER_HUB_REPO] Error when pulling DockerHub data. Exiting."
     exit 50
 fi
 
@@ -69,15 +71,15 @@ if [ -f "$OLD_FILEPATH" ] && [ -f "$NEW_FILEPATH" ]; then
     DIFF=$(diff $OLD_FILEPATH $NEW_FILEPATH)
 
     # TODO : uncomment after testing
-    if [ "$DIFF"  == "" ]; then
-        echo "[INFO] [$DOCKER_HUB_REPO] No new tag found. Exiting."
-        rm $NEW_FILEPATH
-        exit 0
-    else
+    # if [ "$DIFF"  == "" ]; then
+    #     echo "[INFO] [$0] [$DOCKER_HUB_REPO] No new tag found. Exiting."
+    #     rm $NEW_FILEPATH
+    #     exit 0
+    # else
         NEW_TAG_FOUND=true
-    fi
+    # fi
 else
-    echo "[INFO] [$DOCKER_HUB_REPO] No old file found to compare with. Skipping diff."
+    echo "[INFO] [$0] [$DOCKER_HUB_REPO] No old file found to compare with. Skipping diff."
 fi
 
 # rotate historical files
@@ -85,6 +87,5 @@ mv $NEW_FILEPATH $OLD_FILEPATH
 
 # launch pr_script with params
 if [[ $NEW_TAG_FOUND = true ]]; then
-    echo "[INFO] [$DOCKER_HUB_REPO] pr_script trigger"
-    # ./pr_script.sh
+    ./pr_script.sh
 fi
