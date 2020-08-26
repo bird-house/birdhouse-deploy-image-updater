@@ -15,7 +15,7 @@ source test/integration/env.test && ONLY_UPDATE_TAGS_HISTORY=true ./main.sh
 
 # update an image
 printf "%s\n" "" "    [TEST] Pushing finch tag" ""
-curl -XPOST localhost:5000/birdhouse/finch/version-0.5.4
+curl -XPOST localhost:5000/pavics/weaver/1.13.2-worker
 
 # run updater CLI
 printf "%s\n" "" "    [TEST] Running updater" ""

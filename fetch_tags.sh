@@ -14,7 +14,7 @@
 # IMAGE_ID="weaver-worker"
 # DOCKERHUB_REPO="pavics/weaver"
 # TAG_FILTER="^[0-9]+(\\.[0-9]+)*$"
-# BUMP_TAG="FINCH_IMAGE"
+# BUMP_TAG="WEAVER_WORKER_IMAGE"
 # BUMP_FILE="birdhouse/default.env"
 
 REQUIRED_ENV_VARS='

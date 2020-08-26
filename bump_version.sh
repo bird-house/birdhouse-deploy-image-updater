@@ -7,8 +7,8 @@
 ###
 
 # Sample environment variables
-# BUMP_TAG="FINCH_IMAGE"
-# BUMP_TAG_VALUE="0.5.3"
+# BUMP_TAG="WEAVER_WORKER_IMAGE"
+# BUMP_TAG_VALUE="1.13.2-worker"
 # BUMP_FILE="birdhouse/default.env"
 
 REQUIRED_ENV_VARS='

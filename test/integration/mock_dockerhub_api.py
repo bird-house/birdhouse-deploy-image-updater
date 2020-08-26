@@ -7,7 +7,7 @@ app = Flask(__name__)
 # testing paths:
 # curl 192.168.99.201:5000/v2/repositories/birdhouse/finch/tags
 # curl 192.168.99.201:5000/v2/repositories/pavics/weaver/tags
-# curl -XPOST localhost:5000/birdhouse/finch/version-0.5.4
+# curl -XPOST localhost:5000/pavics/weaver/1.13.2-worker
 
 
 BIRDHOUSE_FINCH_DATA = json.load(open("./mock_data/birdhouse_finch"))

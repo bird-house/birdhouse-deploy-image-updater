@@ -10,8 +10,8 @@
 # REPO_URL=https://github.com/bird-house/birdhouse-deploy
 # PROJECT_NAME=birdhouse-deploy
 # IMAGE_ID="weaver-worker"
-# BUMP_TAG="FINCH_IMAGE"
-# BUMP_TAG_VALUE="0.5.3"
+# BUMP_TAG="WEAVER_WORKER_IMAGE"
+# BUMP_TAG_VALUE="1.13.2-worker"
 # BUMP_FILE="birdhouse/default.env"
 # GITHUB_USER=""
 # GITHUB_PASSWORD=""
