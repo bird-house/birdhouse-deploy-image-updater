@@ -13,12 +13,16 @@
 # Sample envionment variables
 # IMAGE_ID="weaver-worker"
 # DOCKERHUB_REPO="pavics/weaver"
-# TAG_FILTER="worker"
+# TAG_FILTER="^[0-9]+(\\.[0-9]+)*$"
+# BUMP_TAG="FINCH_IMAGE"
+# BUMP_FILE="birdhouse/default.env"
 
 REQUIRED_ENV_VARS='
     IMAGE_ID
     DOCKERHUB_REPO
     TAG_FILTER
+    BUMP_TAG
+    BUMP_FILE
 '
 
 # args parsing
@@ -30,7 +34,7 @@ do
     fi
 done
 
-echo "[STEP] [$0] [$DOCKERHUB_REPO] Fetch tags"
+echo "[STEP] [$0] [$IMAGE_ID] Fetch tags"
 
 DATA_DIR="data"
 
@@ -58,7 +62,7 @@ do
 done
 
 if [ "$LATEST_TAG" == "" ]; then
-    echo "[INFO] [$0] [$DOCKERHUB_REPO] No valid tag found. Exiting."
+    echo "[INFO] [$0] [$IMAGE_ID] No valid tag found. Exiting."
     exit 51
 fi
 
@@ -67,7 +71,7 @@ echo $LATEST_TAG > $NEW_FILEPATH
 
 # make sure data is persisted to file
 if [ ! -f "$NEW_FILEPATH" ]; then
-    echo "[WARNING] [$0] [$DOCKERHUB_REPO] Error when pulling DockerHub data. Exiting."
+    echo "[WARNING] [$0] [$IMAGE_ID] Error when pulling DockerHub data. Exiting."
     exit 50
 fi
 
@@ -83,14 +87,14 @@ if [ -f "$OLD_FILEPATH" ] && [ -f "$NEW_FILEPATH" ]; then
 
     # TODO : uncomment after testing
     if [ "$DIFF"  == "" ]; then
-        echo "[INFO] [$0] [$DOCKERHUB_REPO] No new tag found. Exiting."
+        echo "[INFO] [$0] [$IMAGE_ID] No new tag found. Exiting."
         rm $NEW_FILEPATH
         exit 0
     else
         NEW_TAG_FOUND=true
     fi
 else
-    echo "[INFO] [$0] [$DOCKERHUB_REPO] No old file found to compare with. Skipping diff."
+    echo "[INFO] [$0] [$IMAGE_ID] No old file found to compare with. Skipping diff."
 fi
 
 # rotate historical files
@@ -98,11 +102,11 @@ mv $NEW_FILEPATH $OLD_FILEPATH
 
 # useful for first time use
 if [[ ! -z "${ONLY_UPDATE_TAGS_HISTORY}" ]]; then
-    echo "[INFO] Tag for [$DOCKERHUB_REPO] updated and ONLY_UPDATE_TAGS_HISTORY used. Exiting."
+    echo "[INFO] Tag for [$IMAGE_ID] updated and ONLY_UPDATE_TAGS_HISTORY used. Exiting."
     exit 0
 fi
 
 # launch pr_script with params
 if [[ $NEW_TAG_FOUND = true ]]; then
-    IMAGE_ID=$IMAGE_ID ./pr_script.sh
+    IMAGE_ID=$IMAGE_ID BUMP_TAG=$BUMP_TAG BUMP_TAG_VALUE=$LATEST_TAG BUMP_FILE=$BUMP_FILE ./pr_script.sh
 fi

@@ -10,8 +10,8 @@
 # REPO_URL=https://github.com/bird-house/birdhouse-deploy
 # PROJECT_NAME=birdhouse-deploy
 # IMAGE_ID="weaver-worker"
-# IMAGE_VERSION_LOCATOR="FINCH_IMAGE"
-# BUMP_TAG="0.5.3"
+# BUMP_TAG="FINCH_IMAGE"
+# BUMP_TAG_VALUE="0.5.3"
 # BUMP_FILE="birdhouse/default.env"
 # GITHUB_USER=""
 # GITHUB_PASSWORD=""
@@ -20,8 +20,8 @@ REQUIRED_ENV_VARS='
     REPO_URL
     PROJECT_NAME
     IMAGE_ID
-    IMAGE_VERSION_LOCATOR
     BUMP_TAG
+    BUMP_TAG_VALUE
     BUMP_FILE
     GITHUB_USER
     GITHUB_PASSWORD
