@@ -14,14 +14,28 @@
             "url": "https://hub.docker.com/r/birdhouse/finch",
             "dockerhub_repo_name": "birdhouse/finch",
             "bump_tag": "FINCH_IMAGE",
-            "tag_filter": ""
+            "tag_filter": "^version-[0-9]+(\\.[0-9]+)*$"
         },
         {
             "name": "weaver",
             "url": "https://hub.docker.com/r/pavics/weaver",
             "dockerhub_repo_name": "pavics/weaver",
             "bump_tag": "WEAVER_IMAGE",
-            "tag_filter": "manager"
+            "tag_filter": "^[0-9]+(\\.[0-9]+)*$"
+        },
+        {
+            "name": "weaver-manager",
+            "url": "https://hub.docker.com/r/pavics/weaver",
+            "dockerhub_repo_name": "pavics/weaver",
+            "bump_tag": "WEAVER_IMAGE",
+            "tag_filter": "^[0-9]+(\\.[0-9]+)*-manager$"
+        },
+        {
+            "name": "weaver-worker",
+            "url": "https://hub.docker.com/r/pavics/weaver",
+            "dockerhub_repo_name": "pavics/weaver",
+            "bump_tag": "WEAVER_IMAGE",
+            "tag_filter": "^[0-9]+(\\.[0-9]+)*-worker$"
         }
     ]
 }
