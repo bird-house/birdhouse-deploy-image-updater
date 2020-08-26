@@ -83,5 +83,6 @@ mv $NEW_FILEPATH $OLD_FILEPATH
 
 # launch pr_script with params
 if [[ $NEW_TAG_FOUND = true ]]; then
-    ./pr_script.sh
+    echo "pr_script trigger"
+    # ./pr_script.sh
 fi

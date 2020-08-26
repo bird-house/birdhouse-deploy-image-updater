@@ -22,5 +22,5 @@ do
     DOCKER_HUB_REPO=$(echo $CURRENT_IMAGE | jq '.dockerhub_repo_name')
 
     # start fetch_tags
-    ./fetch_tags.sh
+    DOCKER_HUB_REPO=$DOCKER_HUB_REPO ./fetch_tags.sh
 done
