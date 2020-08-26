@@ -58,7 +58,7 @@ do
 done
 
 if [ "$LATEST_TAG" == "" ]; then
-    echo "[INFO] [$0] [$DOCKERHUB_REPO] No valid tag found."
+    echo "[INFO] [$0] [$DOCKERHUB_REPO] No valid tag found. Exiting."
     exit 51
 fi
 
