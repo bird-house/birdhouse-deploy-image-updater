@@ -1,6 +1,9 @@
 # DACCS Docker image updater
 
 
+STATUS : Experimental
+
+
 Automatically updates `birdhouse-deploy` docker images as soon as new tags are pushed.
 
 
