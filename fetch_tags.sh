@@ -40,7 +40,6 @@ mkdir -p data
 NAME=${DOCKER_HUB_REPO//\//_}_$IMAGE_ID
 NEW_FILENAME=$NAME.new
 NEW_FILEPATH=$DATA_DIR/$NEW_FILENAME
-# LATEST_TAG="latest"     # dummy one, to get replaced during API call. Needs to be more specific than 'latest'
 DOCKER_HUB_IMAGE_TAGS=$(wget -q https://registry.hub.docker.com/v2/repositories/$DOCKER_HUB_REPO/tags?page_size=1024 -O-)
 MAX_TAG_ITERATION=$(echo $DOCKER_HUB_IMAGE_TAGS | jq '.count')
 TAG_INDEX=0
@@ -50,7 +49,6 @@ while [[ ! $LATEST_TAG =~ $TAG_FILTER ]]
 do
     # assumption that results are always in the same order, most recent first
     LATEST_TAG=$(echo $DOCKER_HUB_IMAGE_TAGS | jq '.results['$TAG_INDEX'].name' | tr -d \")
-    echo $LATEST_TAG
     TAG_INDEX=$TAG_INDEX+1
 
     if [[ "$TAG_INDEX" -eq "$MAX_TAG_ITERATION" ]]; then
