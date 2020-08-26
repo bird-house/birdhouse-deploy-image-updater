@@ -12,6 +12,10 @@
 CONFIG_FILEPATH='config.json'
 
 
+# set global variables, to be used accross the script call stack
+export REPO_URL=$(cat $CONFIG_FILEPATH | jq '.project.url' | tr -d '\"')
+export PROJECT_NAME=${REPO_URL##*/}
+
 # iterate through the images in config file
 IMAGE_COUNT=$(cat $CONFIG_FILEPATH  | jq '.images | length')
 IMAGE_INDEX=0
