@@ -25,10 +25,12 @@ do
     fi
 done
 
+echo "[STEP] [$PROJECT_NAME] Fetch tags"
+
 
 # # git specifics
 # REPO_URL=https://github.com/bird-house/birdhouse-deploy
-# PROJECT_NAME=finch
+# PROJECT_NAME=birdhouse-deploy
 # COMMIT_MESSAGE="bump_finch_0.5.3"
 # BRANCH_NAME="bump_finch_0.5.3"
 
@@ -43,7 +45,7 @@ done
 
 
 # prepare repo
-git clone $REPO_URL
+git clone $REPO_URL         # TODO : other wrking_dir
 cd $PROJECT_NAME
 git checkout -b $BRANCH_NAME
 

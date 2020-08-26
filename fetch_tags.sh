@@ -22,6 +22,8 @@ do
     fi
 done
 
+echo "[STEP] [$DOCKER_HUB_REPO] Fetch tags"
+
 # DOCKER_HUB_REPO="birdhouse/finch"
 DATA_DIR="data"
 
@@ -35,7 +37,7 @@ LATEST_TAG="latest"     # dummy one, to get replaced during API call. Needs to b
 
 TAG_INDEX=0
 
-while [ "$LATEST_TAG" == "latest" ]
+while [[ "$LATEST_TAG" == *"latest"* ]]
 do
     # assumption that results are always in the same order, most recent first
     LATEST_TAG=$(wget -q https://registry.hub.docker.com/v2/repositories/$DOCKER_HUB_REPO/tags -O- | jq '.results['$TAG_INDEX'].name' | tr -d \")
@@ -43,7 +45,7 @@ do
 done
 
 if [ "$LATEST_TAG" == "" ]; then
-    echo "[INFO] No valid tag found."
+    echo "[INFO] [$DOCKER_HUB_REPO] No valid tag found."
     exit 51
 fi
 
@@ -52,7 +54,7 @@ echo $LATEST_TAG > $NEW_FILEPATH
 
 # make sure data is persisted to file
 if [ ! -f "$NEW_FILEPATH" ]; then
-    echo "[WARNING] Error when pulling DockerHub data. Exiting."
+    echo "[WARNING] [$DOCKER_HUB_REPO] Error when pulling DockerHub data. Exiting."
     exit 50
 fi
 
@@ -67,15 +69,15 @@ if [ -f "$OLD_FILEPATH" ] && [ -f "$NEW_FILEPATH" ]; then
     DIFF=$(diff $OLD_FILEPATH $NEW_FILEPATH)
 
     # TODO : uncomment after testing
-    # if [ "$DIFF"  == "" ]; then
-    #     echo "[INFO] No new tag found. Exiting"
-    #     rm $NEW_FILEPATH
-    #     exit 0
-    # fi
-
-    NEW_TAG_FOUND=true
+    if [ "$DIFF"  == "" ]; then
+        echo "[INFO] [$DOCKER_HUB_REPO] No new tag found. Exiting."
+        rm $NEW_FILEPATH
+        exit 0
+    else
+        NEW_TAG_FOUND=true
+    fi
 else
-    echo "[INFO] No old file found to compare with. Skipping diff."
+    echo "[INFO] [$DOCKER_HUB_REPO] No old file found to compare with. Skipping diff."
 fi
 
 # rotate historical files
@@ -83,6 +85,6 @@ mv $NEW_FILEPATH $OLD_FILEPATH
 
 # launch pr_script with params
 if [[ $NEW_TAG_FOUND = true ]]; then
-    echo "pr_script trigger"
+    echo "[INFO] [$DOCKER_HUB_REPO] pr_script trigger"
     # ./pr_script.sh
 fi

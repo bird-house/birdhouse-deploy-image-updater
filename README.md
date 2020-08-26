@@ -14,8 +14,7 @@ Automatically updates `birdhouse-deploy` docker images as soon as new tags are p
 <br>
 `bump_version.sh` : Bump version of specific image in repo
 
-Note that env variables are passed implicitely all along the pipeline.
-
+Tags containing "latest" are taken into account, since usage should be avoided in any ways in `birdhouse-deploy` repo.
 
 ## Advantages
 
