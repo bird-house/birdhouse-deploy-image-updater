@@ -12,12 +12,12 @@
 
 # Sample envionment variables
 # IMAGE_ID="weaver-worker"
-# DOCKER_HUB_REPO="pavics/weaver"
+# DOCKERHUB_REPO="pavics/weaver"
 # TAG_FILTER="worker"
 
 REQUIRED_ENV_VARS='
     IMAGE_ID
-    DOCKER_HUB_REPO
+    DOCKERHUB_REPO
     TAG_FILTER
 '
 
@@ -30,25 +30,25 @@ do
     fi
 done
 
-echo "[STEP] [$0] [$DOCKER_HUB_REPO] Fetch tags"
+echo "[STEP] [$0] [$DOCKERHUB_REPO] Fetch tags"
 
 DATA_DIR="data"
 
 
 # get latest image tag from dockerhub
 mkdir -p data
-NAME=${DOCKER_HUB_REPO//\//_}_$IMAGE_ID
+NAME=${DOCKERHUB_REPO//\//_}_$IMAGE_ID
 NEW_FILENAME=$NAME.new
 NEW_FILEPATH=$DATA_DIR/$NEW_FILENAME
-DOCKER_HUB_IMAGE_TAGS=$(wget -q https://registry.hub.docker.com/v2/repositories/$DOCKER_HUB_REPO/tags?page_size=1024 -O-)
-MAX_TAG_ITERATION=$(echo $DOCKER_HUB_IMAGE_TAGS | jq '.count')
+DOCKERHUB_IMAGE_TAGS=$(wget -q https://registry.hub.docker.com/v2/repositories/$DOCKERHUB_REPO/tags?page_size=1024 -O-)
+MAX_TAG_ITERATION=$(echo $DOCKERHUB_IMAGE_TAGS | jq '.count')
 TAG_INDEX=0
 TAG_FILTER=${TAG_FILTER//\\\\/\\}    # replace \\ with \ in regex
 
 while [[ ! $LATEST_TAG =~ $TAG_FILTER ]]
 do
     # assumption that results are always in the same order, most recent first
-    LATEST_TAG=$(echo $DOCKER_HUB_IMAGE_TAGS | jq '.results['$TAG_INDEX'].name' | tr -d \")
+    LATEST_TAG=$(echo $DOCKERHUB_IMAGE_TAGS | jq '.results['$TAG_INDEX'].name' | tr -d \")
     TAG_INDEX=$TAG_INDEX+1
 
     if [[ "$TAG_INDEX" -eq "$MAX_TAG_ITERATION" ]]; then
@@ -58,7 +58,7 @@ do
 done
 
 if [ "$LATEST_TAG" == "" ]; then
-    echo "[INFO] [$0] [$DOCKER_HUB_REPO] No valid tag found."
+    echo "[INFO] [$0] [$DOCKERHUB_REPO] No valid tag found."
     exit 51
 fi
 
@@ -67,7 +67,7 @@ echo $LATEST_TAG > $NEW_FILEPATH
 
 # make sure data is persisted to file
 if [ ! -f "$NEW_FILEPATH" ]; then
-    echo "[WARNING] [$0] [$DOCKER_HUB_REPO] Error when pulling DockerHub data. Exiting."
+    echo "[WARNING] [$0] [$DOCKERHUB_REPO] Error when pulling DockerHub data. Exiting."
     exit 50
 fi
 
@@ -83,14 +83,14 @@ if [ -f "$OLD_FILEPATH" ] && [ -f "$NEW_FILEPATH" ]; then
 
     # TODO : uncomment after testing
     # if [ "$DIFF"  == "" ]; then
-    #     echo "[INFO] [$0] [$DOCKER_HUB_REPO] No new tag found. Exiting."
+    #     echo "[INFO] [$0] [$DOCKERHUB_REPO] No new tag found. Exiting."
     #     rm $NEW_FILEPATH
     #     exit 0
     # else
         NEW_TAG_FOUND=true
     # fi
 else
-    echo "[INFO] [$0] [$DOCKER_HUB_REPO] No old file found to compare with. Skipping diff."
+    echo "[INFO] [$0] [$DOCKERHUB_REPO] No old file found to compare with. Skipping diff."
 fi
 
 # rotate historical files

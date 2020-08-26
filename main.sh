@@ -24,9 +24,9 @@ for ((n=0; n<$IMAGE_COUNT; n++))
 do
     CURRENT_IMAGE=$(cat $CONFIG_FILEPATH | jq '.images['$n']')
     IMAGE_ID=$(echo $CURRENT_IMAGE | jq '.id' | tr -d '\"')
-    DOCKER_HUB_REPO=$(echo $CURRENT_IMAGE | jq '.dockerhub_repo_name' | tr -d '\"')
+    DOCKERHUB_REPO=$(echo $CURRENT_IMAGE | jq '.dockerhub_repo_name' | tr -d '\"')
     TAG_FILTER=$(echo $CURRENT_IMAGE | jq '.tag_filter' | tr -d '\"')
 
     # start fetch_tags
-    IMAGE_ID=$IMAGE_ID DOCKER_HUB_REPO=$DOCKER_HUB_REPO TAG_FILTER=$TAG_FILTER ./fetch_tags.sh
+    IMAGE_ID=$IMAGE_ID DOCKERHUB_REPO=$DOCKERHUB_REPO TAG_FILTER=$TAG_FILTER ./fetch_tags.sh
 done
