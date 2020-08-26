@@ -1,24 +1,24 @@
 #!/bin/bash
 
-if [[ -z $0 ]]
-then
-  echo "[INFO] Usage: $0"
-  exit 1
-fi
+###
+# EXIT CODES
+# 0 - success
+# 1 - parameter error
+###
 
-if [[ -z "${IMAGE_VERSION_LOCATOR}" ]]; then
-  echo "[ERROR] IMAGE_VERSION_LOCATOR environment variable not set. Exiting."
-  exit 1
-fi
+REQUIRED_ENV_VARS='
+    IMAGE_VERSION_LOCATOR
+    BUMP_TAG
+    BUMP_FILE
+'
 
-if [[ -z "${NEW_IMAGE_TAG}" ]]; then
-  echo "[ERROR] NEW_IMAGE_TAG environment variable not set. Exiting."
-  exit 1
-fi
-
-if [[ -z "${VERSION_FILE}" ]]; then
-  echo "[ERROR] VERSION_FILE environment variable not set. Exiting."
-  exit 1
-fi
+# args parsing
+for env_var in $REQUIRED_ENV_VARS
+do
+    if [[ ! -v "${env_var}" ]]; then
+        echo "[ERROR] Missing ${env_var} environment variable. Exiting."
+        exit 1
+    fi
+done
 
 # TODO

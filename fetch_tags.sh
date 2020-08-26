@@ -9,14 +9,20 @@
 # 52 - no old tag file found
 ###
 
-DOCKER_HUB_REPO="birdhouse/finch"
+REQUIRED_ENV_VARS='
+    DOCKER_HUB_REPO
+'
 
-if [[ -z "${DOCKER_HUB_REPO}" ]]; then
-  echo "[ERROR] Missing DOCKER_HUB_REPO environment variable. Exiting."
-  exit 1
-fi
+# args parsing
+for env_var in $REQUIRED_ENV_VARS
+do
+    if [[ ! -v "${env_var}" ]]; then
+        echo "[ERROR] Missing ${env_var} environment variable. Exiting."
+        exit 1
+    fi
+done
 
-
+# DOCKER_HUB_REPO="birdhouse/finch"
 DATA_DIR="data"
 
 

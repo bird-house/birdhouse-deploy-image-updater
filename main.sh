@@ -6,21 +6,21 @@
 # 1 - parameter error
 ###
 
+# no REQUIRED_ENV_VARS
 
 # vars
-
 CONFIG_FILEPATH='config.json'
 
 
 # iterate through the images in config file
+IMAGE_COUNT=$(cat $CONFIG_FILEPATH  | jq '.images | length')
 IMAGE_INDEX=0
 
-CURRENT_IMAGE=$(cat $CONFIG_FILEPATH | jq '.images['$IMAGE_INDEX']')
-DOCKER_HUB_REPO=$(echo $CURRENT_IMAGE | jq '.dockerhub_repo_name')
+for ((n=0; n<$IMAGE_COUNT; n++))
+do
+    CURRENT_IMAGE=$(cat $CONFIG_FILEPATH | jq '.images['$n']')
+    DOCKER_HUB_REPO=$(echo $CURRENT_IMAGE | jq '.dockerhub_repo_name')
 
-
-# !! TODO : change call structure, to manage env vars in better way
-
-
-# start fetch_tags
-./fetch_tags.sh
+    # start fetch_tags
+    ./fetch_tags.sh
+done

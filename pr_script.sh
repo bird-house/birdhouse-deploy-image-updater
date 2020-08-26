@@ -12,8 +12,8 @@ REQUIRED_ENV_VARS='
     COMMIT_MESSAGE
     BRANCH_NAME
     IMAGE_VERSION_LOCATOR
-    NEW_IMAGE_TAG
-    VERSION_FILE
+    BUMP_TAG
+    BUMP_FILE
 '
 
 # args parsing
@@ -34,8 +34,8 @@ done
 
 # # bumpversion config
 # IMAGE_VERSION_LOCATOR="FINCH_IMAGE"
-# NEW_IMAGE_TAG="0.5.3"
-# VERSION_FILE="birdhouse/default.env"
+# BUMP_TAG="0.5.3"
+# BUMP_FILE="birdhouse/default.env"
 
 # # hub config
 # GITHUB_USER=""
