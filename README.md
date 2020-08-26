@@ -52,3 +52,9 @@ ONLY_UPDATE_TAGS_HISTORY=true ./main.sh
 # then
 ./main.sh
 ```
+
+
+# Tests
+
+E2E integration test with DockerHub and GitHub API mocks are available in `test/integration`.
+It mimicks an image tag push on DockerHub, then runs the updater script and checks if a new PR has been opened.
