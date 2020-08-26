@@ -13,13 +13,15 @@
             "name": "finch",
             "url": "https://hub.docker.com/r/birdhouse/finch",
             "dockerhub_repo_name": "birdhouse/finch",
-            "bump_tag": "FINCH_IMAGE"
+            "bump_tag": "FINCH_IMAGE",
+            "tag_filter": ""
         },
         {
             "name": "weaver",
             "url": "https://hub.docker.com/r/pavics/weaver",
             "dockerhub_repo_name": "pavics/weaver",
-            "bump_tag": "WEAVER_IMAGE"
+            "bump_tag": "WEAVER_IMAGE",
+            "tag_filter": "manager"
         }
     ]
 }
