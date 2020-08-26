@@ -40,7 +40,7 @@ mkdir -p data
 NAME=${DOCKERHUB_REPO//\//_}_$IMAGE_ID
 NEW_FILENAME=$NAME.new
 NEW_FILEPATH=$DATA_DIR/$NEW_FILENAME
-DOCKERHUB_IMAGE_TAGS=$(wget -q https://registry.hub.docker.com/v2/repositories/$DOCKERHUB_REPO/tags?page_size=1024 -O-)
+DOCKERHUB_IMAGE_TAGS=$(wget -q $DOCKERHUB_IMAGE_TAGS_URL$DOCKERHUB_REPO/tags?page_size=1024 -O-)
 MAX_TAG_ITERATION=$(echo $DOCKERHUB_IMAGE_TAGS | jq '.count')
 TAG_INDEX=0
 TAG_FILTER=${TAG_FILTER//\\\\/\\}    # replace \\ with \ in regex
@@ -82,13 +82,13 @@ if [ -f "$OLD_FILEPATH" ] && [ -f "$NEW_FILEPATH" ]; then
     DIFF=$(diff $OLD_FILEPATH $NEW_FILEPATH)
 
     # TODO : uncomment after testing
-    # if [ "$DIFF"  == "" ]; then
-    #     echo "[INFO] [$0] [$DOCKERHUB_REPO] No new tag found. Exiting."
-    #     rm $NEW_FILEPATH
-    #     exit 0
-    # else
+    if [ "$DIFF"  == "" ]; then
+        echo "[INFO] [$0] [$DOCKERHUB_REPO] No new tag found. Exiting."
+        rm $NEW_FILEPATH
+        exit 0
+    else
         NEW_TAG_FOUND=true
-    # fi
+    fi
 else
     echo "[INFO] [$0] [$DOCKERHUB_REPO] No old file found to compare with. Skipping diff."
 fi

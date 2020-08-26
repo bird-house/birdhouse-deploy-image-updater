@@ -11,6 +11,13 @@
 # vars
 CONFIG_FILEPATH='config.json'
 
+# seed .env if we are not in test mode
+if [[ -z "${TEST_ENV_CONFIG}" ]]; then
+    source .env
+else
+    echo "[INFO] TEST CONFIG SEEDED"
+fi
+
 
 # set global variables, to be used accross the script call stack
 export REPO_URL=$(cat $CONFIG_FILEPATH | jq '.project.url' | tr -d '\"')
