@@ -9,8 +9,7 @@
 # Sample environment variables
 # REPO_URL=https://github.com/bird-house/birdhouse-deploy
 # PROJECT_NAME=birdhouse-deploy
-# COMMIT_MESSAGE="bump_finch_0.5.3"
-# BRANCH_NAME="bump_finch_0.5.3"
+# IMAGE_ID="weaver-worker"
 # IMAGE_VERSION_LOCATOR="FINCH_IMAGE"
 # BUMP_TAG="0.5.3"
 # BUMP_FILE="birdhouse/default.env"
@@ -20,8 +19,7 @@
 REQUIRED_ENV_VARS='
     REPO_URL
     PROJECT_NAME
-    COMMIT_MESSAGE
-    BRANCH_NAME
+    IMAGE_ID
     IMAGE_VERSION_LOCATOR
     BUMP_TAG
     BUMP_FILE
@@ -39,6 +37,9 @@ do
 done
 
 echo "[STEP] [$0] [$PROJECT_NAME] Fetch tags"
+
+COMMIT_MESSAGE="bump ${IMAGE_ID} ${IMAGE_TAG}"
+BRANCH_NAME="bump_${IMAGE_ID}_${IMAGE_TAG}"
 
 
 # prepare repo

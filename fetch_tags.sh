@@ -104,5 +104,5 @@ fi
 
 # launch pr_script with params
 if [[ $NEW_TAG_FOUND = true ]]; then
-    ./pr_script.sh
+    IMAGE_ID=$IMAGE_ID ./pr_script.sh
 fi
