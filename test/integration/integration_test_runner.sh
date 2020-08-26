@@ -14,7 +14,7 @@ printf "%s\n" "" "    [TEST] Running updater" ""
 source test/integration/env.test && ONLY_UPDATE_TAGS_HISTORY=true ./main.sh
 
 # update an image
-printf "%s\n" "" "    [TEST] Pushing finch tag" ""
+printf "%s\n" "" "    [TEST] Pushing finch tag to DockerHub" ""
 curl -XPOST localhost:5000/pavics/weaver/1.13.2-worker
 
 # run updater CLI

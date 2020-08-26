@@ -40,8 +40,8 @@ WORKING_DIR="working_dir"
 
 echo "[STEP] [$0] [$PROJECT_NAME] Fetch tags"
 
-COMMIT_MESSAGE="bump ${IMAGE_ID} ${IMAGE_TAG}"
-BRANCH_NAME="bump_${IMAGE_ID}_${IMAGE_TAG}"
+COMMIT_MESSAGE="bump ${IMAGE_ID} to ${BUMP_TAG_VALUE}"
+BRANCH_NAME="bump_${IMAGE_ID}_to_${BUMP_TAG_VALUE}"
 
 
 # prepare repo
