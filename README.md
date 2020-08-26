@@ -19,6 +19,8 @@ Automatically updates `birdhouse-deploy` docker images as soon as new tags are p
 
 Tags containing "latest" are taken into account, since usage should be avoided in any ways in `birdhouse-deploy` repo.
 
+Hypothesis taken at the moment is that only one image change is done at given time. This limitation needs to be removed, since if two images are updated, the second one will be discarded.
+
 ## Advantages
 
 - Not dependent on Github API, since abstracted in `hub`
@@ -29,3 +31,15 @@ Tags containing "latest" are taken into account, since usage should be avoided i
 
 - Restricted to Github repositories
 - Restricted to Dockerhub images
+
+
+
+# Usage
+
+```
+# first time use, to initiate historical data in `data/`
+ONLY_UPDATE_TAGS_HISTORY=true ./main.sh
+
+# then
+./main.sh
+```

@@ -96,6 +96,12 @@ fi
 # rotate historical files
 mv $NEW_FILEPATH $OLD_FILEPATH
 
+# useful for first time use
+if [[ ! -z "${ONLY_UPDATE_TAGS_HISTORY}" ]]; then
+    echo "[INFO] Tag for [$DOCKERHUB_REPO] updated and ONLY_UPDATE_TAGS_HISTORY used. Exiting."
+    exit 0
+fi
+
 # launch pr_script with params
 if [[ $NEW_TAG_FOUND = true ]]; then
     ./pr_script.sh
