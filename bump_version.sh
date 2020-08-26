@@ -7,13 +7,13 @@
 ###
 
 # Sample environment variables
-# IMAGE_VERSION_LOCATOR="FINCH_IMAGE"
-# BUMP_TAG="0.5.3"
+# BUMP_TAG="FINCH_IMAGE"
+# BUMP_TAG_VALUE="0.5.3"
 # BUMP_FILE="birdhouse/default.env"
 
 REQUIRED_ENV_VARS='
-    IMAGE_VERSION_LOCATOR
     BUMP_TAG
+    BUMP_TAG_VALUE
     BUMP_FILE
 '
 

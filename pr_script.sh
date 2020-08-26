@@ -36,6 +36,8 @@ do
     fi
 done
 
+WORKING_DIR="working_dir"
+
 echo "[STEP] [$0] [$PROJECT_NAME] Fetch tags"
 
 COMMIT_MESSAGE="bump ${IMAGE_ID} ${IMAGE_TAG}"
@@ -43,17 +45,20 @@ BRANCH_NAME="bump_${IMAGE_ID}_${IMAGE_TAG}"
 
 
 # prepare repo
-git clone $REPO_URL         # TODO : other working_dir
+mkdir -p $WORKING_DIR
+rm -rf $WORKING_DIR/$PROJECT_NAME
+cd $WORKING_DIR
+git clone $REPO_URL
 cd $PROJECT_NAME
 git checkout -b $BRANCH_NAME
 
 # bumpversion
-./bump_version.sh
+BUMP_TAG=$BUMP_TAG BUMP_TAG_VALUE=$BUMP_TAG_VALUE BUMP_FILE=$BUMP_FILE ./bump_version.sh
 
 # push
 git add -A
 git commit -m $COMMIT_MESSAGE
-git push
+# git push
 
 # PR
 hub pull-request -m $COMMIT_MESSAGE
