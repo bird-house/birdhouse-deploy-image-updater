@@ -11,10 +11,12 @@
 ###
 
 # Sample envionment variables
+# IMAGE_ID="weaver-worker"
 # DOCKER_HUB_REPO="pavics/weaver"
 # TAG_FILTER="worker"
 
 REQUIRED_ENV_VARS='
+    IMAGE_ID
     DOCKER_HUB_REPO
     TAG_FILTER
 '
@@ -35,7 +37,7 @@ DATA_DIR="data"
 
 # get latest image tag from dockerhub
 mkdir -p data
-NAME=${DOCKER_HUB_REPO//\//_}
+NAME=${DOCKER_HUB_REPO//\//_}_$IMAGE_ID
 NEW_FILENAME=$NAME.new
 NEW_FILEPATH=$DATA_DIR/$NEW_FILENAME
 # LATEST_TAG="latest"     # dummy one, to get replaced during API call. Needs to be more specific than 'latest'
