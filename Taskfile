@@ -19,7 +19,7 @@ function run {
         echo "[ERROR] Missing GITHUB_PASSWORD. Exiting."
         exit 1
     fi
-echo $HISTORIC_TAG_DATA_PATH
+
     docker run -v ${HISTORIC_TAG_DATA_PATH}:/opt/local/src/daccs-image-updater/data \
      -v ~/.gitconfig:/etc/gitconfig \
      -e GITHUB_USER=$GITHUB_USER \
@@ -28,6 +28,8 @@ echo $HISTORIC_TAG_DATA_PATH
 }
 
 function test {
+    echo $HISTORIC_TAG_DATA_PATH
+
     docker run -v ${HISTORIC_TAG_DATA_PATH}:/opt/local/src/daccs-image-updater/data \
      daccs-image-updater:0.1 /bin/sh -c 'cd tests/integration && ./integration_test_runner.sh'
 
