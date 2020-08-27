@@ -20,6 +20,8 @@ curl -XPOST localhost:5000/pavics/weaver/1.13.2-worker
 # run updater CLI
 printf "%s\n" "" "    [TEST] Running updater" ""
 source test/integration/env.test && ./main.sh
+echo
+cat last-diff-result.log
 
 # # run updater CLI
 printf "%s\n" "" "    [TEST] Running updater" ""

@@ -26,6 +26,9 @@ do
     fi
 done
 
-# TODO implement logic
+# TODO : remove, only for test
+BUMP_TAG="FINCH_IMAGE"
 
-pwd
+NEW_IMAGE_TAG_DECLARATION="export "$BUMP_TAG"=\""$BUMP_TAG_VALUE"\""
+
+sed -i "s/.*$BUMP_TAG.*/$NEW_IMAGE_TAG_DECLARATION/" $BUMP_FILE

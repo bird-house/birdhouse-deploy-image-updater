@@ -55,10 +55,22 @@ git checkout -b $BRANCH_NAME
 # bumpversion
 BUMP_TAG=$BUMP_TAG BUMP_TAG_VALUE=$BUMP_TAG_VALUE BUMP_FILE=$BUMP_FILE ../../bump_version.sh
 
+# to track last diff result
+git diff &> ../../last-diff-result.log
+
 # push
 git add -A
-git commit -m $COMMIT_MESSAGE
+git commit -m "$COMMIT_MESSAGE"
 # git push
 
 # PR
-hub pull-request -m $COMMIT_MESSAGE
+# hub pull-request -m $COMMIT_MESSAGE
+
+
+
+## TODO remove
+# curl \
+#   -X POST \
+#   -H "Accept: application/vnd.github.v3+json" \
+#   localhost:6000/repos/bird-house/birdhouse-deploy/pulls \
+#   -d '{"title":"title","head":"head","base":"base"}'
