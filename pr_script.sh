@@ -48,10 +48,24 @@ BRANCH_NAME="bump_${IMAGE_ID}_to_${BUMP_TAG_VALUE}"
 
 # prepare repo
 mkdir -p $WORKING_DIR
-rm -rf $WORKING_DIR/$PROJECT_NAME
+# rm -rf $WORKING_DIR/$PROJECT_NAME
 cd $WORKING_DIR
-git clone $REPO_URL
-cd $PROJECT_NAME
+
+if [[ ! -d "$PROJECT_NAME" ]]
+then
+    echo "[INFO] Not existing project directory, cloning"
+    git clone $REPO_URL
+    cd $PROJECT_NAME
+else
+    echo "[INFO] Existing project directory, cleaning"
+    cd $PROJECT_NAME
+    git clean -fd
+    git reset --hard HEAD
+    git checkout master
+    git pull
+    git branch -d $BRANCH_NAME     # TODO : to avoid already existing branch error. Handle error instead
+fi
+
 git checkout -b $BRANCH_NAME
 
 # bumpversion
