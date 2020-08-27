@@ -41,7 +41,6 @@ else
     echo
     cat last-diff-result.log
     printf "${NC}"
-    exit 1
 fi
 
 
@@ -74,7 +73,6 @@ else
     echo
     cat last-diff-result.log
     printf "${NC}"
-    exit 1
 fi
 
 
@@ -96,13 +94,12 @@ else
     echo
     cat last-diff-result.log
     printf "${NC}"
-    exit 1
 fi
 
 
 # kill the dummy API
 printf "%s\n" "" "    [TEST] Stopping dummy APIs" ""
-lsof -ti tcp:5000 | xargs kill
+lsof -ti tcp:5000 | xargs kill &> /dev/null
 echo "done"
 
 
