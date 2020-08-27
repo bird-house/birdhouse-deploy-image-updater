@@ -9,3 +9,8 @@ use GITHUB_TOKEN instead of GITHUB_USER and GITHUB_PASSWORD, for Hub
 test with real repo push (to test credentials)
 
 add configuration for all bh deploy image files
+
+
+jenkins:
+issue with docker volume + persistence
+print image name in slack
