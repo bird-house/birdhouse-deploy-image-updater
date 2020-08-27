@@ -55,7 +55,7 @@ function default {
 function help {
     echo "Build and test docker image"
     echo ""
-    echo "Example : HISTORIC_TAG_DATA_PATH=./data $0 build-test"
+    echo "Example : HISTORIC_TAG_DATA_PATH=/historic-tag-data $0 build-test"
     echo ""
     echo "Actions:"
     compgen -A function | grep -v help | grep -v default | cat -n

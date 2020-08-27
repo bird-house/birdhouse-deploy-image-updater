@@ -70,7 +70,7 @@ ONLY_UPDATE_TAGS_HISTORY=true ./main.sh
 chmod +x ./Taskfile
 
 # Run
-HISTORIC_TAG_DATA_PATH=./historic-tag-data GITHUB_USER=XXXX GITHUB_PASSWORD=YYYY ./Taskfile build-run
+HISTORIC_TAG_DATA_PATH=/historic-tag-data GITHUB_USER=XXXX GITHUB_PASSWORD=YYYY ./Taskfile build-run
 
 # Run integration test
 ./Taskfile build-test
