@@ -8,6 +8,7 @@
 # 51 - no valid docker image tag
 # 52 - no old tag file found
 # 53 - max tag count iteration reached
+# 100 - new tag found, pr_script triggered
 ###
 
 # Sample envionment variables
@@ -109,4 +110,5 @@ fi
 # launch pr_script with params
 if [[ $NEW_TAG_FOUND = true ]]; then
     DOCKERHUB_REPO=$DOCKERHUB_REPO IMAGE_ID=$IMAGE_ID BUMP_TAG=$BUMP_TAG BUMP_TAG_VALUE=$LATEST_TAG BUMP_FILE=$BUMP_FILE ./pr_script.sh
+    exit 100
 fi

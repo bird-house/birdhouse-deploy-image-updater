@@ -41,4 +41,9 @@ do
 
     # start fetch_tags
     IMAGE_ID=$IMAGE_ID DOCKERHUB_REPO=$DOCKERHUB_REPO TAG_FILTER=$TAG_FILTER BUMP_TAG=$BUMP_TAG BUMP_FILE=$BUMP_FILE ./fetch_tags.sh
+    
+    if [[ $? -eq 100 ]]; then
+        echo "[INFO] Created PR for [${IMAGE_ID}]. Exiting."
+        exit 0
+    fi
 done

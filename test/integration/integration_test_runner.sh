@@ -55,8 +55,6 @@ source test/integration/env.test && ./main.sh
 # update an image
 printf "%s\n" "" "    [TEST] Pushing weaver and finch tags to DockerHub" ""
 curl -XPOST localhost:5000/pavics/weaver/1.13.3-worker
-curl -XPOST localhost:5000/pavics/weaver/1.13.3-manager
-curl -XPOST localhost:5000/pavics/weaver/1.13.3
 curl -XPOST localhost:5000/birdhouse/finch/version-0.5.4
 
 
