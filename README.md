@@ -45,12 +45,20 @@ Hypothesis taken at the moment is that only one image change is done at given ti
 
 # Usage
 
+## Command line
+
 ```
 # first time use, to initiate historical data in `data/`
 ONLY_UPDATE_TAGS_HISTORY=true ./main.sh
 
 # then
 ./main.sh
+```
+
+## Docker
+
+```
+
 ```
 
 
