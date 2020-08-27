@@ -28,8 +28,6 @@ function run {
 }
 
 function test {
-    echo $HISTORIC_TAG_DATA_PATH
-
     docker run -v ${HISTORIC_TAG_DATA_PATH}:/opt/local/src/daccs-image-updater/data \
      daccs-image-updater:0.1 /bin/sh -c 'cd tests/integration && ./integration_test_runner.sh'
 
