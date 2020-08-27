@@ -19,7 +19,7 @@ rm -rf data/
 # run updater CLI
 printf "%s\n" "" "    [TEST] Running updater - no PR to create" ""
 rm -f last-diff-result.log
-source test/integration/env.test && ONLY_UPDATE_TAGS_HISTORY=true ./main.sh
+source tests/integration/env.test && ONLY_UPDATE_TAGS_HISTORY=true ./main.sh
 
 # update an image
 printf "%s\n" "" "    [TEST] Pushing weaver tag to DockerHub" ""
@@ -28,7 +28,7 @@ curl -XPOST localhost:5000/pavics/weaver/1.13.2-worker
 # run updater CLI
 printf "%s\n" "" "    [TEST] Running updater - need to create a PR for [bump_weaver-worker_to_1.13.2-worker]" ""
 rm -f last-diff-result.log
-source test/integration/env.test && ./main.sh
+source tests/integration/env.test && ./main.sh
 
 
 ### Asserts that diff contains the right thing
@@ -50,7 +50,7 @@ fi
 # run updater CLI
 printf "%s\n" "" "    [TEST] Running updater - no PR to create" ""
 rm -f last-diff-result.log
-source test/integration/env.test && ./main.sh
+source tests/integration/env.test && ./main.sh
 
 # update an image
 printf "%s\n" "" "    [TEST] Pushing weaver and finch tags to DockerHub" ""
@@ -61,7 +61,7 @@ curl -XPOST localhost:5000/birdhouse/finch/version-0.5.4
 # run updater CLI
 printf "%s\n" "" "    [TEST] Running updater - need to create a PR for [bump_finch_to_version-0.5.4]" ""
 rm -f last-diff-result.log
-source test/integration/env.test && ./main.sh
+source tests/integration/env.test && ./main.sh
 
 
 ### Asserts that diff contains the right thing
@@ -83,7 +83,7 @@ fi
 # run updater CLI
 printf "%s\n" "" "    [TEST] Running updater - need to create a PR for [bump_weaver-worker_to_1.13.3-worker]" ""
 rm -f last-diff-result.log
-source test/integration/env.test && ./main.sh
+source tests/integration/env.test && ./main.sh
 
 
 ### Asserts that diff contains the right thing

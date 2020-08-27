@@ -56,12 +56,12 @@ ONLY_UPDATE_TAGS_HISTORY=true ./main.sh
 
 # Tests
 
-E2E integration test with DockerHub API mock available in `test/integration`.
+E2E integration test with DockerHub API mock available in `tests/integration`.
 It mimicks an image tag push on DockerHub, then runs the updater script and checks that the proper commit is made.
 Assumption that the `hub` CLI tool will open the PR properly after then.
 
 To run the integration test:
 
 ```
-cd test/integration && ./integration_test_runner.sh
+cd tests/integration && ./integration_test_runner.sh
 ```
