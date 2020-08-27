@@ -26,6 +26,10 @@ RUN mkdir /hub
 RUN tar -xvf hub.tgz -C /hub --strip-components 1
 RUN bash /hub/install
 
+# configure github account. Defaults, overridden by GITHUB_USER
+RUN git config --global user.email "you@example.com"
+RUN git config --global user.name "Your Name"
+
 # install 
 COPY ./ ${APP_DIR}
 WORKDIR ${TEST_DIR}
