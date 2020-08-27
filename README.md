@@ -3,6 +3,8 @@
 
 STATUS : Experimental
 
+Automatically updates `birdhouse-deploy` docker images as soon as new tags are pushed.
+
 ## Requirements
 
 - hub (via brew)
@@ -13,7 +15,13 @@ STATUS : Experimental
 - python3
 
 
-Automatically updates `birdhouse-deploy` docker images as soon as new tags are pushed.
+## Setup
+
+- Define 'GITHUB_USER'
+- Define 'GITHUB_PASSWORD'
+
+
+## Flow
 
 
 `[cronjob]` : Periodically trigger `main.sh`
@@ -29,6 +37,7 @@ Automatically updates `birdhouse-deploy` docker images as soon as new tags are p
 Tags containing "latest" are taken into account, since usage should be avoided in any ways in `birdhouse-deploy` repo.
 
 Hypothesis taken at the moment is that only one image change is done at given time. This limitation needs to be removed, since if two images are updated, the second one will be discarded.
+
 
 ## Advantages
 
@@ -61,7 +70,7 @@ ONLY_UPDATE_TAGS_HISTORY=true ./main.sh
 chmod +x ./Taskfile
 
 # Run
-./Taskfile build-run
+HISTORIC_TAG_DATA_PATH=./historic-tag-data GITHUB_USER=XXXX GITHUB_PASSWORD=YYYY ./Taskfile build-run
 
 # Run integration test
 ./Taskfile build-test

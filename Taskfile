@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# TODO : change volume mount host directory
-
 if [[ -z "${HISTORIC_TAG_DATA_PATH}" ]]; then
     echo "[WARNING] You need to define HISTORIC_TAG_DATA_PATH, that will contain historic tag data. Exiting."
     exit 1
@@ -12,8 +10,20 @@ function build {
 }
 
 function run {
+    if [[ -z "${GITHUB_USER}" ]]; then
+        echo "[ERROR] Missing GITHUB_USER. Exiting."
+        exit 1
+    fi
+
+    if [[ -z "${GITHUB_PASSWORD}" ]]; then
+        echo "[ERROR] Missing GITHUB_PASSWORD. Exiting."
+        exit 1
+    fi
+
     docker run -v ${HISTORIC_TAG_DATA_PATH}:/opt/local/src/daccs-image-updater/data \
      -v ~/.gitconfig:/etc/gitconfig \
+     -e GITHUB_USER=$GITHUB_USER \
+     -e GITHUB_PASSWORD=$GITHUB_PASSWORD \
      daccs-image-updater:0.1 ./main.sh
 }
 

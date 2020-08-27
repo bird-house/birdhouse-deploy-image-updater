@@ -34,10 +34,12 @@ printf "%s\n" "" "    [TEST] ASSERT" ""
 if grep -q 'export WEAVER_WORKER_IMAGE="pavics/weaver:1.13.2-worker"' "last-diff-result.log"; then
     printf "${GREEN}[INFO] [bump_weaver-worker_to_1.13.2-worker] The commit content looks good"
     echo
+    echo
     cat last-diff-result.log
     printf "${NC}"
 else
     printf "${RED}[ERROR] [bump_weaver-worker_to_1.13.2-worker] wrong commit content. Exiting."
+    echo
     echo
     cat last-diff-result.log
     printf "${NC}"
@@ -66,10 +68,12 @@ printf "%s\n" "" "    [TEST] ASSERT" ""
 if grep -q 'export FINCH_IMAGE="birdhouse/finch:version-0.5.4"' "last-diff-result.log"; then
     printf "${GREEN}[INFO] [bump_finch_to_version-0.5.4] The commit content looks good"
     echo
+    echo
     cat last-diff-result.log
     printf "${NC}"
 else
     printf "${RED}[ERROR] [bump_finch_to_version-0.5.4] wrong commit content. Exiting."
+    echo
     echo
     cat last-diff-result.log
     printf "${NC}"
@@ -87,10 +91,12 @@ printf "%s\n" "" "    [TEST] ASSERT" ""
 if grep -q 'export WEAVER_WORKER_IMAGE="pavics/weaver:1.13.3-worker"' "last-diff-result.log"; then
     printf "${GREEN}[INFO] [bump_weaver-worker_to_1.13.3-worker] The commit content looks good"
     echo
+    echo
     cat last-diff-result.log
     printf "${NC}"
 else
     printf "${RED}[ERROR] [bump_weaver-worker_to_1.13.3-worker] wrong commit content. Exiting."
+    echo
     echo
     cat last-diff-result.log
     printf "${NC}"
