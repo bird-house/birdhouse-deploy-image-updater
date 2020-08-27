@@ -92,4 +92,3 @@ fi
 # PR
 git push
 hub pull-request -m $COMMIT_MESSAGE
-

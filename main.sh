@@ -4,6 +4,7 @@
 # EXIT CODES
 # 0 - success
 # 1 - parameter error
+# 100 - new tag found, pr_script triggered
 ###
 
 # no REQUIRED_ENV_VARS
@@ -47,6 +48,8 @@ do
             echo "[INFO] Created PR for [${IMAGE_ID}]. Exiting."
         fi
 
-        exit 0
+        exit 100
     fi
 done
+
+exit 0
