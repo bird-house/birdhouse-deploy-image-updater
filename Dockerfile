@@ -20,6 +20,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     lsof
 
+# install GitHub's hub CLI tool
+RUN wget -O hub.tgz --progress=dot:mega https://github.com/github/hub/releases/download/v2.14.2/hub-linux-amd64-2.14.2.tgz
+RUN mkdir /hub
+RUN tar -xvf hub.tgz -C /hub --strip-components 1
+RUN bash /hub/install
+
 # install 
 COPY ./ ${APP_DIR}
 WORKDIR ${TEST_DIR}
