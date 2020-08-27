@@ -79,11 +79,17 @@ DOCKERHUB_REPO=$DOCKERHUB_REPO BUMP_TAG=$BUMP_TAG BUMP_TAG_VALUE=$BUMP_TAG_VALUE
 # to track last diff result
 git diff &> ../../last-diff-result.log
 
-# push
+# commit
 git add -A
 git commit -m "$COMMIT_MESSAGE"
-# git push
+
+# when in test mode, we can avoid to make a real PR
+if [[ ! -z "${EXIT_BEFORE_PR}" ]]; then
+    echo "[INFO] Exiting before PR, since EXIT_BEFORE_PR is defined. Exiting."
+    exit 0
+fi
 
 # PR
-# hub pull-request -m $COMMIT_MESSAGE
+git push
+hub pull-request -m $COMMIT_MESSAGE
 
