@@ -9,6 +9,7 @@
 # Sample environment variables
 # REPO_URL=https://github.com/bird-house/birdhouse-deploy
 # PROJECT_NAME=birdhouse-deploy
+# DOCKERHUB_REPO="pavics/weaver"
 # IMAGE_ID="weaver-worker"
 # BUMP_TAG="WEAVER_WORKER_IMAGE"
 # BUMP_TAG_VALUE="1.13.2-worker"
@@ -19,6 +20,7 @@
 REQUIRED_ENV_VARS='
     REPO_URL
     PROJECT_NAME
+    DOCKERHUB_REPO
     IMAGE_ID
     BUMP_TAG
     BUMP_TAG_VALUE
@@ -53,7 +55,7 @@ cd $PROJECT_NAME
 git checkout -b $BRANCH_NAME
 
 # bumpversion
-BUMP_TAG=$BUMP_TAG BUMP_TAG_VALUE=$BUMP_TAG_VALUE BUMP_FILE=$BUMP_FILE ../../bump_version.sh
+DOCKERHUB_REPO=$DOCKERHUB_REPO BUMP_TAG=$BUMP_TAG BUMP_TAG_VALUE=$BUMP_TAG_VALUE BUMP_FILE=$BUMP_FILE ../../bump_version.sh
 
 # to track last diff result
 git diff &> ../../last-diff-result.log
