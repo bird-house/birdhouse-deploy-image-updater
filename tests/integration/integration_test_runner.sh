@@ -103,6 +103,33 @@ else
 fi
 
 
+# update an image
+printf "%s\n" "" "    [TEST] Pushing weaver tag to DockerHub" ""
+curl -s -XPOST localhost:5000/pavics/weaver/1.13.4-worker
+
+# run updater CLI
+printf "%s\n" "" "    [TEST] Running updater - need to create a PR for [bump_weaver-worker_to_1.13.4-worker]" ""
+rm -f last-diff-result.log
+source tests/integration/env.test && ./main.sh
+
+
+### Asserts that diff contains the right thing
+printf "%s\n" "" "    [TEST] ASSERT" ""
+if grep -q '1.13.4-worker' "data/last-update-result.log"; then
+    printf "${GREEN}[INFO] [bump_weaver-worker_to_1.13.4-worker] 'last-update-result.log' looks good"
+    echo
+    echo
+    cat data/last-update-result.log
+    printf "${NC}"
+else
+    printf "${RED}[ERROR] [bump_weaver-worker_to_1.13.4-worker] wrong 'last-update-result.log'. Exiting."
+    echo
+    echo
+    cat data/last-update-result.log
+    printf "${NC}"
+fi
+
+
 # kill the dummy API
 printf "%s\n" "" "    [TEST] Stopping dummy APIs" ""
 lsof -ti tcp:5000 | xargs kill &> /dev/null

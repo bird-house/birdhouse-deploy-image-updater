@@ -9,6 +9,9 @@
 
 # no REQUIRED_ENV_VARS
 
+# clean past log
+rm -f $DATA_DIR/last-update-result.log
+
 # vars
 CONFIG_FILEPATH='config.json'
 

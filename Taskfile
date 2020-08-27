@@ -37,6 +37,7 @@ function test {
 function clean-data {
     sudo rm -f ${HISTORIC_TAG_DATA_PATH}/*.old
     sudo rm -f ${HISTORIC_TAG_DATA_PATH}/*.new
+    sudo rm -f ${HISTORIC_TAG_DATA_PATH}/*.log
 }
 
 function build-test {
