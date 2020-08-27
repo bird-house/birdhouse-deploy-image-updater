@@ -12,11 +12,13 @@ ENV TEST_DIR=${APP_DIR}/tests/integration
 WORKDIR ${APP_DIR}
 
 # install package dependencies
-# RUN apt-get update && apt-get install -y jq
+# TODO : install hub, via brew
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     jq \
-    git
+    git \
+    curl \
+    lsof
 
 # install 
 COPY ./ ${APP_DIR}

@@ -15,7 +15,7 @@ function run {
 function test {
     docker run -v /home/vagrant/projects/_daccs-docker-volume-test:/opt/local/src/daccs-image-updater/data \
      -v ~/.gitconfig:/etc/gitconfig \
-     daccs-image-updater:0.1 python ./tests/integration/integration_test_runner.sh
+     daccs-image-updater:0.1 /bin/sh -c 'cd tests/integration && ./integration_test_runner.sh'
 }
 
 function clean-data {
