@@ -4,13 +4,22 @@ function build {
     docker build -t daccs-image-updater:0.1 .
 }
 
-function test {
+function run {
     docker run daccs-image-updater:0.1 ./main.sh
+}
+
+function test {
+    docker run daccs-image-updater:0.1 python ./tests/integration/integration_test_runner.sh
 }
 
 function build-test {
     build
     test
+}
+
+function build-run {
+    build
+    run
 }
 
 function default {
