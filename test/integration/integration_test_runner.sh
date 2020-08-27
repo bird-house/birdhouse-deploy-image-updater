@@ -1,8 +1,8 @@
 
-# free port for dummy APIs
+# free port for dummy API
 lsof -ti tcp:5000 | xargs kill &> /dev/null
 
-# start the dummy APIs
+# start the dummy API
 printf "%s\n" "" "    [TEST] Starting dummy APIs" ""
 python3 mock_dockerhub_api.py &> /dev/null  &
 echo "done"
@@ -27,7 +27,7 @@ cat last-diff-result.log
 printf "%s\n" "" "    [TEST] Running updater" ""
 source test/integration/env.test && ./main.sh
 
-# kill the dummy APIs
+# kill the dummy API
 printf "%s\n" "" "    [TEST] Stopping dummy APIs" ""
 lsof -ti tcp:5000 | xargs kill
 echo "done"

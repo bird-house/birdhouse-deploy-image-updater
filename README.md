@@ -56,5 +56,6 @@ ONLY_UPDATE_TAGS_HISTORY=true ./main.sh
 
 # Tests
 
-E2E integration test with DockerHub and GitHub API mocks are available in `test/integration`.
-It mimicks an image tag push on DockerHub, then runs the updater script and checks if a new PR has been opened.
+E2E integration test with DockerHub API mock available in `test/integration`.
+It mimicks an image tag push on DockerHub, then runs the updater script and checks that the proper commit is made.
+Assumption that the `hub` CLI tool will open the PR properly after then.
