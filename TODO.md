@@ -8,3 +8,4 @@ add retry mechanism, if task fails after triggering the pr_script
 add configuration for all bh deploy image files
 
 test with real repo push (to test credentials)
+jenkinsfile (other repo)
