@@ -27,14 +27,14 @@
             "id": "weaver-manager",
             "url": "https://hub.docker.com/r/pavics/weaver",
             "dockerhub_repo_name": "pavics/weaver",
-            "bump_tag": "WEAVER_IMAGE",
+            "bump_tag": "WEAVER_MANAGER_IMAGE",
             "tag_filter": "^[0-9]+(\\.[0-9]+)*-manager$"
         },
         {
             "id": "weaver-worker",
             "url": "https://hub.docker.com/r/pavics/weaver",
             "dockerhub_repo_name": "pavics/weaver",
-            "bump_tag": "WEAVER_IMAGE",
+            "bump_tag": "WEAVER_WORKER_IMAGE",
             "tag_filter": "^[0-9]+(\\.[0-9]+)*-worker$"
         }
     ]

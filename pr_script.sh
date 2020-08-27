@@ -68,6 +68,11 @@ fi
 
 git checkout -b $BRANCH_NAME
 
+# for testing purpose only, since birdhouse-deploy's default.env doesn't has WEAVER_WORKER_IMAGE variable for now
+if [[ ! -z "${TEST_ENV_CONFIG}" ]] && [[ "$BUMP_TAG" == "WEAVER_WORKER_IMAGE" ]]; then
+    echo "export WEAVER_WORKER_IMAGE=\"pavics/weaver:1.13.1-worker\"" >> $BUMP_FILE
+fi
+
 # bumpversion
 DOCKERHUB_REPO=$DOCKERHUB_REPO BUMP_TAG=$BUMP_TAG BUMP_TAG_VALUE=$BUMP_TAG_VALUE BUMP_FILE=$BUMP_FILE ../../bump_version.sh
 
@@ -82,11 +87,3 @@ git commit -m "$COMMIT_MESSAGE"
 # PR
 # hub pull-request -m $COMMIT_MESSAGE
 
-
-
-## TODO remove
-# curl \
-#   -X POST \
-#   -H "Accept: application/vnd.github.v3+json" \
-#   localhost:6000/repos/bird-house/birdhouse-deploy/pulls \
-#   -d '{"title":"title","head":"head","base":"base"}'

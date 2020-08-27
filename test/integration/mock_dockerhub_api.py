@@ -35,7 +35,7 @@ def post_tag(dockerhub_project, dockerhub_repo, tagname):
       "name": tagname
     })
 
-    return "added tag " + tagname + " for " + dockerhub_project + "/" + dockerhub_repo + "\n"
+    return "pushed tag " + dockerhub_project + "/" + dockerhub_repo + ":" + tagname + " on DockerHub\n"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

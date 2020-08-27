@@ -28,9 +28,6 @@ do
     fi
 done
 
-# TODO : remove, only for test
-BUMP_TAG="FINCH_IMAGE"
-
 
 NEW_IMAGE_TAG_VALUE=$DOCKERHUB_REPO":"$BUMP_TAG_VALUE
 NEW_IMAGE_TAG_DECLARATION="export "$BUMP_TAG"=\""$NEW_IMAGE_TAG_VALUE"\""

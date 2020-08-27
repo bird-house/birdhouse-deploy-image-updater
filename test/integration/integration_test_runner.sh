@@ -33,7 +33,7 @@ source test/integration/env.test && ./main.sh
 
 ### Asserts that diff contains the right thing
 printf "%s\n" "" "    [TEST] ASSERT" ""
-if grep -q 'export FINCH_IMAGE="pavics/weaver:1.13.2-worker"' "last-diff-result.log"; then
+if grep -q 'export WEAVER_WORKER_IMAGE="pavics/weaver:1.13.2-worker"' "last-diff-result.log"; then
     printf "${GREEN}[INFO] [bump_weaver-worker_to_1.13.2-worker] The commit content looks good"
     echo
     cat last-diff-result.log
@@ -88,7 +88,7 @@ source test/integration/env.test && ./main.sh
 
 ### Asserts that diff contains the right thing
 printf "%s\n" "" "    [TEST] ASSERT" ""
-if grep -q 'export FINCH_IMAGE="pavics/weaver:1.13.3-worker"' "last-diff-result.log"; then
+if grep -q 'export WEAVER_WORKER_IMAGE="pavics/weaver:1.13.3-worker"' "last-diff-result.log"; then
     printf "${GREEN}[INFO] [bump_weaver-worker_to_1.13.3-worker] The commit content looks good"
     echo
     cat last-diff-result.log
