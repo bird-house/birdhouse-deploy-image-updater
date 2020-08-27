@@ -2,25 +2,30 @@
 
 # TODO : change volume mount host directory
 
+if [[ -z "${HISTORIC_TAG_DATA_PATH}" ]]; then
+    echo "[WARNING] You need to define HISTORIC_TAG_DATA_PATH, that will contain historic tag data. Exiting."
+    exit 1
+fi
+
 function build {
     docker build -t daccs-image-updater:0.1 .
 }
 
 function run {
-    docker run -v /home/vagrant/projects/_daccs-docker-volume-test:/opt/local/src/daccs-image-updater/data \
+    docker run -v ${HISTORIC_TAG_DATA_PATH}:/opt/local/src/daccs-image-updater/data \
      -v ~/.gitconfig:/etc/gitconfig \
      daccs-image-updater:0.1 ./main.sh
 }
 
 function test {
-    docker run -v /home/vagrant/projects/_daccs-docker-volume-test:/opt/local/src/daccs-image-updater/data \
+    docker run -v ${HISTORIC_TAG_DATA_PATH}:/opt/local/src/daccs-image-updater/data \
      -v ~/.gitconfig:/etc/gitconfig \
      daccs-image-updater:0.1 /bin/sh -c 'cd tests/integration && ./integration_test_runner.sh'
 }
 
 function clean-data {
-    sudo rm -f /home/vagrant/projects/_daccs-docker-volume-test/*.old
-    sudo rm -f /home/vagrant/projects/_daccs-docker-volume-test/*.new
+    sudo rm -f ${HISTORIC_TAG_DATA_PATH}/*.old
+    sudo rm -f ${HISTORIC_TAG_DATA_PATH}/*.new
 }
 
 function build-test {
@@ -40,7 +45,7 @@ function default {
 function help {
     echo "Build and test docker image"
     echo ""
-    echo "Example : $0 build"
+    echo "Example : HISTORIC_TAG_DATA_PATH=./data $0 build-test"
     echo ""
     echo "Actions:"
     compgen -A function | grep -v help | grep -v default | cat -n
