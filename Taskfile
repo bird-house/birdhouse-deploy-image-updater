@@ -29,8 +29,9 @@ function run {
 
 function test {
     docker run -v ${HISTORIC_TAG_DATA_PATH}:/opt/local/src/daccs-image-updater/data \
-     -v ~/.gitconfig:/etc/gitconfig \
      daccs-image-updater:0.1 /bin/sh -c 'cd tests/integration && ./integration_test_runner.sh'
+
+    # -v ~/.gitconfig:/etc/gitconfig \
 }
 
 function clean-data {
