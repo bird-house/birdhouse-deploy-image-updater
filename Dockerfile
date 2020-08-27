@@ -12,17 +12,11 @@ ENV TEST_DIR=${APP_DIR}/tests/integration
 WORKDIR ${APP_DIR}
 
 # install package dependencies
-RUN apt-get update && apt-get install -y jq
-
-# install runtime/package dependencies
-# RUN apt-get update && apt-get install -y --no-install-recommends \
-# 		ca-certificates \
-# 		netbase \
-# 		gcc \
-# 		python3-dev \
-# 	&& rm -rf /var/lib/apt/lists/* \
-#     && pip install --no-cache-dir --upgrade pip setuptools \
-#     && pip install --no-cache-dir -e ${APP_DIR}
+# RUN apt-get update && apt-get install -y jq
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    wget \
+    jq \
+    git
 
 # install 
 COPY ./ ${APP_DIR}

@@ -58,7 +58,8 @@ ONLY_UPDATE_TAGS_HISTORY=true ./main.sh
 ## Docker
 
 ```
-
+chmod +x ./Taskfile
+./Taskfile build-test
 ```
 
 

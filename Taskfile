@@ -1,31 +1,16 @@
 #!/bin/bash
 
 function build {
-    if [[ "$1" =~ ^(daccs-image-updater)$ ]]; then
-        echo "Building docker image for [ $1 ]"
-
-        case "$1" in
-            daccs-image-updater)
-                echo "daccs-image-updater"
-                docker build -t daccs-image-updater:0.1 .
-                ;;
-        esac
-
-        echo "Finished building docker image for [ $1 ]"
-    else
-        echo "[ $1 ] is not registered"
-        echo ""
-        echo "Registered images are [daccs-image-updater]"
-        echo ""
-        echo "Example : ./Taskfile build daccs-image-updater"
-        echo ""
-    fi
+    docker build -t daccs-image-updater:0.1 .
 }
 
 function test {
-    # TODO : print msg if image not found
-
     docker run daccs-image-updater:0.1 ./main.sh
+}
+
+function build-test {
+    build
+    test
 }
 
 function default {
@@ -33,9 +18,9 @@ function default {
 }
 
 function help {
-    echo "Build and test docker images"
+    echo "Build and test docker image"
     echo ""
-    echo "Example : $0 build daccs-image-updater"
+    echo "Example : $0 build"
     echo ""
     echo "Actions:"
     compgen -A function | grep -v help | grep -v default | cat -n
