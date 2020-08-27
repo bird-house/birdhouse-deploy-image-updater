@@ -59,7 +59,15 @@ ONLY_UPDATE_TAGS_HISTORY=true ./main.sh
 
 ```
 chmod +x ./Taskfile
+
+# Run
+./Taskfile build-run
+
+# Run integration test
 ./Taskfile build-test
+
+# Clean historic tag data
+./Taskfile clean-data
 ```
 
 

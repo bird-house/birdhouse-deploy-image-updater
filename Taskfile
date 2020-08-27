@@ -7,15 +7,20 @@ function build {
 }
 
 function run {
-    docker run -v /home/vagrant/projects/_daccs-docker-volume-test:/opt/local/src/daccs-image-updater/data daccs-image-updater:0.1 ./main.sh
+    docker run -v /home/vagrant/projects/_daccs-docker-volume-test:/opt/local/src/daccs-image-updater/data \
+     -v ~/.gitconfig:/etc/gitconfig \
+     daccs-image-updater:0.1 ./main.sh
 }
 
 function test {
-    docker run -v /home/vagrant/projects/_daccs-docker-volume-test:/opt/local/src/daccs-image-updater/data daccs-image-updater:0.1 python ./tests/integration/integration_test_runner.sh
+    docker run -v /home/vagrant/projects/_daccs-docker-volume-test:/opt/local/src/daccs-image-updater/data \
+     -v ~/.gitconfig:/etc/gitconfig \
+     daccs-image-updater:0.1 python ./tests/integration/integration_test_runner.sh
 }
 
 function clean-data {
-    rm -rf /home/vagrant/projects/_daccs-docker-volume-test
+    sudo rm -f /home/vagrant/projects/_daccs-docker-volume-test/*.old
+    sudo rm -f /home/vagrant/projects/_daccs-docker-volume-test/*.new
 }
 
 function build-test {
