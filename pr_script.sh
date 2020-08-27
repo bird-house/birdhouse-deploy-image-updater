@@ -60,7 +60,7 @@ else
     echo "[INFO] Existing project directory, cleaning"
     cd $PROJECT_NAME
     git clean -fd
-    git reset --hard HEAD
+    git reset --hard origin
     git checkout master
     git pull
     git branch -d $BRANCH_NAME     # TODO : to avoid already existing branch error. Handle error instead
