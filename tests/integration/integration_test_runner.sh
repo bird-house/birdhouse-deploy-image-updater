@@ -2,6 +2,7 @@
 
 GREEN='\033[0;32m'
 RED='\033[0;31m'
+BLUE='\033[0;36m'
 NC='\033[0m'
 
 DATA_DIR="data"
@@ -24,8 +25,10 @@ rm -f last-diff-result.log
 source tests/integration/env.test && ONLY_UPDATE_TAGS_HISTORY=true ./main.sh
 
 # update an image
-printf "%s\n" "" "    [TEST] Pushing weaver tag to DockerHub" ""
+printf "%s\n" "" "    [INFO] Pushing weaver tag to DockerHub" ""
+printf "${BLUE}"
 curl -s -XPOST localhost:5000/pavics/weaver/1.13.2-worker
+printf "${NC}"
 
 # run updater CLI
 printf "%s\n" "" "    [TEST] Running updater - need to create a PR for [bump_weaver-worker_to_1.13.2-worker]" ""
@@ -58,10 +61,11 @@ rm -f last-diff-result.log
 source tests/integration/env.test && ./main.sh
 
 # update an image
-printf "%s\n" "" "    [TEST] Pushing weaver and finch tags to DockerHub" ""
+printf "%s\n" "" "    [INFO] Pushing weaver and finch tags to DockerHub" ""
+printf "${BLUE}"
 curl -s -XPOST localhost:5000/pavics/weaver/1.13.3-worker
 curl -s -XPOST localhost:5000/birdhouse/finch/version-0.5.4
-
+printf "${NC}"
 
 # run updater CLI
 printf "%s\n" "" "    [TEST] Running updater - need to create a PR for [bump_finch_to_version-0.5.4]" ""
@@ -114,11 +118,13 @@ fi
 
 
 # update ALL images
-printf "%s\n" "" "    [TEST] Pushing all tags to DockerHub" ""
+printf "%s\n" "" "    [INFO] Pushing all tags to DockerHub" ""
+printf "${BLUE}"
 curl -s -XPOST localhost:5000/pavics/weaver/1.13.4-worker
 curl -s -XPOST localhost:5000/pavics/weaver/1.13.4-manager
 curl -s -XPOST localhost:5000/pavics/weaver/1.13.4
 curl -s -XPOST localhost:5000/birdhouse/finch/version-0.5.5
+printf "${NC}"
 PUSHED_TAGS_COUNT=4
 echo
 
@@ -158,8 +164,10 @@ fi
 
 
 # update an image
-printf "%s\n" "" "    [TEST] Pushing weaver tag to DockerHub" ""
+printf "%s\n" "" "    [INFO] Pushing weaver tag to DockerHub" ""
+printf "${BLUE}"
 curl -s -XPOST localhost:5000/pavics/weaver/1.13.5-worker
+printf "${NC}"
 
 # run updater CLI
 printf "%s\n" "" "    [TEST] Running updater - need to create a PR for [bump_weaver-worker_to_1.13.4-worker]" ""
