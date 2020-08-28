@@ -14,3 +14,4 @@ add configuration for all bh deploy image files
 jenkins:
 issue with docker volume + persistence
 print image name in slack
+jenkins reboot (ansicolor plugin)

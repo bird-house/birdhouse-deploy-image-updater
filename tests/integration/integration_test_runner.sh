@@ -3,6 +3,7 @@
 GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m'
+DATA_DIR="data"
 
 # free port for dummy API
 lsof -ti tcp:5000 | xargs kill &> /dev/null
@@ -38,7 +39,7 @@ if grep -q 'export WEAVER_WORKER_IMAGE="pavics/weaver:1.13.2-worker"' "last-diff
     cat last-diff-result.log
     printf "${NC}"
 else
-    printf "${RED}[ERROR] [bump_weaver-worker_to_1.13.2-worker] wrong commit content. Exiting."
+    printf "${RED}[ERROR] [bump_weaver-worker_to_1.13.2-worker] wrong commit content."
     echo
     echo
     cat last-diff-result.log
@@ -72,7 +73,7 @@ if grep -q 'export FINCH_IMAGE="birdhouse/finch:version-0.5.4"' "last-diff-resul
     cat last-diff-result.log
     printf "${NC}"
 else
-    printf "${RED}[ERROR] [bump_finch_to_version-0.5.4] wrong commit content. Exiting."
+    printf "${RED}[ERROR] [bump_finch_to_version-0.5.4] wrong commit content."
     echo
     echo
     cat last-diff-result.log
@@ -95,10 +96,51 @@ if grep -q 'export WEAVER_WORKER_IMAGE="pavics/weaver:1.13.3-worker"' "last-diff
     cat last-diff-result.log
     printf "${NC}"
 else
-    printf "${RED}[ERROR] [bump_weaver-worker_to_1.13.3-worker] wrong commit content. Exiting."
+    printf "${RED}[ERROR] [bump_weaver-worker_to_1.13.3-worker] wrong commit content."
     echo
     echo
     cat last-diff-result.log
+    printf "${NC}"
+fi
+
+
+# update ALL images
+printf "%s\n" "" "    [TEST] Pushing all tags to DockerHub" ""
+curl -s -XPOST localhost:5000/pavics/weaver/1.13.5-worker
+curl -s -XPOST localhost:5000/pavics/weaver/1.13.5-manager
+curl -s -XPOST localhost:5000/pavics/weaver/1.13.5
+curl -s -XPOST localhost:5000/birdhouse/finch/version-0.5.5
+PUSHED_TAGS_COUNT=4
+
+# count number of updated image tags
+UPDATED_IMAGE_COUNTER=-1
+exitCode=100
+
+while [[ $exitCode -eq 100 ]]
+do
+    # run updater CLI
+    rm -f last-diff-result.log
+    source tests/integration/env.test && ./main.sh
+
+    exitCode=$?
+    UPDATED_IMAGE_COUNTER=$((UPDATED_IMAGE_COUNTER+1))
+    cat $DATA_DIR/last-update-result.log >> $DATA_DIR/updated-images-list.log
+done
+
+
+### Asserts that correct number of images have been updated
+printf "%s\n" "" "    [TEST] ASSERT" ""
+if [[ $UPDATED_IMAGE_COUNTER -eq $PUSHED_TAGS_COUNT ]]; then
+    printf "${GREEN}[INFO] All image tags push created a PR have triggered the image updater."
+    echo
+    echo
+    cat $DATA_DIR/updated-images-list.log
+    printf "${NC}"
+else
+    printf "${RED}[ERROR] Wrong number of image tag resulting in PR. Expecting [$PUSHED_TAGS_COUNT], got [$UPDATED_IMAGE_COUNTER]."
+    echo
+    echo
+    cat $DATA_DIR/updated-images-list.log
     printf "${NC}"
 fi
 
@@ -113,19 +155,19 @@ rm -f last-diff-result.log
 source tests/integration/env.test && ./main.sh
 
 
-### Asserts that diff contains the right thing
+### Assert
 printf "%s\n" "" "    [TEST] ASSERT" ""
-if grep -q '1.13.4-worker' "data/last-update-result.log"; then
+if grep -q '1.13.4-worker' "$DATA_DIR/last-update-result.log"; then
     printf "${GREEN}[INFO] [bump_weaver-worker_to_1.13.4-worker] 'last-update-result.log' looks good"
     echo
     echo
-    cat data/last-update-result.log
+    cat $DATA_DIR/last-update-result.log
     printf "${NC}"
 else
-    printf "${RED}[ERROR] [bump_weaver-worker_to_1.13.4-worker] wrong 'last-update-result.log'. Exiting."
+    printf "${RED}[ERROR] [bump_weaver-worker_to_1.13.4-worker] wrong 'last-update-result.log'."
     echo
     echo
-    cat data/last-update-result.log
+    cat $DATA_DIR/last-update-result.log
     printf "${NC}"
 fi
 
@@ -135,5 +177,7 @@ printf "%s\n" "" "    [TEST] Stopping dummy APIs" ""
 lsof -ti tcp:5000 | xargs kill &> /dev/null
 echo "done"
 
+# clean workspace
+rm -f $DATA_DIR/updated-images-list.log
 
-
+# test summary
