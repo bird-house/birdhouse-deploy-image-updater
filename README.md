@@ -41,7 +41,7 @@ HISTORIC_TAG_DATA_PATH=/absolute-and-writable-path ./Taskfile clean-data
 
 E2E integration test with DockerHub API mock available in `tests/integration`.
 It mimicks an image tag push on DockerHub, then runs the updater script and checks that the proper commit is made.
-Assumption that the `hub` CLI tool will open the PR properly after then.
+Makes that assumption that the `hub` CLI tool will open the PR properly after then.
 
 To run the integration test via docker:
 
@@ -71,9 +71,7 @@ cd tests/integration && ./integration_test_runner.sh
 <br>
 `bump_version.sh` : Bump version of specific image in repo
 
-Tags containing "latest" are taken into account, since usage should be avoided in any ways in `birdhouse-deploy` repo.
-
-Hypothesis taken at the moment is that only one image change is done at given time. This limitation needs to be removed, since if two images are updated, the second one will be discarded.
+Tags containing "latest" are not taken into account, since usage should be avoided in any ways in `birdhouse-deploy` repo.
 
 
 ## Advantages
