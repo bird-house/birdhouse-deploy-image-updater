@@ -63,7 +63,7 @@ else
     git reset --hard origin
     git checkout master
     git pull
-    git branch -D $BRANCH_NAME     # TODO : to avoid already existing branch error. Handle error instead
+    git branch -D $BRANCH_NAME     # TODO : currently avoids already existing branch error. Handle error instead
 fi
 
 git checkout -b $BRANCH_NAME

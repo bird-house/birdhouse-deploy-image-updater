@@ -86,7 +86,6 @@ NEW_TAG_FOUND=false
 if [ -f "$OLD_FILEPATH" ] && [ -f "$NEW_FILEPATH" ]; then
     DIFF=$(diff $OLD_FILEPATH $NEW_FILEPATH)
 
-    # TODO : uncomment after testing
     if [ "$DIFF"  == "" ]; then
         echo "[INFO] [$0] [$IMAGE_ID] No new tag found. Exiting."
         rm $NEW_FILEPATH
