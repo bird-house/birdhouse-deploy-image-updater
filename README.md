@@ -15,10 +15,47 @@ Automatically updates `birdhouse-deploy` docker images as soon as new tags are p
 - python3
 
 
-## Setup
+# Usage
 
-- Define 'GITHUB_USER'
-- Define 'GITHUB_PASSWORD'
+## Command line
+
+```
+# remove `EXIT_BEFORE_PR=1` if you want to actually create the PR
+EXIT_BEFORE_PR=1 GITHUB_USER=XXXX GITHUB_PASSWORD=YYYY ./main.sh
+```
+
+## Docker
+
+```
+chmod +x ./Taskfile
+
+# remove `EXIT_BEFORE_PR=1` if you want to actually create the PR
+HISTORIC_TAG_DATA_PATH=/absolute-and-writable-path EXIT_BEFORE_PR=1 GITHUB_USER=XXXX GITHUB_PASSWORD=YYYY ./Taskfile build-run
+
+# Clean historic tag data
+HISTORIC_TAG_DATA_PATH=/absolute-and-writable-path ./Taskfile clean-data
+```
+
+
+# Tests
+
+E2E integration test with DockerHub API mock available in `tests/integration`.
+It mimicks an image tag push on DockerHub, then runs the updater script and checks that the proper commit is made.
+Assumption that the `hub` CLI tool will open the PR properly after then.
+
+To run the integration test via docker:
+
+```
+# Run integration test. Won't push the PR, since `EXIT_BEFORE_PR=1` is seeded
+HISTORIC_TAG_DATA_PATH=/absolute-and-writable-path ./Taskfile build-test
+```
+
+Or via command line:
+
+```
+cd tests/integration && ./integration_test_runner.sh
+```
+
 
 
 ## Flow
@@ -52,42 +89,3 @@ Hypothesis taken at the moment is that only one image change is done at given ti
 
 
 
-# Usage
-
-## Command line
-
-```
-# first time use, to initiate historical data in `data/`
-ONLY_UPDATE_TAGS_HISTORY=true ./main.sh
-
-# then
-./main.sh
-```
-
-## Docker
-
-```
-chmod +x ./Taskfile
-
-# Run
-HISTORIC_TAG_DATA_PATH=/historic-tag-data GITHUB_USER=XXXX GITHUB_PASSWORD=YYYY ./Taskfile build-run
-
-# Run integration test
-./Taskfile build-test
-
-# Clean historic tag data
-./Taskfile clean-data
-```
-
-
-# Tests
-
-E2E integration test with DockerHub API mock available in `tests/integration`.
-It mimicks an image tag push on DockerHub, then runs the updater script and checks that the proper commit is made.
-Assumption that the `hub` CLI tool will open the PR properly after then.
-
-To run the integration test:
-
-```
-cd tests/integration && ./integration_test_runner.sh
-```
