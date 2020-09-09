@@ -84,7 +84,7 @@ Tags containing "latest" are not taken into account, since usage should be avoid
 # Advantages
 
 - Not dependent on Github API, since abstracted in `hub`
-- Does not require a running docker instance
+- Does not require a running docker instance to manage docker image updates
 
 
 # Limitations

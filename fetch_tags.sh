@@ -41,7 +41,7 @@ DATA_DIR="data"
 
 
 # get latest image tag from dockerhub
-mkdir -p data
+mkdir -p $DATA_DIR
 NAME=${DOCKERHUB_REPO//\//_}_$IMAGE_ID
 NEW_FILENAME=$NAME.new
 NEW_FILEPATH=$DATA_DIR/$NEW_FILENAME
