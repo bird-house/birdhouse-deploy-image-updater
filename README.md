@@ -78,8 +78,6 @@ Makes that assumption that the `hub` CLI tool will open the PR properly after th
 <br>
 `bump_version.sh` : Bump version of specific image in repo
 
-Tags containing "latest" are not taken into account, since usage should be avoided in any ways in `birdhouse-deploy` repo.
-
 
 # Advantages
 
@@ -91,6 +89,3 @@ Tags containing "latest" are not taken into account, since usage should be avoid
 
 - Restricted to Github repositories
 - Restricted to Dockerhub images
-
-
-

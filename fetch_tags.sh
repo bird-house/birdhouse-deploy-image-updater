@@ -84,9 +84,7 @@ OLD_FILEPATH=$DATA_DIR/$OLD_FILENAME
 NEW_TAG_FOUND=false
 
 if [ -f "$OLD_FILEPATH" ] && [ -f "$NEW_FILEPATH" ]; then
-    DIFF=$(diff $OLD_FILEPATH $NEW_FILEPATH)
-
-    if [ "$DIFF"  == "" ]; then
+    if diff $OLD_FILEPATH $NEW_FILEPATH; then
         echo "[INFO] [$0] [$IMAGE_ID] No new tag found. Exiting."
         rm $NEW_FILEPATH
         exit 0
