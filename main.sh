@@ -43,7 +43,7 @@ do
     DOCKERHUB_REPO=$(echo $CURRENT_IMAGE | jq '.dockerhub_repo_name' | tr -d '\"')
     TAG_FILTER=$(echo $CURRENT_IMAGE | jq '.tag_filter' | tr -d '\"')
     BUMP_TAG=$(echo $CURRENT_IMAGE | jq '.bump_tag' | tr -d '\"')
-    BUMP_FILE=$(cat $CONFIG_FILEPATH | jq '.project.bump_file' | tr -d '\"')
+    BUMP_FILE=$(echo $CURRENT_IMAGE | jq '.bump_file' | tr -d '\"')
 
     # start fetch_tags
     IMAGE_ID=$IMAGE_ID DOCKERHUB_REPO=$DOCKERHUB_REPO TAG_FILTER=$TAG_FILTER BUMP_TAG=$BUMP_TAG BUMP_FILE=$BUMP_FILE ./fetch_tags.sh
