@@ -30,6 +30,7 @@ export PROJECT_NAME=${REPO_URL##*/}
 export ONLY_UPDATE_TAGS_HISTORY=${ONLY_UPDATE_TAGS_HISTORY}
 export GITHUB_USER=$GITHUB_USER
 export GITHUB_PASSWORD=$GITHUB_PASSWORD
+export EXIT_BEFORE_PR=$EXIT_BEFORE_PR
 
 # iterate through the images in config file
 IMAGE_COUNT=$(cat $CONFIG_FILEPATH  | jq '.images | length')
@@ -48,10 +49,6 @@ do
     IMAGE_ID=$IMAGE_ID DOCKERHUB_REPO=$DOCKERHUB_REPO TAG_FILTER=$TAG_FILTER BUMP_TAG=$BUMP_TAG BUMP_FILE=$BUMP_FILE ./fetch_tags.sh
     
     if [[ $? -eq 100 ]]; then
-        if [[ -z "${EXIT_BEFORE_PR}" ]]; then
-            echo "[INFO] Created PR for [${IMAGE_ID}]. Exiting."
-        fi
-
         exit 100
     fi
 done
