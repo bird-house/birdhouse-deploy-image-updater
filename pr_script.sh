@@ -12,7 +12,7 @@
 # DOCKERHUB_REPO="pavics/weaver"
 # IMAGE_ID="weaver-worker"
 # BUMP_TAG="WEAVER_WORKER_IMAGE"
-# BUMP_TAG_VALUE="1.13.2-worker"
+# NEW_TAG_VALUE="1.13.2-worker"
 # BUMP_FILE="birdhouse/default.env"
 # GITHUB_USER=""
 # GITHUB_PASSWORD=""
@@ -23,7 +23,7 @@ REQUIRED_ENV_VARS='
     DOCKERHUB_REPO
     IMAGE_ID
     BUMP_TAG
-    BUMP_TAG_VALUE
+    NEW_TAG_VALUE
     BUMP_FILE
     GITHUB_USER
     GITHUB_PASSWORD
@@ -42,8 +42,8 @@ WORKING_DIR="working_dir"
 
 echo "[STEP] [$0] [$PROJECT_NAME] Fetch tags"
 
-COMMIT_MESSAGE="bump ${IMAGE_ID} to ${BUMP_TAG_VALUE}"
-BRANCH_NAME="bump_${IMAGE_ID}_to_${BUMP_TAG_VALUE}"
+COMMIT_MESSAGE="bump ${IMAGE_ID} to ${NEW_TAG_VALUE}"
+BRANCH_NAME="bump_${IMAGE_ID}_to_${NEW_TAG_VALUE}"
 
 
 # prepare repo
@@ -74,7 +74,7 @@ if [[ ! -z "${TEST_ENV_CONFIG}" ]] && [[ "$BUMP_TAG" == "WEAVER_WORKER_IMAGE" ]]
 fi
 
 # bumpversion
-DOCKERHUB_REPO=$DOCKERHUB_REPO BUMP_TAG=$BUMP_TAG BUMP_TAG_VALUE=$BUMP_TAG_VALUE BUMP_FILE=$BUMP_FILE ../../bump_version.sh
+DOCKERHUB_REPO=$DOCKERHUB_REPO BUMP_TAG=$BUMP_TAG NEW_TAG_VALUE=$NEW_TAG_VALUE BUMP_FILE=$BUMP_FILE ../../bump_version.sh
 
 # to track last diff result
 git diff &> ../../last-diff-result.log

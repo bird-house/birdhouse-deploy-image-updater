@@ -106,7 +106,7 @@ fi
 
 # launch pr_script with params
 if [[ $NEW_TAG_FOUND = true ]]; then
-    DOCKERHUB_REPO=$DOCKERHUB_REPO IMAGE_ID=$IMAGE_ID BUMP_TAG=$BUMP_TAG BUMP_TAG_VALUE=$LATEST_TAG BUMP_FILE=$BUMP_FILE ./pr_script.sh
+    DOCKERHUB_REPO=$DOCKERHUB_REPO IMAGE_ID=$IMAGE_ID BUMP_TAG=$BUMP_TAG NEW_TAG_VALUE=$LATEST_TAG BUMP_FILE=$BUMP_FILE ./pr_script.sh
     
     # output to logs
     echo ${DOCKERHUB_REPO} ${IMAGE_ID}:${LATEST_TAG} > $DATA_DIR/last-update-result.log
