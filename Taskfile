@@ -20,7 +20,7 @@ function run {
         exit 1
     fi
 
-    docker run --privileged -v ${HISTORIC_TAG_DATA_PATH}:/opt/local/src/daccs-image-updater/data \
+    docker run -v ${HISTORIC_TAG_DATA_PATH}:/opt/local/src/daccs-image-updater/data \
      -v ~/.gitconfig:/etc/gitconfig \
      -e GITHUB_USER=$GITHUB_USER \
      -e GITHUB_PASSWORD=$GITHUB_PASSWORD \
@@ -28,7 +28,7 @@ function run {
 }
 
 function test {
-    docker run --privileged -v ${HISTORIC_TAG_DATA_PATH}:/opt/local/src/daccs-image-updater/data \
+    docker run -v ${HISTORIC_TAG_DATA_PATH}:/opt/local/src/daccs-image-updater/data \
      daccs-image-updater:0.1 /bin/sh -c 'cd tests/integration && ./integration_test_runner.sh'
 
     # -v ~/.gitconfig:/etc/gitconfig \
