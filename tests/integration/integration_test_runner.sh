@@ -211,7 +211,7 @@ if [[ $FAILURE_COUNT -eq 0 ]]; then
     echo "Success : $SUCCESS_COUNT"
     echo "Failure : $FAILURE_COUNT"
     printf "${NC}"
-    exit 0
+    exit 100        # for testing purposes, we emulate a successful image tag update exit status code
 else 
     printf "${RED}[ERROR] Some tests failed."
     echo
