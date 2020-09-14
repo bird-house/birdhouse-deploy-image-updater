@@ -25,11 +25,15 @@ function run {
      -e GITHUB_USER=$GITHUB_USER \
      -e GITHUB_PASSWORD=$GITHUB_PASSWORD \
      daccs-image-updater:0.1 ./main.sh
+
+     exit $?
 }
 
 function test {
     docker run -v ${HISTORIC_TAG_DATA_PATH}:/opt/local/src/daccs-image-updater/data \
      daccs-image-updater:0.1 /bin/sh -c 'cd tests/integration && ./integration_test_runner.sh'
+
+    exit $?
 
     # -v ~/.gitconfig:/etc/gitconfig \
 }
