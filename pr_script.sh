@@ -38,9 +38,9 @@ done
 
 WORKING_DIR="working_dir"
 
-echo "[STEP] [$0] [$PROJECT_NAME] Fetch tags"
+echo "[STEP] [$0] [$PROJECT_NAME] PR"
 
-COMMIT_MESSAGE="bump ${IMAGE_ID} to ${NEW_TAG_VALUE}"
+COMMIT_MESSAGE="bump \`${IMAGE_ID}\` to ${NEW_TAG_VALUE}"
 BRANCH_NAME="bump_${IMAGE_ID}_to_${NEW_TAG_VALUE}"
 
 
@@ -52,7 +52,7 @@ cd $WORKING_DIR
 if [[ ! -d "$PROJECT_NAME" ]]
 then
     echo "[INFO] Not existing project directory, cloning"
-    hub clone $REPO_URL
+    hub clone $PROJECT_ORG_REPO
     cd $PROJECT_NAME
 else
     echo "[INFO] Existing project directory, cleaning"
@@ -88,5 +88,6 @@ if [[ ! -z "${EXIT_BEFORE_PR}" ]]; then
 fi
 
 # PR
-git push --set-upstream origin $BRANCH_NAME
-hub pull-request -m $COMMIT_MESSAGE
+git remote set-url origin https://$GITHUB_TOKEN:x-oauth-basic@github.com/$PROJECT_ORG_REPO.git
+hub push origin $BRANCH_NAME
+hub pull-request -m "$COMMIT_MESSAGE"

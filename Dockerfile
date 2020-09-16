@@ -17,7 +17,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     jq \
     git \
     curl \
-    lsof
+    lsof \
+    ssh-client
 
 # install GitHub's hub CLI tool
 RUN wget -O hub.tgz --progress=dot:mega https://github.com/github/hub/releases/download/v2.14.2/hub-linux-amd64-2.14.2.tgz
@@ -26,8 +27,9 @@ RUN tar -xvf hub.tgz -C /hub --strip-components 1
 RUN bash /hub/install
 
 # configure github account. Defaults, overridden by GITHUB_USER
-# RUN git config --global user.email "you@example.com"
-# RUN git config --global user.name "Your Name"
+RUN git config --global user.email "bot@crim.ca"
+RUN git config --global user.name "birdhouse-deploy updater bot"
+RUN hub config --global hub.protocol https
 
 # install 
 COPY ./ ${APP_DIR}

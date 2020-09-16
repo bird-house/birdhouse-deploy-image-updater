@@ -16,7 +16,7 @@ configurable config.json path
 
 add configuration for all bh deploy image files
 
-
+handle PR errors (eg: currently states that PR is created and send slack notif even if PR issue might have occured)
 
 
 ---- 
