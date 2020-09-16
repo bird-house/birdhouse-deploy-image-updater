@@ -48,7 +48,7 @@ BRANCH_NAME="bump_${IMAGE_ID}_to_${NEW_TAG_VALUE}"
 
 # prepare repo
 mkdir -p $WORKING_DIR
-# rm -rf $WORKING_DIR/$PROJECT_NAME
+rm -rf $WORKING_DIR/$PROJECT_NAME     # TODO : only for testing, comment
 cd $WORKING_DIR
 
 if [[ ! -d "$PROJECT_NAME" ]]
