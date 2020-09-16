@@ -90,5 +90,5 @@ if [[ ! -z "${EXIT_BEFORE_PR}" ]]; then
 fi
 
 # PR
-git push
+git push --set-upstream origin $BRANCH_NAME
 hub pull-request -m $COMMIT_MESSAGE
