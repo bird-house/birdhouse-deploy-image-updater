@@ -54,7 +54,7 @@ cd $WORKING_DIR
 if [[ ! -d "$PROJECT_NAME" ]]
 then
     echo "[INFO] Not existing project directory, cloning"
-    git clone $REPO_URL
+    hub clone $REPO_URL
     cd $PROJECT_NAME
 else
     echo "[INFO] Existing project directory, cleaning"
@@ -62,7 +62,7 @@ else
     git clean -fd
     git reset --hard origin
     git checkout master
-    git pull
+    hub pull
     git branch -D $BRANCH_NAME     # TODO : currently avoids already existing branch error. Handle error instead
 fi
 
