@@ -16,7 +16,7 @@ To run the image updater using Docker:
 chmod +x ./Taskfile
 
 # remove `EXIT_BEFORE_PR=1` if you want to actually create the PR
-HISTORIC_TAG_DATA_PATH=/absolute-and-writable-path EXIT_BEFORE_PR=1 GITHUB_USER=XXXX GITHUB_PASSWORD=YYYY ./Taskfile build-run
+HISTORIC_TAG_DATA_PATH=/absolute-and-writable-path EXIT_BEFORE_PR=1 GITHUB_TOKEN=XXXX ./Taskfile build-run
 
 # Clean historic tag data
 HISTORIC_TAG_DATA_PATH=/absolute-and-writable-path ./Taskfile clean-data
@@ -48,7 +48,7 @@ To run the image updater using CLI:
 
 ```
 # remove `EXIT_BEFORE_PR=1` if you want to actually create the PR
-EXIT_BEFORE_PR=1 GITHUB_USER=XXXX GITHUB_PASSWORD=YYYY ./main.sh
+EXIT_BEFORE_PR=1 GITHUB_TOKEN=XXXX ./main.sh
 ```
 
 To run the integration test via CLI:

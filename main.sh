@@ -28,12 +28,8 @@ fi
 export REPO_URL=$(cat $CONFIG_FILEPATH | jq '.project.url' | tr -d '\"')
 export PROJECT_NAME=${REPO_URL##*/}
 export ONLY_UPDATE_TAGS_HISTORY=${ONLY_UPDATE_TAGS_HISTORY}
-export GITHUB_USER=$(echo $GITHUB_USER | base64 | base64 --decode)
-export GITHUB_PASSWORD=$(echo $GITHUB_PASSWORD | base64 | base64 --decode)
+export GITHUB_TOKEN=$GITHUB_TOKEN
 export EXIT_BEFORE_PR=$EXIT_BEFORE_PR
-
-echo $GITHUB_USER
-echo $GITHUB_PASSWORD
 
 # iterate through the images in config file
 IMAGE_COUNT=$(cat $CONFIG_FILEPATH  | jq '.images | length')

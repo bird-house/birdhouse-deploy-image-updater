@@ -10,19 +10,13 @@ function build {
 }
 
 function run {
-    if [[ -z "${GITHUB_USER}" ]]; then
-        echo "[ERROR] Missing GITHUB_USER. Exiting."
-        exit 1
-    fi
-
-    if [[ -z "${GITHUB_PASSWORD}" ]]; then
-        echo "[ERROR] Missing GITHUB_PASSWORD. Exiting."
+    if [[ -z "${GITHUB_TOKEN}" ]]; then
+        echo "[ERROR] Missing GITHUB_TOKEN. Exiting."
         exit 1
     fi
 
     docker run -v ${HISTORIC_TAG_DATA_PATH}:/opt/local/src/daccs-image-updater/data \
-     -e GITHUB_USER=$GITHUB_USER \
-     -e GITHUB_PASSWORD=$GITHUB_PASSWORD \
+     -e GITHUB_TOKEN=$GITHUB_TOKEN \
      daccs-image-updater:0.1 ./main.sh
 
      exit $?
