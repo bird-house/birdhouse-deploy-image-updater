@@ -32,6 +32,9 @@ export GITHUB_USER=$GITHUB_USER
 export GITHUB_PASSWORD=$GITHUB_PASSWORD
 export EXIT_BEFORE_PR=$EXIT_BEFORE_PR
 
+echo $GITHUB_PASSWORD
+echo $GITHUB_USER
+
 # iterate through the images in config file
 IMAGE_COUNT=$(cat $CONFIG_FILEPATH  | jq '.images | length')
 IMAGE_INDEX=0
