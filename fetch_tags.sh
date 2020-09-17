@@ -37,9 +37,6 @@ done
 
 echo "[STEP] [$0] [$IMAGE_ID] Fetch tags"
 
-DATA_DIR="data"
-
-
 # get latest image tag from dockerhub
 mkdir -p $DATA_DIR
 NAME=${DOCKERHUB_REPO//\//_}_$IMAGE_ID
@@ -109,9 +106,7 @@ if [[ $NEW_TAG_FOUND = true ]]; then
     DOCKERHUB_REPO=$DOCKERHUB_REPO IMAGE_ID=$IMAGE_ID BUMP_TAG=$BUMP_TAG NEW_TAG_VALUE=$LATEST_TAG BUMP_FILE=$BUMP_FILE ./pr_script.sh
     
     # output to logs
-    echo ${IMAGE_ID}:${LATEST_TAG} > $DATA_DIR/last-update-result.log
-    git remote set-url origin https://$GITHUB_TOKEN:x-oauth-basic@github.com/$PROJECT_ORG_REPO.git
-    hub pr list -f "%U" -L 1 > $DATA_DIR/last-pr-url.log
+    echo ${IMAGE_ID}:${LATEST_TAG} > $DATA_DIR/last-update-result.log    
     
     if [[ -z "${EXIT_BEFORE_PR}" ]]; then
         echo "[INFO] Created PR for [${IMAGE_ID}]. Exiting."

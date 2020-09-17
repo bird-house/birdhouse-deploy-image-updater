@@ -10,7 +10,7 @@
 # no REQUIRED_ENV_VARS
 
 # clean past log
-DATA_DIR="data"
+export DATA_DIR="data"
 rm -f $DATA_DIR/last-update-result.log
 
 # vars
