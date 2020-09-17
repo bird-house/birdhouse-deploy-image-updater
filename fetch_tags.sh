@@ -37,9 +37,6 @@ done
 
 echo "[STEP] [$0] [$IMAGE_ID] Fetch tags"
 
-DATA_DIR="data"
-
-
 # get latest image tag from dockerhub
 mkdir -p $DATA_DIR
 NAME=${DOCKERHUB_REPO//\//_}_$IMAGE_ID
