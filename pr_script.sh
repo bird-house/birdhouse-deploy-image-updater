@@ -92,4 +92,4 @@ git remote set-url origin https://$GITHUB_TOKEN:x-oauth-basic@github.com/$PROJEC
 hub push origin $BRANCH_NAME
 hub pull-request -m "$COMMIT_MESSAGE"
 hub pr list -f "%U" -L 1
-hub pr list -f "%U" -L 1 > $DATA_DIR/last-pr-url.log
+hub pr list -f "%U" -L 1 > ../../$DATA_DIR/last-pr-url.log
