@@ -12,7 +12,7 @@ add configuration for all bh deploy image files
 configuration management : less env var, maybe one config per script
     add `env.default` and `env.custom`, for documentation purposes
     add `GITHUB_TOKEN` to env file
-
+merge the jenkins pipeline repo to this one
 
 
 ## Backlog
