@@ -110,6 +110,7 @@ if [[ $NEW_TAG_FOUND = true ]]; then
     
     # output to logs
     echo ${IMAGE_ID}:${LATEST_TAG} > $DATA_DIR/last-update-result.log
+    hub pr list -f "%U" -L 1 > $DATA_DIR/last-pr-url.log
     
     if [[ -z "${EXIT_BEFORE_PR}" ]]; then
         echo "[INFO] Created PR for [${IMAGE_ID}]. Exiting."
