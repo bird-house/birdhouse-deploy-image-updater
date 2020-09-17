@@ -27,8 +27,6 @@ function test {
      daccs-image-updater:0.1 /bin/sh -c 'cd tests/integration && ./integration_test_runner.sh'
 
     exit $?
-
-    # -v ~/.gitconfig:/etc/gitconfig \
 }
 
 function clean-data {
