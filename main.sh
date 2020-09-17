@@ -26,7 +26,7 @@ fi
 
 # set global variables, to be used accross the script call stack
 export REPO_URL=$(cat $CONFIG_FILEPATH | jq '.project.url' | tr -d '\"')
-export PROJECT_ORG_REPO=${REPO_URL#*/}
+export PROJECT_ORG_REPO=$(echo $REPO_URL | cut -d/ -f4-)
 export PROJECT_NAME=${REPO_URL##*/}
 export ONLY_UPDATE_TAGS_HISTORY=${ONLY_UPDATE_TAGS_HISTORY}
 export GITHUB_TOKEN=$GITHUB_TOKEN
