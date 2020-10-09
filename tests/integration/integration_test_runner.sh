@@ -10,7 +10,7 @@ SUCCESS_COUNT=0
 FAILURE_COUNT=0
 
 # free port for dummy API
-lsof -ti tcp:5000 | xargs kill &> /dev/null
+lsof -ti tcp:5555 | xargs kill &> /dev/null
 
 # start the dummy API
 printf "%s\n" "" "    [TEST] Starting dummy APIs" ""
@@ -27,7 +27,7 @@ source tests/integration/env.test && ONLY_UPDATE_TAGS_HISTORY=true ./main.sh
 # update an image
 printf "%s\n" "" "    [INFO] Pushing weaver tag to DockerHub" ""
 printf "${BLUE}"
-curl -s -XPOST localhost:5000/pavics/weaver/1.13.2-worker
+curl -s -XPOST localhost:5555/pavics/weaver/1.13.2-worker
 printf "${NC}"
 
 # run updater CLI
@@ -63,8 +63,8 @@ source tests/integration/env.test && ./main.sh
 # update an image
 printf "%s\n" "" "    [INFO] Pushing weaver and finch tags to DockerHub" ""
 printf "${BLUE}"
-curl -s -XPOST localhost:5000/pavics/weaver/1.13.3-worker
-curl -s -XPOST localhost:5000/birdhouse/finch/version-0.5.4
+curl -s -XPOST localhost:5555/pavics/weaver/1.13.3-worker
+curl -s -XPOST localhost:5555/birdhouse/finch/version-0.5.4
 printf "${NC}"
 
 # run updater CLI
@@ -120,10 +120,10 @@ fi
 # update ALL images
 printf "%s\n" "" "    [INFO] Pushing all tags to DockerHub" ""
 printf "${BLUE}"
-curl -s -XPOST localhost:5000/pavics/weaver/1.13.4-worker
-curl -s -XPOST localhost:5000/pavics/weaver/1.13.4-manager
-curl -s -XPOST localhost:5000/pavics/weaver/1.13.4
-curl -s -XPOST localhost:5000/birdhouse/finch/version-0.5.5
+curl -s -XPOST localhost:5555/pavics/weaver/1.13.4-worker
+curl -s -XPOST localhost:5555/pavics/weaver/1.13.4-manager
+curl -s -XPOST localhost:5555/pavics/weaver/1.13.4
+curl -s -XPOST localhost:5555/birdhouse/finch/version-0.5.5
 printf "${NC}"
 PUSHED_TAGS_COUNT=4
 echo
@@ -166,7 +166,7 @@ fi
 # update an image
 printf "%s\n" "" "    [INFO] Pushing weaver tag to DockerHub" ""
 printf "${BLUE}"
-curl -s -XPOST localhost:5000/pavics/weaver/1.13.5-worker
+curl -s -XPOST localhost:5555/pavics/weaver/1.13.5-worker
 printf "${NC}"
 
 # run updater CLI
@@ -196,7 +196,7 @@ fi
 
 # kill the dummy API
 printf "%s\n" "" "    [TEST] Stopping dummy APIs" ""
-lsof -ti tcp:5000 | xargs kill &> /dev/null
+lsof -ti tcp:5555 | xargs kill &> /dev/null
 echo "done"
 echo
 

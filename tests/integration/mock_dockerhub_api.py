@@ -5,9 +5,9 @@ from os import path
 app = Flask(__name__)
 
 # testing paths:
-# curl 192.168.99.201:5000/v2/repositories/birdhouse/finch/tags
-# curl 192.168.99.201:5000/v2/repositories/pavics/weaver/tags
-# curl -XPOST localhost:5000/pavics/weaver/1.13.2-worker
+# curl 192.168.99.201:5555/v2/repositories/birdhouse/finch/tags
+# curl 192.168.99.201:5555/v2/repositories/pavics/weaver/tags
+# curl -XPOST localhost:5555/pavics/weaver/1.13.2-worker
 
 
 BIRDHOUSE_FINCH_DATA = json.load(open("./mock_data/birdhouse_finch"))
@@ -38,4 +38,4 @@ def post_tag(dockerhub_project, dockerhub_repo, tagname):
     return "pushed tag " + dockerhub_project + "/" + dockerhub_repo + ":" + tagname + " on DockerHub\n"
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5555)
