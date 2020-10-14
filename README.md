@@ -29,6 +29,8 @@ To run the integration test via Docker:
 HISTORIC_TAG_DATA_PATH=/absolute-and-writable-path ENV_FILE=tests/integration/env.test.prod CONFIG_FILE=config.test.json ./Taskfile build-test
 ```
 
+Add the `DRY_RUN=1` parameter, to only list all the images that have new tags available.
+
 
 
 ## Command line

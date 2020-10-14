@@ -81,7 +81,7 @@ OLD_FILEPATH=$DATA_DIR/$OLD_FILENAME
 NEW_TAG_FOUND=false
 
 if [ -f "$OLD_FILEPATH" ] && [ -f "$NEW_FILEPATH" ]; then
-    if diff $OLD_FILEPATH $NEW_FILEPATH; then
+    if diff $OLD_FILEPATH $NEW_FILEPATH &> /dev/null; then
         echo "[INFO] [$0] [$IMAGE_ID] No new tag found. Exiting."
         rm $NEW_FILEPATH
         exit 0
@@ -90,6 +90,12 @@ if [ -f "$OLD_FILEPATH" ] && [ -f "$NEW_FILEPATH" ]; then
     fi
 else
     echo "[INFO] [$0] [$IMAGE_ID] No old file found to compare with. Skipping diff."
+fi
+
+# dry run
+echo "[INFO] Found new tag: $LATEST_TAG"
+if [[ $DRY_RUN == 1 ]]; then
+    exit 0
 fi
 
 # rotate historical files

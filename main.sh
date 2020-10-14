@@ -37,6 +37,7 @@ export PROJECT_NAME=${REPO_URL##*/}
 export ONLY_UPDATE_TAGS_HISTORY=${ONLY_UPDATE_TAGS_HISTORY}
 export GITHUB_TOKEN=$GITHUB_TOKEN
 export EXIT_BEFORE_PR=$EXIT_BEFORE_PR
+export DRY_RUN=$DRY_RUN
 
 # iterate through the images in config file
 IMAGE_COUNT=$(cat $CONFIG_FILE | jq '.images | length')

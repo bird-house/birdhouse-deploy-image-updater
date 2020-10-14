@@ -19,6 +19,7 @@ function run {
      -e GITHUB_TOKEN=$GITHUB_TOKEN \
      -e ENV_FILE=$ENV_FILE \
      -e CONFIG_FILE=$CONFIG_FILE \
+     -e DRY_RUN=$DRY_RUN \
      daccs-image-updater:0.1 ./main.sh
 
      exit $?
@@ -28,6 +29,7 @@ function test {
     docker run -v ${HISTORIC_TAG_DATA_PATH}:/opt/local/src/daccs-image-updater/data \
      -e ENV_FILE=$ENV_FILE \
      -e CONFIG_FILE=$CONFIG_FILE \
+     -e DRY_RUN=$DRY_RUN \
      daccs-image-updater:0.1 /bin/sh -c 'cd tests/integration && ./integration_test_runner.sh'
 
     exit $?
