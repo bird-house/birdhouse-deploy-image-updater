@@ -87,16 +87,17 @@ if [ -f "$OLD_FILEPATH" ] && [ -f "$NEW_FILEPATH" ]; then
         exit 0
     else
         NEW_TAG_FOUND=true
+
+        # dry run
+        echo "[INFO] [$0] [$IMAGE_ID] Found new tag: $LATEST_TAG"
+        if [[ $DRY_RUN == 1 ]]; then
+            exit 0
+        fi
     fi
 else
     echo "[INFO] [$0] [$IMAGE_ID] No old file found to compare with. Skipping diff."
 fi
 
-# dry run
-echo "[INFO] Found new tag: $LATEST_TAG"
-if [[ $DRY_RUN == 1 ]]; then
-    exit 0
-fi
 
 # rotate historical files
 mv $NEW_FILEPATH $OLD_FILEPATH
