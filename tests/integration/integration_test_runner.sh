@@ -184,21 +184,6 @@ DRY_RUN=1 ./main.sh
 # reset DockerHub API mock tags
 curl -s -XPOST $DOCKERHUB_HOST_TEST/reset/token1234
 
-# # count number of updated image tags
-# UPDATED_IMAGE_COUNTER=-1
-# exitCode=100
-
-# while [[ $exitCode -eq 100 ]]
-# do
-#     # run updater CLI
-#     rm -f last-diff-result.log
-#     ./main.sh
-
-#     exitCode=$?
-#     UPDATED_IMAGE_COUNTER=$((UPDATED_IMAGE_COUNTER+1))
-#     cat $DATA_DIR/last-update-result.log >> $DATA_DIR/updated-images-list.log
-# done
-
 
 # ### Asserts that correct number of images have been updated
 # printf "%s\n" "" "    [TEST] ASSERT" ""
@@ -214,37 +199,6 @@ curl -s -XPOST $DOCKERHUB_HOST_TEST/reset/token1234
 #     echo
 #     echo
 #     cat $DATA_DIR/updated-images-list.log
-#     printf "${NC}"
-#     ((FAILURE_COUNT++))
-# fi
-
-
-# # update an image
-# printf "%s\n" "" "    [INFO] Pushing weaver tag to DockerHub" ""
-# printf "${BLUE}"
-# curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.5-worker
-# printf "${NC}"
-
-# # run updater CLI
-# printf "%s\n" "" "    [TEST] Running updater - need to create a PR for [bump_weaver-worker_to_1.13.4-worker]" ""
-# rm -f last-diff-result.log
-# ./main.sh
-
-
-# ### Assert
-# printf "%s\n" "" "    [TEST] ASSERT" ""
-# if grep -q '1.13.5-worker' "$DATA_DIR/last-update-result.log"; then
-#     printf "${GREEN}[INFO] [bump_weaver-worker_to_1.13.5-worker] 'last-update-result.log' looks good"
-#     echo
-#     echo
-#     cat $DATA_DIR/last-update-result.log
-#     printf "${NC}"
-#     ((SUCCESS_COUNT++))
-# else
-#     printf "${RED}[ERROR] [bump_weaver-worker_to_1.13.5-worker] wrong 'last-update-result.log'."
-#     echo
-#     echo
-#     cat $DATA_DIR/last-update-result.log
 #     printf "${NC}"
 #     ((FAILURE_COUNT++))
 # fi
