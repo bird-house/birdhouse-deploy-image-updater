@@ -19,11 +19,21 @@ if [[ ! -v CONFIG_FILE ]]; then
     exit 1
 fi
 
+if [ ! -f $CONFIG_FILE ]; then
+    echo "[INFO] Config file not existing. Exiting."
+    exit 1
+fi
+
 echo "[INFO] USING CONFIG FILE ${CONFIG_FILE}"
 
 # env file
 if [[ ! -v ENV_FILE ]]; then
     ENV_FILE=".env"
+fi
+
+if [ ! -f $ENV_FILE ]; then
+    echo "[INFO] Env file not existing. Exiting."
+    exit 1
 fi
 
 source $ENV_FILE
