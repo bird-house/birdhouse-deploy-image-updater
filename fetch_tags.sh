@@ -46,10 +46,16 @@ DOCKERHUB_IMAGE_TAGS=$(wget -t 3 --timeout=3000 -q $DOCKERHUB_IMAGE_TAGS_URL$DOC
 
 if [ "$DOCKERHUB_IMAGE_TAGS" == "" ]; then
     echo "[INFO] [$0] [$IMAGE_ID] DockerHub fetch timeout reached. Exiting."
+    exit 50
+fi
+
+MAX_TAG_ITERATION=$(echo $DOCKERHUB_IMAGE_TAGS | jq -r '.results' | jq length)
+
+if [ "$MAX_TAG_ITERATION" == "null" ]; then
+    echo "[INFO] [$0] [$IMAGE_ID] DockerHub fetched null results. Exiting."
     exit 51
 fi
 
-MAX_TAG_ITERATION=$(echo $DOCKERHUB_IMAGE_TAGS | jq '.count')
 TAG_INDEX=0
 TAG_FILTER=${TAG_FILTER//\\\\/\\}    # replace \\ with \ in regex
 
@@ -57,10 +63,10 @@ while [[ ! $LATEST_TAG =~ $TAG_FILTER ]]
 do
     # assumption that results are always in the same order, most recent first
     LATEST_TAG=$(echo $DOCKERHUB_IMAGE_TAGS | jq '.results['$TAG_INDEX'].name' | tr -d \")
-    TAG_INDEX=$TAG_INDEX+1
+    TAG_INDEX=$(($TAG_INDEX+1))
 
-    if [[ "$TAG_INDEX" -eq "$MAX_TAG_ITERATION" ]]; then
-        echo "[WARNING] [$0] Reached max tag iteration count. Exiting."
+    if [[ $TAG_INDEX -gt $MAX_TAG_ITERATION ]]; then
+        echo "[INFO] [$0] Reached max tag iteration count. Exiting."
         exit 53
     fi
 done
