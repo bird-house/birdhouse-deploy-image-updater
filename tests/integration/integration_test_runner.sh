@@ -134,6 +134,14 @@ else
 fi
 
 
+# clear historical data, to avoid bias from previous tag tests
+rm -f ${DATA_DIR}/*.old
+rm -f ${DATA_DIR}/*.new
+rm -f ${DATA_DIR}/*.log
+
+# tag snapshot
+ONLY_UPDATE_TAGS_HISTORY=true ./main.sh
+
 # update ALL images
 printf "%s\n" "" "    [INFO] Pushing all tags to DockerHub" ""
 printf "${BLUE}"
@@ -164,13 +172,18 @@ printf "${NC}"
 PUSHED_TAGS_COUNT=4
 echo
 
+# # clear historical data
+# rm -f ${DATA_DIR}/*.old
+# rm -f ${DATA_DIR}/*.new
+# rm -f ${DATA_DIR}/*.log
+
 # dry run
 DRY_RUN=1 ./main.sh
 
-# clear historical data
-rm -f ${DATA_DIR}/*.old
-rm -f ${DATA_DIR}/*.new
-rm -f ${DATA_DIR}/*.log
+# # clear historical data
+# rm -f ${DATA_DIR}/*.old
+# rm -f ${DATA_DIR}/*.new
+# rm -f ${DATA_DIR}/*.log
 
 # # count number of updated image tags
 # UPDATED_IMAGE_COUNTER=-1

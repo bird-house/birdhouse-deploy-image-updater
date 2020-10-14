@@ -48,5 +48,15 @@ def post_tag(dockerhub_project, dockerhub_repo, tagname):
 
     return "pushed tag " + dockerhub_project + "/" + dockerhub_repo + ":" + tagname + " on DockerHub\n"
 
+@app.route('/reset/<token>', methods=['POST'])
+def post_reset(token):
+    if token == 'token1234':
+        dockerhub_mock_data = {
+            "birdhouse_finch" : BIRDHOUSE_FINCH_DATA,
+            "pavics_weaver" : PAVICS_WEAVER_DATA
+        }
+
+    return "resetted dockerhub tags\n"
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5555)
