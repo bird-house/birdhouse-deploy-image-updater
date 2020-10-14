@@ -22,7 +22,13 @@ dockerhub_mock_data = {
 @app.route('/v2/repositories/<dockerhub_project>/<dockerhub_repo>/tags', methods=['GET'])
 def get_tags(dockerhub_project, dockerhub_repo):
     data_key = dockerhub_project + "_" + dockerhub_repo
-    data = dockerhub_mock_data[data_key]
+
+    if data_key in dockerhub_mock_data:
+        data = dockerhub_mock_data[data_key]
+    else:
+        data = {
+            "results": []
+        }
     
     return data
 
@@ -30,6 +36,11 @@ def get_tags(dockerhub_project, dockerhub_repo):
 @app.route('/<dockerhub_project>/<dockerhub_repo>/<tagname>', methods=['POST'])
 def post_tag(dockerhub_project, dockerhub_repo, tagname):
     data_key = dockerhub_project + "_" + dockerhub_repo
+
+    if data_key not in dockerhub_mock_data:
+        dockerhub_mock_data[data_key] = {
+            "results": []
+        }
 
     dockerhub_mock_data[data_key]["results"].insert(0, {
       "name": tagname
