@@ -42,7 +42,13 @@ mkdir -p $DATA_DIR
 NAME=${DOCKERHUB_REPO//\//_}_$IMAGE_ID
 NEW_FILENAME=$NAME.new
 NEW_FILEPATH=$DATA_DIR/$NEW_FILENAME
-DOCKERHUB_IMAGE_TAGS=$(wget -q $DOCKERHUB_IMAGE_TAGS_URL$DOCKERHUB_REPO/tags?page_size=1024 -O-)
+DOCKERHUB_IMAGE_TAGS=$(wget -t 3 --timeout=3000 -q $DOCKERHUB_IMAGE_TAGS_URL$DOCKERHUB_REPO/tags?page_size=1024 -O-)
+
+if [ "$DOCKERHUB_IMAGE_TAGS" == "" ]; then
+    echo "[INFO] [$0] [$IMAGE_ID] DockerHub fetch timeout reached. Exiting."
+    exit 51
+fi
+
 MAX_TAG_ITERATION=$(echo $DOCKERHUB_IMAGE_TAGS | jq '.count')
 TAG_INDEX=0
 TAG_FILTER=${TAG_FILTER//\\\\/\\}    # replace \\ with \ in regex

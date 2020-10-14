@@ -16,6 +16,20 @@
             "bump_file": "birdhouse/default.env",
             "tag_filter": "^version-[0-9]+(\\.[0-9]+)*$"
         },
+
+        {
+            "id": "canarieapi",
+            "url": "https://hub.docker.com/r/pavics/canarieapi",
+            "dockerhub_repo_name": "pavics/canarieapi",
+            "bump_tag": "TODO",
+            "bump_file": "birdhouse/docker-compose.yml",
+            "tag_filter": "^[0-9]+(\\.[0-9]+)*$"
+        },
+
+
+
+
+
         {
             "id": "weaver",
             "url": "https://hub.docker.com/r/pavics/weaver",
