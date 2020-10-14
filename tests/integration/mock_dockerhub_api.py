@@ -51,6 +51,7 @@ def post_tag(dockerhub_project, dockerhub_repo, tagname):
 @app.route('/reset/<token>', methods=['POST'])
 def post_reset(token):
     if token == 'token1234':
+        global dockerhub_mock_data
         dockerhub_mock_data = {
             "birdhouse_finch" : BIRDHOUSE_FINCH_DATA,
             "pavics_weaver" : PAVICS_WEAVER_DATA

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# NOTE : Would need complete refactoring, lot of hardcoded values and logic.
+
 GREEN='\033[0;32m'
 RED='\033[0;31m'
 BLUE='\033[0;36m'
@@ -134,11 +136,35 @@ else
 fi
 
 
-# clear historical data, to avoid bias from previous tag tests
-rm -f ${DATA_DIR}/*.old
-rm -f ${DATA_DIR}/*.new
-rm -f ${DATA_DIR}/*.log
-curl -s -XPOST $DOCKERHUB_HOST_TEST/reset/token1234
+
+# push ALL images
+printf "%s\n" "" "    [INFO] Pushing all initial tags to DockerHub" ""
+printf "${BLUE}"
+curl -s -XPOST $DOCKERHUB_HOST_TEST/birdhouse/finch/version-0.5.4
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/canarieapi/0.3.5
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/pavics-frontend/1.0.5
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/pavics-project-api/0.9.0
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/pyramid-phoenix/pavics-0.2.3
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/pavics-datacatalog/0.6.11
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/geoserver/2.9.3
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/malleefowl/pavics-0.3.5
+curl -s -XPOST $DOCKERHUB_HOST_TEST/birdhouse/flyingpigeon/1.6
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/raven/0.10.0
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/hummingbird/0.5_dev
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/solr/5.2.1
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/ncwms2/2.0.4
+curl -s -XPOST $DOCKERHUB_HOST_TEST/unidata/thredds-docker/4.6.14
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/postgis/2.2
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/magpie/1.7.3
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/twitcher/magpie-1.7.3
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/jupyterhub/1.0.0-20200130
+
+# extra components
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.3-worker
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.3-manager
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.3
+printf "${NC}"
+echo
 
 # tag snapshot
 ONLY_UPDATE_TAGS_HISTORY=true ./main.sh
@@ -170,8 +196,9 @@ curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.4-worker
 curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.4-manager
 curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.4
 printf "${NC}"
-PUSHED_TAGS_COUNT=4
 echo
+
+PUSHED_TAGS_COUNT=21
 
 # # clear historical data
 # rm -f ${DATA_DIR}/*.old
@@ -179,7 +206,11 @@ echo
 # rm -f ${DATA_DIR}/*.log
 
 # dry run
-DRY_RUN=1 ./main.sh
+DRY_RUN=1 ./main.sh | tee tmp.log
+
+UPDATED_TAGS=$(cat tmp.log | grep -c "Found new tag")
+echo $UPDATED_TAGS
+rm tmp.log
 
 # reset DockerHub API mock tags
 curl -s -XPOST $DOCKERHUB_HOST_TEST/reset/token1234
