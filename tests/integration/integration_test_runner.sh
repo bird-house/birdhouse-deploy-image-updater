@@ -138,6 +138,7 @@ fi
 rm -f ${DATA_DIR}/*.old
 rm -f ${DATA_DIR}/*.new
 rm -f ${DATA_DIR}/*.log
+curl -s -XPOST $DOCKERHUB_HOST_TEST/reset/token1234
 
 # tag snapshot
 ONLY_UPDATE_TAGS_HISTORY=true ./main.sh
@@ -180,10 +181,8 @@ echo
 # dry run
 DRY_RUN=1 ./main.sh
 
-# # clear historical data
-# rm -f ${DATA_DIR}/*.old
-# rm -f ${DATA_DIR}/*.new
-# rm -f ${DATA_DIR}/*.log
+# reset DockerHub API mock tags
+curl -s -XPOST $DOCKERHUB_HOST_TEST/reset/token1234
 
 # # count number of updated image tags
 # UPDATED_IMAGE_COUNTER=-1
