@@ -137,16 +137,40 @@ fi
 # update ALL images
 printf "%s\n" "" "    [INFO] Pushing all tags to DockerHub" ""
 printf "${BLUE}"
+curl -s -XPOST $DOCKERHUB_HOST_TEST/birdhouse/finch/version-0.5.5
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/canarieapi/0.3.6
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/pavics-frontend/1.0.6
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/pavics-project-api/0.9.1
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/pyramid-phoenix/pavics-0.2.4
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/pavics-datacatalog/0.6.12
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/geoserver/2.9.4
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/malleefowl/pavics-0.3.6
+curl -s -XPOST $DOCKERHUB_HOST_TEST/birdhouse/flyingpigeon/1.7
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/raven/0.10.1
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/hummingbird/0.6_dev
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/solr/5.2.2
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/ncwms2/2.0.5
+curl -s -XPOST $DOCKERHUB_HOST_TEST/unidata/thredds-docker/4.6.15
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/postgis/2.3
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/magpie/1.7.4
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/twitcher/magpie-1.7.4
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/jupyterhub/1.0.0-20200131
+
+# extra components
 curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.4-worker
 curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.4-manager
 curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.4
-curl -s -XPOST $DOCKERHUB_HOST_TEST/birdhouse/finch/version-0.5.5
 printf "${NC}"
 PUSHED_TAGS_COUNT=4
 echo
 
 # dry run
 DRY_RUN=1 ./main.sh
+
+# clear historical data
+rm -f ${DATA_DIR}/*.old
+rm -f ${DATA_DIR}/*.new
+rm -f ${DATA_DIR}/*.log
 
 # # count number of updated image tags
 # UPDATED_IMAGE_COUNTER=-1
