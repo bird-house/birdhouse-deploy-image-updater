@@ -39,7 +39,7 @@ cd ../..
 # run updater CLI
 printf "%s\n" "" "    [TEST] Running updater - no PR to create" ""
 rm -f last-diff-result.log
-source tests/integration/env.test && ONLY_UPDATE_TAGS_HISTORY=true ./main.sh
+ONLY_UPDATE_TAGS_HISTORY=true ./main.sh
 
 # update an image
 printf "%s\n" "" "    [INFO] Pushing weaver tag to DockerHub" ""
@@ -50,7 +50,7 @@ printf "${NC}"
 # run updater CLI
 printf "%s\n" "" "    [TEST] Running updater - need to create a PR for [bump_weaver-worker_to_1.13.2-worker]" ""
 rm -f last-diff-result.log
-source tests/integration/env.test && ./main.sh
+./main.sh
 
 
 ### Asserts that diff contains the right thing
@@ -75,7 +75,7 @@ fi
 # run updater CLI
 printf "%s\n" "" "    [TEST] Running updater - no PR to create" ""
 rm -f last-diff-result.log
-source tests/integration/env.test && ./main.sh
+./main.sh
 
 # update an image
 printf "%s\n" "" "    [INFO] Pushing weaver and finch tags to DockerHub" ""
@@ -87,7 +87,7 @@ printf "${NC}"
 # run updater CLI
 printf "%s\n" "" "    [TEST] Running updater - need to create a PR for [bump_finch_to_version-0.5.4]" ""
 rm -f last-diff-result.log
-source tests/integration/env.test && ./main.sh
+./main.sh
 
 
 ### Asserts that diff contains the right thing
@@ -112,7 +112,7 @@ fi
 # run updater CLI
 printf "%s\n" "" "    [TEST] Running updater - need to create a PR for [bump_weaver-worker_to_1.13.3-worker]" ""
 rm -f last-diff-result.log
-source tests/integration/env.test && ./main.sh
+./main.sh
 
 
 ### Asserts that diff contains the right thing
@@ -145,70 +145,73 @@ printf "${NC}"
 PUSHED_TAGS_COUNT=4
 echo
 
-# count number of updated image tags
-UPDATED_IMAGE_COUNTER=-1
-exitCode=100
+# dry run
+DRY_RUN=1 ./main.sh
 
-while [[ $exitCode -eq 100 ]]
-do
-    # run updater CLI
-    rm -f last-diff-result.log
-    source tests/integration/env.test && ./main.sh
+# # count number of updated image tags
+# UPDATED_IMAGE_COUNTER=-1
+# exitCode=100
 
-    exitCode=$?
-    UPDATED_IMAGE_COUNTER=$((UPDATED_IMAGE_COUNTER+1))
-    cat $DATA_DIR/last-update-result.log >> $DATA_DIR/updated-images-list.log
-done
+# while [[ $exitCode -eq 100 ]]
+# do
+#     # run updater CLI
+#     rm -f last-diff-result.log
+#     ./main.sh
 
-
-### Asserts that correct number of images have been updated
-printf "%s\n" "" "    [TEST] ASSERT" ""
-if [[ $UPDATED_IMAGE_COUNTER -eq $PUSHED_TAGS_COUNT ]]; then
-    printf "${GREEN}[INFO] All image tags push created a PR have triggered the image updater."
-    echo
-    echo
-    cat $DATA_DIR/updated-images-list.log
-    printf "${NC}"
-    ((SUCCESS_COUNT++))
-else
-    printf "${RED}[ERROR] Wrong number of image tag resulting in PR. Expecting [$PUSHED_TAGS_COUNT], got [$UPDATED_IMAGE_COUNTER]."
-    echo
-    echo
-    cat $DATA_DIR/updated-images-list.log
-    printf "${NC}"
-    ((FAILURE_COUNT++))
-fi
+#     exitCode=$?
+#     UPDATED_IMAGE_COUNTER=$((UPDATED_IMAGE_COUNTER+1))
+#     cat $DATA_DIR/last-update-result.log >> $DATA_DIR/updated-images-list.log
+# done
 
 
-# update an image
-printf "%s\n" "" "    [INFO] Pushing weaver tag to DockerHub" ""
-printf "${BLUE}"
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.5-worker
-printf "${NC}"
+# ### Asserts that correct number of images have been updated
+# printf "%s\n" "" "    [TEST] ASSERT" ""
+# if [[ $UPDATED_IMAGE_COUNTER -eq $PUSHED_TAGS_COUNT ]]; then
+#     printf "${GREEN}[INFO] All image tags push created a PR have triggered the image updater."
+#     echo
+#     echo
+#     cat $DATA_DIR/updated-images-list.log
+#     printf "${NC}"
+#     ((SUCCESS_COUNT++))
+# else
+#     printf "${RED}[ERROR] Wrong number of image tag resulting in PR. Expecting [$PUSHED_TAGS_COUNT], got [$UPDATED_IMAGE_COUNTER]."
+#     echo
+#     echo
+#     cat $DATA_DIR/updated-images-list.log
+#     printf "${NC}"
+#     ((FAILURE_COUNT++))
+# fi
 
-# run updater CLI
-printf "%s\n" "" "    [TEST] Running updater - need to create a PR for [bump_weaver-worker_to_1.13.4-worker]" ""
-rm -f last-diff-result.log
-source tests/integration/env.test && ./main.sh
+
+# # update an image
+# printf "%s\n" "" "    [INFO] Pushing weaver tag to DockerHub" ""
+# printf "${BLUE}"
+# curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.5-worker
+# printf "${NC}"
+
+# # run updater CLI
+# printf "%s\n" "" "    [TEST] Running updater - need to create a PR for [bump_weaver-worker_to_1.13.4-worker]" ""
+# rm -f last-diff-result.log
+# ./main.sh
 
 
-### Assert
-printf "%s\n" "" "    [TEST] ASSERT" ""
-if grep -q '1.13.5-worker' "$DATA_DIR/last-update-result.log"; then
-    printf "${GREEN}[INFO] [bump_weaver-worker_to_1.13.5-worker] 'last-update-result.log' looks good"
-    echo
-    echo
-    cat $DATA_DIR/last-update-result.log
-    printf "${NC}"
-    ((SUCCESS_COUNT++))
-else
-    printf "${RED}[ERROR] [bump_weaver-worker_to_1.13.5-worker] wrong 'last-update-result.log'."
-    echo
-    echo
-    cat $DATA_DIR/last-update-result.log
-    printf "${NC}"
-    ((FAILURE_COUNT++))
-fi
+# ### Assert
+# printf "%s\n" "" "    [TEST] ASSERT" ""
+# if grep -q '1.13.5-worker' "$DATA_DIR/last-update-result.log"; then
+#     printf "${GREEN}[INFO] [bump_weaver-worker_to_1.13.5-worker] 'last-update-result.log' looks good"
+#     echo
+#     echo
+#     cat $DATA_DIR/last-update-result.log
+#     printf "${NC}"
+#     ((SUCCESS_COUNT++))
+# else
+#     printf "${RED}[ERROR] [bump_weaver-worker_to_1.13.5-worker] wrong 'last-update-result.log'."
+#     echo
+#     echo
+#     cat $DATA_DIR/last-update-result.log
+#     printf "${NC}"
+#     ((FAILURE_COUNT++))
+# fi
 
 
 # kill the dummy API
