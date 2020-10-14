@@ -13,19 +13,25 @@
 export DATA_DIR="data"
 rm -f $DATA_DIR/last-update-result.log
 
-# vars
-CONFIG_FILEPATH='config.json'
-
-# seed .env if we are not in test mode
-if [[ -z "${TEST_ENV_CONFIG}" ]]; then
-    source .env
-else
-    echo "[INFO] TEST CONFIG SEEDED"
+# config file
+if [[ ! -v CONFIG_FILE ]]; then
+    echo "[ERROR] NO CONFIG FILE SPECIFIED."
+    exit 1
 fi
+
+echo "[INFO] USING CONFIG FILE ${CONFIG_FILE}"
+
+# env file
+if [[ ! -v ENV_FILE ]]; then
+    ENV_FILE=".env"
+fi
+
+source $ENV_FILE
+echo "[INFO] USING ENVIRONMENT FILE ${ENV_FILE}"
 
 
 # set global variables, to be used accross the script call stack
-export REPO_URL=$(cat $CONFIG_FILEPATH | jq '.project.url' | tr -d '\"')
+export REPO_URL=$(cat $CONFIG_FILE | jq '.project.url' | tr -d '\"')
 export PROJECT_ORG_REPO=$(echo $REPO_URL | cut -d/ -f4-)
 export PROJECT_NAME=${REPO_URL##*/}
 export ONLY_UPDATE_TAGS_HISTORY=${ONLY_UPDATE_TAGS_HISTORY}
@@ -33,12 +39,12 @@ export GITHUB_TOKEN=$GITHUB_TOKEN
 export EXIT_BEFORE_PR=$EXIT_BEFORE_PR
 
 # iterate through the images in config file
-IMAGE_COUNT=$(cat $CONFIG_FILEPATH  | jq '.images | length')
+IMAGE_COUNT=$(cat $CONFIG_FILE | jq '.images | length')
 IMAGE_INDEX=0
 
 for ((n=0; n<$IMAGE_COUNT; n++))
 do
-    CURRENT_IMAGE=$(cat $CONFIG_FILEPATH | jq '.images['$n']')
+    CURRENT_IMAGE=$(cat $CONFIG_FILE | jq '.images['$n']')
     IMAGE_ID=$(echo $CURRENT_IMAGE | jq '.id' | tr -d '\"')
     DOCKERHUB_REPO=$(echo $CURRENT_IMAGE | jq '.dockerhub_repo_name' | tr -d '\"')
     TAG_FILTER=$(echo $CURRENT_IMAGE | jq '.tag_filter' | tr -d '\"')

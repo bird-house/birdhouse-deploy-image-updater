@@ -3,8 +3,8 @@
     "name": "DACCS E2E docker image updater config",
 
     "project": {
-        "name": "birdhouse-deploy-for-testing",
-        "url": "https://github.com/bird-house/birdhouse-deploy-for-testing"
+        "name": "birdhouse-deploy",
+        "url": "https://github.com/bird-house/birdhouse-deploy"
     },
 
     "images": [

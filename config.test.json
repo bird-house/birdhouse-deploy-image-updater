@@ -1,0 +1,44 @@
+{
+    "version": 1,
+    "name": "DACCS E2E docker image updater config",
+
+    "project": {
+        "name": "birdhouse-deploy-for-testing",
+        "url": "https://github.com/Ouranosinc/birdhouse-deploy-for-testing"
+    },
+
+    "images": [
+        {
+            "id": "finch",
+            "url": "https://hub.docker.com/r/birdhouse/finch",
+            "dockerhub_repo_name": "birdhouse/finch",
+            "bump_tag": "FINCH_IMAGE",
+            "bump_file": "birdhouse/default.env",
+            "tag_filter": "^version-[0-9]+(\\.[0-9]+)*$"
+        },
+        {
+            "id": "weaver",
+            "url": "https://hub.docker.com/r/pavics/weaver",
+            "dockerhub_repo_name": "pavics/weaver",
+            "bump_tag": "WEAVER_IMAGE",
+            "bump_file": "birdhouse/default.env",
+            "tag_filter": "^[0-9]+(\\.[0-9]+)*$"
+        },
+        {
+            "id": "weaver-manager",
+            "url": "https://hub.docker.com/r/pavics/weaver",
+            "dockerhub_repo_name": "pavics/weaver",
+            "bump_tag": "WEAVER_MANAGER_IMAGE",
+            "bump_file": "birdhouse/default.env",
+            "tag_filter": "^[0-9]+(\\.[0-9]+)*-manager$"
+        },
+        {
+            "id": "weaver-worker",
+            "url": "https://hub.docker.com/r/pavics/weaver",
+            "dockerhub_repo_name": "pavics/weaver",
+            "bump_tag": "WEAVER_WORKER_IMAGE",
+            "bump_file": "birdhouse/default.env",
+            "tag_filter": "^[0-9]+(\\.[0-9]+)*-worker$"
+        }
+    ]
+}
