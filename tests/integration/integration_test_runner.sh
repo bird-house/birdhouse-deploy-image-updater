@@ -11,7 +11,7 @@ DATA_DIR="data"
 SUCCESS_COUNT=0
 FAILURE_COUNT=0
 
-ENV_FILENAME=$(basename $ENV_FILE)
+ENV_FILENAME="../../"$ENV_FILE
 
 if [ ! -f $ENV_FILENAME ]; then
     echo "[INFO] Env file not existing. Exiting."

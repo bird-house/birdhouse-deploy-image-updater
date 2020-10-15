@@ -28,7 +28,8 @@ echo "[INFO] USING CONFIG FILE ${CONFIG_FILE}"
 
 # env file
 if [[ ! -v ENV_FILE ]]; then
-    ENV_FILE=".env"
+    echo "[ERROR] NO ENV FILE SPECIFIED."
+    exit 1
 fi
 
 if [ ! -f $ENV_FILE ]; then
