@@ -31,3 +31,32 @@ use functions instead of splitting logic in multiple files (?)
 ### Suggestion from Long (translates to TODO)
 
 If the NEW_IMAGE_TAG_DECLARATION in bump_version.sh is also moved to config.json as a template string, I think we can seriously achieve generic find-replace that can work for any file format, not just default.env in birdhouse-deploy. So the config.json committed becomes a sample config pre-configured for birdhouse-deploy repo.
+
+
+
+## weaver config
+
+        {
+            "id": "weaver",
+            "url": "https://hub.docker.com/r/pavics/weaver",
+            "dockerhub_repo_name": "pavics/weaver",
+            "bump_tag": "WEAVER_IMAGE",
+            "bump_file": "birdhouse/default.env",
+            "tag_filter": "^[0-9]+(\\.[0-9]+)*$"
+        },
+        {
+            "id": "weaver-manager",
+            "url": "https://hub.docker.com/r/pavics/weaver",
+            "dockerhub_repo_name": "pavics/weaver",
+            "bump_tag": "WEAVER_MANAGER_IMAGE",
+            "bump_file": "birdhouse/default.env",
+            "tag_filter": "^[0-9]+(\\.[0-9]+)*-manager$"
+        },
+        {
+            "id": "weaver-worker",
+            "url": "https://hub.docker.com/r/pavics/weaver",
+            "dockerhub_repo_name": "pavics/weaver",
+            "bump_tag": "WEAVER_WORKER_IMAGE",
+            "bump_file": "birdhouse/default.env",
+            "tag_filter": "^[0-9]+(\\.[0-9]+)*-worker$"
+        }

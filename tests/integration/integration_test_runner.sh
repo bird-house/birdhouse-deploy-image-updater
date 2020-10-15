@@ -43,35 +43,35 @@ printf "%s\n" "" "    [TEST] Running updater - no PR to create" ""
 rm -f last-diff-result.log
 ONLY_UPDATE_TAGS_HISTORY=true ./main.sh
 
-# update an image
-printf "%s\n" "" "    [INFO] Pushing weaver tag to DockerHub" ""
-printf "${BLUE}"
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.2-worker
-printf "${NC}"
+# # update an image
+# printf "%s\n" "" "    [INFO] Pushing weaver tag to DockerHub" ""
+# printf "${BLUE}"
+# curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.2-worker
+# printf "${NC}"
 
-# run updater CLI
-printf "%s\n" "" "    [TEST] Running updater - need to create a PR for [bump_weaver-worker_to_1.13.2-worker]" ""
-rm -f last-diff-result.log
-./main.sh
+# # run updater CLI
+# printf "%s\n" "" "    [TEST] Running updater - need to create a PR for [bump_weaver-worker_to_1.13.2-worker]" ""
+# rm -f last-diff-result.log
+# ./main.sh
 
 
-### Asserts that diff contains the right thing
-printf "%s\n" "" "    [TEST] ASSERT" ""
-if grep -q 'export WEAVER_WORKER_IMAGE="pavics/weaver:1.13.2-worker"' "last-diff-result.log"; then
-    printf "${GREEN}[INFO] [bump_weaver-worker_to_1.13.2-worker] The commit content looks good"
-    echo
-    echo
-    cat last-diff-result.log
-    printf "${NC}"
-    ((SUCCESS_COUNT++))
-else
-    printf "${RED}[ERROR] [bump_weaver-worker_to_1.13.2-worker] wrong commit content."
-    echo
-    echo
-    cat last-diff-result.log
-    printf "${NC}"
-    ((FAILURE_COUNT++))
-fi
+# ### Asserts that diff contains the right thing
+# printf "%s\n" "" "    [TEST] ASSERT" ""
+# if grep -q 'export WEAVER_WORKER_IMAGE="pavics/weaver:1.13.2-worker"' "last-diff-result.log"; then
+#     printf "${GREEN}[INFO] [bump_weaver-worker_to_1.13.2-worker] The commit content looks good"
+#     echo
+#     echo
+#     cat last-diff-result.log
+#     printf "${NC}"
+#     ((SUCCESS_COUNT++))
+# else
+#     printf "${RED}[ERROR] [bump_weaver-worker_to_1.13.2-worker] wrong commit content."
+#     echo
+#     echo
+#     cat last-diff-result.log
+#     printf "${NC}"
+#     ((FAILURE_COUNT++))
+# fi
 
 
 # run updater CLI
@@ -117,23 +117,23 @@ rm -f last-diff-result.log
 ./main.sh
 
 
-### Asserts that diff contains the right thing
-printf "%s\n" "" "    [TEST] ASSERT" ""
-if grep -q 'export WEAVER_WORKER_IMAGE="pavics/weaver:1.13.3-worker"' "last-diff-result.log"; then
-    printf "${GREEN}[INFO] [bump_weaver-worker_to_1.13.3-worker] The commit content looks good"
-    echo
-    echo
-    cat last-diff-result.log
-    printf "${NC}"
-    ((SUCCESS_COUNT++))
-else
-    printf "${RED}[ERROR] [bump_weaver-worker_to_1.13.3-worker] wrong commit content."
-    echo
-    echo
-    cat last-diff-result.log
-    printf "${NC}"
-    ((FAILURE_COUNT++))
-fi
+# ### Asserts that diff contains the right thing
+# printf "%s\n" "" "    [TEST] ASSERT" ""
+# if grep -q 'export WEAVER_WORKER_IMAGE="pavics/weaver:1.13.3-worker"' "last-diff-result.log"; then
+#     printf "${GREEN}[INFO] [bump_weaver-worker_to_1.13.3-worker] The commit content looks good"
+#     echo
+#     echo
+#     cat last-diff-result.log
+#     printf "${NC}"
+#     ((SUCCESS_COUNT++))
+# else
+#     printf "${RED}[ERROR] [bump_weaver-worker_to_1.13.3-worker] wrong commit content."
+#     echo
+#     echo
+#     cat last-diff-result.log
+#     printf "${NC}"
+#     ((FAILURE_COUNT++))
+# fi
 
 
 
@@ -198,7 +198,7 @@ curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.4
 printf "${NC}"
 echo
 
-PUSHED_TAGS_COUNT=21
+PUSHED_TAGS_COUNT=18
 
 # dry run
 DRY_RUN=1 ./main.sh | tee tmp.log

@@ -151,36 +151,6 @@
             "bump_tag": "TODO",
             "bump_file": "birdhouse/docker-compose.yml",
             "tag_filter": "^[0-9]+(\\.[0-9]+)*-[0-9]+"
-        },
-
-
-
-
-
-
-        {
-            "id": "weaver",
-            "url": "https://hub.docker.com/r/pavics/weaver",
-            "dockerhub_repo_name": "pavics/weaver",
-            "bump_tag": "WEAVER_IMAGE",
-            "bump_file": "birdhouse/default.env",
-            "tag_filter": "^[0-9]+(\\.[0-9]+)*$"
-        },
-        {
-            "id": "weaver-manager",
-            "url": "https://hub.docker.com/r/pavics/weaver",
-            "dockerhub_repo_name": "pavics/weaver",
-            "bump_tag": "WEAVER_MANAGER_IMAGE",
-            "bump_file": "birdhouse/default.env",
-            "tag_filter": "^[0-9]+(\\.[0-9]+)*-manager$"
-        },
-        {
-            "id": "weaver-worker",
-            "url": "https://hub.docker.com/r/pavics/weaver",
-            "dockerhub_repo_name": "pavics/weaver",
-            "bump_tag": "WEAVER_WORKER_IMAGE",
-            "bump_file": "birdhouse/default.env",
-            "tag_filter": "^[0-9]+(\\.[0-9]+)*-worker$"
         }
     ]
 }
