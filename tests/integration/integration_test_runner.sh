@@ -204,27 +204,24 @@ PUSHED_TAGS_COUNT=21
 DRY_RUN=1 ./main.sh | tee tmp.log
 
 UPDATED_TAGS=$(cat tmp.log | grep -c "Found new tag")
-echo $UPDATED_TAGS
 rm tmp.log
 
 
-# ### Asserts that correct number of images have been updated
-# printf "%s\n" "" "    [TEST] ASSERT" ""
-# if [[ $UPDATED_IMAGE_COUNTER -eq $PUSHED_TAGS_COUNT ]]; then
-#     printf "${GREEN}[INFO] All image tags push created a PR have triggered the image updater."
-#     echo
-#     echo
-#     cat $DATA_DIR/updated-images-list.log
-#     printf "${NC}"
-#     ((SUCCESS_COUNT++))
-# else
-#     printf "${RED}[ERROR] Wrong number of image tag resulting in PR. Expecting [$PUSHED_TAGS_COUNT], got [$UPDATED_IMAGE_COUNTER]."
-#     echo
-#     echo
-#     cat $DATA_DIR/updated-images-list.log
-#     printf "${NC}"
-#     ((FAILURE_COUNT++))
-# fi
+### Asserts that correct number of images have been updated
+printf "%s\n" "" "    [TEST] ASSERT" ""
+if [[ $PUSHED_TAGS_COUNT -eq $UPDATED_TAGS ]]; then
+    printf "${GREEN}[INFO] All image tags push have triggered the image updater."
+    echo
+    echo
+    printf "${NC}"
+    ((SUCCESS_COUNT++))
+else
+    printf "${RED}[ERROR] Wrong number of image tag resulting in PR. Expecting [$PUSHED_TAGS_COUNT], got [$UPDATED_TAGS]."
+    echo
+    echo
+    printf "${NC}"
+    ((FAILURE_COUNT++))
+fi
 
 
 # kill the dummy API
