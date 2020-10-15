@@ -207,9 +207,6 @@ UPDATED_TAGS=$(cat tmp.log | grep -c "Found new tag")
 echo $UPDATED_TAGS
 rm tmp.log
 
-# reset DockerHub API mock tags
-curl -s -XPOST $DOCKERHUB_HOST_TEST/reset/token1234
-
 
 # ### Asserts that correct number of images have been updated
 # printf "%s\n" "" "    [TEST] ASSERT" ""
