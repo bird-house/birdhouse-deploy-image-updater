@@ -200,11 +200,6 @@ echo
 
 PUSHED_TAGS_COUNT=21
 
-# # clear historical data
-# rm -f ${DATA_DIR}/*.old
-# rm -f ${DATA_DIR}/*.new
-# rm -f ${DATA_DIR}/*.log
-
 # dry run
 DRY_RUN=1 ./main.sh | tee tmp.log
 

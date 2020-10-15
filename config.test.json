@@ -16,7 +16,6 @@
             "bump_file": "birdhouse/default.env",
             "tag_filter": "^version-[0-9]+(\\.[0-9]+)*$"
         },
-
         {
             "id": "canarieapi",
             "url": "https://hub.docker.com/r/pavics/canarieapi",
@@ -25,6 +24,135 @@
             "bump_file": "birdhouse/docker-compose.yml",
             "tag_filter": "^[0-9]+(\\.[0-9]+)*$"
         },
+        {
+            "id": "pavics-frontend",
+            "url": "https://hub.docker.com/r/pavics/pavics-frontend",
+            "dockerhub_repo_name": "pavics/pavics-frontend",
+            "bump_tag": "TODO",
+            "bump_file": "birdhouse/docker-compose.yml",
+            "tag_filter": "^[0-9]+(\\.[0-9]+)*$"
+        },
+        {
+            "id": "pavics-project-api",
+            "url": "https://hub.docker.com/r/pavics/pavics-project-api",
+            "dockerhub_repo_name": "pavics/pavics-project-api",
+            "bump_tag": "TODO",
+            "bump_file": "birdhouse/docker-compose.yml",
+            "tag_filter": "^[0-9]+(\\.[0-9]+)*$"
+        },
+        {
+            "id": "pyramid-phoenix",
+            "url": "https://hub.docker.com/r/pavics/pyramid-phoenix",
+            "dockerhub_repo_name": "pavics/pyramid-phoenix",
+            "bump_tag": "TODO",
+            "bump_file": "birdhouse/docker-compose.yml",
+            "tag_filter": "^pavics-[0-9]+(\\.[0-9]+)*$"
+        },
+        {
+            "id": "pavics-datacatalog",
+            "url": "https://hub.docker.com/r/pavics/pavics-datacatalog",
+            "dockerhub_repo_name": "pavics/pavics-datacatalog",
+            "bump_tag": "TODO",
+            "bump_file": "birdhouse/docker-compose.yml",
+            "tag_filter": "^[0-9]+(\\.[0-9]+)*$"
+        },
+        {
+            "id": "geoserver",
+            "url": "https://hub.docker.com/r/pavics/geoserver",
+            "dockerhub_repo_name": "pavics/geoserver",
+            "bump_tag": "TODO",
+            "bump_file": "birdhouse/docker-compose.yml",
+            "tag_filter": "^[0-9]+(\\.[0-9]+)*$"
+        },
+        {
+            "id": "malleefowl",
+            "url": "https://hub.docker.com/r/pavics/malleefowl",
+            "dockerhub_repo_name": "pavics/malleefowl",
+            "bump_tag": "TODO",
+            "bump_file": "birdhouse/docker-compose.yml",
+            "tag_filter": "^pavics-[0-9]+(\\.[0-9]+)*$"
+        },
+        {
+            "id": "flyingpigeon",
+            "url": "https://hub.docker.com/r/birdhouse/flyingpigeon",
+            "dockerhub_repo_name": "birdhouse/flyingpigeon",
+            "bump_tag": "TODO",
+            "bump_file": "birdhouse/docker-compose.yml",
+            "tag_filter": "^[0-9]+(\\.[0-9]+)*$"
+        },
+        {
+            "id": "raven",
+            "url": "https://hub.docker.com/r/pavics/raven",
+            "dockerhub_repo_name": "pavics/raven",
+            "bump_tag": "TODO",
+            "bump_file": "birdhouse/docker-compose.yml",
+            "tag_filter": "^[0-9]+(\\.[0-9]+)*$"
+        },
+        {
+            "id": "hummingbird",
+            "url": "https://hub.docker.com/r/pavics/hummingbird",
+            "dockerhub_repo_name": "pavics/hummingbird",
+            "bump_tag": "TODO",
+            "bump_file": "birdhouse/docker-compose.yml",
+            "tag_filter": "^[0-9]+(\\.[0-9]+)*$"
+        },
+        {
+            "id": "solr",
+            "url": "https://hub.docker.com/r/pavics/solr",
+            "dockerhub_repo_name": "pavics/solr",
+            "bump_tag": "TODO",
+            "bump_file": "birdhouse/docker-compose.yml",
+            "tag_filter": "^[0-9]+(\\.[0-9]+)*$"
+        },
+        {
+            "id": "ncwms2",
+            "url": "https://hub.docker.com/r/pavics/ncwms2",
+            "dockerhub_repo_name": "pavics/ncwms2",
+            "bump_tag": "TODO",
+            "bump_file": "birdhouse/docker-compose.yml",
+            "tag_filter": "^[0-9]+(\\.[0-9]+)*$"
+        },
+        {
+            "id": "thredds-docker",
+            "url": "https://hub.docker.com/r/unidata/thredds-docker",
+            "dockerhub_repo_name": "unidata/thredds-docker",
+            "bump_tag": "TODO",
+            "bump_file": "birdhouse/docker-compose.yml",
+            "tag_filter": "^[0-9]+(\\.[0-9]+)*$"
+        },
+        {
+            "id": "postgis",
+            "url": "https://hub.docker.com/r/pavics/postgis",
+            "dockerhub_repo_name": "pavics/postgis",
+            "bump_tag": "TODO",
+            "bump_file": "birdhouse/docker-compose.yml",
+            "tag_filter": "^[0-9]+(\\.[0-9]+)*$"
+        },
+        {
+            "id": "magpie",
+            "url": "https://hub.docker.com/r/pavics/magpie",
+            "dockerhub_repo_name": "pavics/magpie",
+            "bump_tag": "TODO",
+            "bump_file": "birdhouse/docker-compose.yml",
+            "tag_filter": "^[0-9]+(\\.[0-9]+)*$"
+        },
+        {
+            "id": "twitcher",
+            "url": "https://hub.docker.com/r/pavics/twitcher",
+            "dockerhub_repo_name": "pavics/twitcher",
+            "bump_tag": "TODO",
+            "bump_file": "birdhouse/docker-compose.yml",
+            "tag_filter": "^magpie-[0-9]+(\\.[0-9]+)*$"
+        },
+        {
+            "id": "jupyterhub",
+            "url": "https://hub.docker.com/r/pavics/jupyterhub",
+            "dockerhub_repo_name": "pavics/jupyterhub",
+            "bump_tag": "TODO",
+            "bump_file": "birdhouse/docker-compose.yml",
+            "tag_filter": "^[0-9]+(\\.[0-9]+)*$"
+        },
+
 
 
 
