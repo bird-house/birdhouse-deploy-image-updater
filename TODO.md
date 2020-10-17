@@ -9,16 +9,6 @@ modify the search & replace, since version tags won't always be structured the s
     handle multiple default.env file since each component now have their own default.env
 
 
-## Backlog
-
-one pr for multiple image changes, need to handle this case later on, config to choose between the two modes
-add retry mechanism, if task fails after triggering the pr_script
-factor out to function integration test's log and assertion logic
-    tag versions in variables, not hardcoded
-handle PR errors (eg: currently states that PR is created and send slack notif even if PR issue might have occured)
-use functions instead of splitting logic in multiple files (?)
-
-
 
 ## weaver config
 
