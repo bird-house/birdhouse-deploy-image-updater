@@ -7,13 +7,11 @@
 ###
 
 # Sample environment variables
-# DOCKERHUB_REPO="pavics/weaver"
-# BUMP_TAG="WEAVER_WORKER_IMAGE"
-# NEW_TAG_VALUE="1.13.2-worker"
-# BUMP_FILE="birdhouse/default.env"
+# BUMP_TAG="s/(.*pavics\/canarieapi:).*/\\1NEW_TAG_VALUE/"
+# NEW_TAG_VALUE="0.3.6"
+# BUMP_FILE="birdhouse/docker-compose.yml"
 
 REQUIRED_ENV_VARS='
-    DOCKERHUB_REPO
     BUMP_TAG
     NEW_TAG_VALUE
     BUMP_FILE
@@ -29,7 +27,6 @@ do
 done
 
 
-NEW_IMAGE_TAG_VALUE=$DOCKERHUB_REPO":"$NEW_TAG_VALUE
-NEW_IMAGE_TAG_DECLARATION="export "$BUMP_TAG"=\""$NEW_IMAGE_TAG_VALUE"\""
+PARSED_BUMP_TAG_EXPRESSION="${BUMP_TAG//NEW_TAG_VALUE/$NEW_TAG_VALUE}" 
 
-sed -i "/.*$BUMP_TAG.*/c $NEW_IMAGE_TAG_DECLARATION" $BUMP_FILE
+sed -E -i'' $PARSED_BUMP_TAG_EXPRESSION $BUMP_FILE

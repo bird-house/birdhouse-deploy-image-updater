@@ -20,7 +20,7 @@
             "id": "canarieapi",
             "url": "https://hub.docker.com/r/pavics/canarieapi",
             "dockerhub_repo_name": "pavics/canarieapi",
-            "bump_tag": "TODO",
+            "bump_tag": "s/(.*pavics\/canarieapi:).*/\\1$NEW_TAG_VALUE/",
             "bump_file": "birdhouse/docker-compose.yml",
             "tag_filter": "^[0-9]+(\\.[0-9]+)*$"
         },
