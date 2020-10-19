@@ -12,7 +12,7 @@
             "id": "finch",
             "url": "https://hub.docker.com/r/birdhouse/finch",
             "dockerhub_repo_name": "birdhouse/finch",
-            "bump_tag": "FINCH_IMAGE",
+            "bump_tag": "s/(.*birdhouse\/finch:).*/\\1NEW_TAG_VALUE\"/",
             "bump_file": "birdhouse/default.env",
             "tag_filter": "^version-[0-9]+(\\.[0-9]+)*$"
         },
