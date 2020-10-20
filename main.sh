@@ -60,7 +60,8 @@ do
     IMAGE_ID=$(echo $CURRENT_IMAGE | jq '.id' | tr -d '\"')
     DOCKERHUB_REPO=$(echo $CURRENT_IMAGE | jq '.dockerhub_repo_name' | tr -d '\"')
     TAG_FILTER=$(echo $CURRENT_IMAGE | jq '.tag_filter' | tr -d '\"')
-    BUMP_TAG=$(echo $CURRENT_IMAGE | jq '.bump_tag' | tr -d '\"')
+    BUMP_TAG=$(echo $CURRENT_IMAGE | jq '.bump_tag')
+    BUMP_TAG=${BUMP_TAG:1:-1}    # remove first and last string quotes
     BUMP_FILE=$(echo $CURRENT_IMAGE | jq '.bump_file' | tr -d '\"')
 
     # start fetch_tags

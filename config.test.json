@@ -12,7 +12,7 @@
             "id": "finch",
             "url": "https://hub.docker.com/r/birdhouse/finch",
             "dockerhub_repo_name": "birdhouse/finch",
-            "bump_tag": "s/(.*birdhouse\/finch:).*/\\1NEW_TAG_VALUE\"/",
+            "bump_tag": "s@(.*birdhouse\\/finch:).*@\\1NEW_TAG_VALUE\"@",
             "bump_file": "birdhouse/default.env",
             "tag_filter": "^version-[0-9]+(\\.[0-9]+)*$"
         },
@@ -20,7 +20,7 @@
             "id": "canarieapi",
             "url": "https://hub.docker.com/r/pavics/canarieapi",
             "dockerhub_repo_name": "pavics/canarieapi",
-            "bump_tag": "s/(.*pavics\/canarieapi:).*/\\1$NEW_TAG_VALUE/",
+            "bump_tag": "s/(.*pavics\/canarieapi:).*/\\1NEW_TAG_VALUE/",
             "bump_file": "birdhouse/docker-compose.yml",
             "tag_filter": "^[0-9]+(\\.[0-9]+)*$"
         },
