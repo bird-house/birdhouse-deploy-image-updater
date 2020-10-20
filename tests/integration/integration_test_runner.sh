@@ -80,10 +80,11 @@ rm -f last-diff-result.log
 ./main.sh
 
 # update an image
-printf "%s\n" "" "    [INFO] Pushing weaver and finch tags to DockerHub" ""
+printf "%s\n" "" "    [INFO] Pushing tags to DockerHub" ""
 printf "${BLUE}"
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.3-worker
-curl -s -XPOST $DOCKERHUB_HOST_TEST/birdhouse/finch/version-0.5.4
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.3-worker         # not used
+curl -s -XPOST $DOCKERHUB_HOST_TEST/birdhouse/finch/version-0.5.4       # tag in birdhouse/default.env, as export
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/canarieapi/0.3.6             # tag in birdhouse/docker-compose.yml, embedded
 printf "${NC}"
 
 # run updater CLI
@@ -112,9 +113,34 @@ fi
 
 
 # run updater CLI
-printf "%s\n" "" "    [TEST] Running updater - need to create a PR for [bump_weaver-worker_to_1.13.3-worker]" ""
+printf "%s\n" "" "    [TEST] Running updater - need to create a PR for [bump_canarieapi_to_0.3.6]" ""
 rm -f last-diff-result.log
 ./main.sh
+
+
+### Asserts that diff contains the right thing
+printf "%s\n" "" "    [TEST] ASSERT" ""
+if grep -q 'image: pavics/canarieapi:0.3.6' "last-diff-result.log"; then
+    printf "${GREEN}[INFO] [bump_canarieapi_to_0.3.6] The commit content looks good"
+    echo
+    echo
+    cat last-diff-result.log
+    printf "${NC}"
+    ((SUCCESS_COUNT++))
+else
+    printf "${RED}[ERROR] [bump_canarieapi_to_0.3.6] wrong commit content."
+    echo
+    echo
+    cat last-diff-result.log
+    printf "${NC}"
+    ((FAILURE_COUNT++))
+fi
+
+
+# # run updater CLI
+# printf "%s\n" "" "    [TEST] Running updater - need to create a PR for [bump_weaver-worker_to_1.13.3-worker]" ""
+# rm -f last-diff-result.log
+# ./main.sh
 
 
 # ### Asserts that diff contains the right thing
