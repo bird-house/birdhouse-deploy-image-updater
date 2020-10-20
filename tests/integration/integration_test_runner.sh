@@ -38,75 +38,100 @@ echo "done"
 
 cd ../..
 
-# pushing initial tag to repositories
-printf "%s\n" "" "    [INFO] Pushing initial tags to DockerHub" ""
-printf "${BLUE}"
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.3-worker         # not used
-curl -s -XPOST $DOCKERHUB_HOST_TEST/birdhouse/finch/version-0.5.2
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/canarieapi/0.3.5
-printf "${NC}"
+
+####
+
+function push_initial_tags_all_images {
+    # push ALL images
+    printf "%s\n" "" "    [INFO] Pushing all initial tags to DockerHub" ""
+    printf "${BLUE}"
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/birdhouse/finch/version-0.5.4
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/canarieapi/0.3.5
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/pavics-frontend/1.0.5
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/pavics-project-api/0.9.0
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/pyramid-phoenix/pavics-0.2.3
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/pavics-datacatalog/0.6.11
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/geoserver/2.9.3
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/malleefowl/pavics-0.3.5
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/birdhouse/flyingpigeon/1.6
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/raven/0.10.0
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/hummingbird/0.5_dev
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/solr/5.2.1
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/ncwms2/2.0.4
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/unidata/thredds-docker/4.6.14
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/postgis/2.2
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/magpie/1.7.3
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/twitcher/magpie-1.7.3
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/jupyterhub/1.0.0-20200130
+
+    # extra components
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.3-worker
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.3-manager
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.3
+    printf "${NC}"
+    echo
+}
+
+
+function update_all_images {
+    # update ALL images
+    printf "%s\n" "" "    [INFO] Pushing all tags to DockerHub" ""
+    printf "${BLUE}"
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/birdhouse/finch/version-0.5.5
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/canarieapi/0.3.6
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/pavics-frontend/1.0.6
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/pavics-project-api/0.9.1
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/pyramid-phoenix/pavics-0.2.4
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/pavics-datacatalog/0.6.12
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/geoserver/2.9.4
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/malleefowl/pavics-0.3.6
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/birdhouse/flyingpigeon/1.7
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/raven/0.10.1
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/hummingbird/0.6_dev
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/solr/5.2.2
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/ncwms2/2.0.5
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/unidata/thredds-docker/4.6.15
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/postgis/2.3
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/magpie/1.7.4
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/twitcher/magpie-1.7.4
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/jupyterhub/1.0.0-20200131
+
+    # extra components
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.4-worker
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.4-manager
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.4
+    printf "${NC}"
+    echo
+}
+
+####
+
+push_initial_tags_all_images
 
 # run updater CLI
 printf "%s\n" "" "    [TEST] Running updater - no PR to create" ""
 rm -f last-diff-result.log
 ONLY_UPDATE_TAGS_HISTORY=true ./main.sh
 
-# # update an image
-# printf "%s\n" "" "    [INFO] Pushing weaver tag to DockerHub" ""
-# printf "${BLUE}"
-# curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.2-worker
-# printf "${NC}"
-
-# # run updater CLI
-# printf "%s\n" "" "    [TEST] Running updater - need to create a PR for [bump_weaver-worker_to_1.13.2-worker]" ""
-# rm -f last-diff-result.log
-# ./main.sh
-
-
-# ### Asserts that diff contains the right thing
-# printf "%s\n" "" "    [TEST] ASSERT" ""
-# if grep -q 'export WEAVER_WORKER_IMAGE="pavics/weaver:1.13.2-worker"' "last-diff-result.log"; then
-#     printf "${GREEN}[INFO] [bump_weaver-worker_to_1.13.2-worker] The commit content looks good"
-#     echo
-#     echo
-#     cat last-diff-result.log
-#     printf "${NC}"
-#     ((SUCCESS_COUNT++))
-# else
-#     printf "${RED}[ERROR] [bump_weaver-worker_to_1.13.2-worker] wrong commit content."
-#     echo
-#     echo
-#     cat last-diff-result.log
-#     printf "${NC}"
-#     ((FAILURE_COUNT++))
-# fi
-
-
-# update an image
-printf "%s\n" "" "    [INFO] Pushing tags to DockerHub" ""
-printf "${BLUE}"
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.3-worker         # not used
-curl -s -XPOST $DOCKERHUB_HOST_TEST/birdhouse/finch/version-0.5.4       # tag in birdhouse/default.env, as export
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/canarieapi/0.3.6             # tag in birdhouse/docker-compose.yml, embedded
-printf "${NC}"
+update_all_images
 
 # run updater CLI
-printf "%s\n" "" "    [TEST] Running updater - need to create a PR for [bump_finch_to_version-0.5.4]" ""
+printf "%s\n" "" "    [TEST] Running updater - need to create a PR" ""
 rm -f last-diff-result.log
 ./main.sh
 
 
 ### Asserts that diff contains the right thing
 printf "%s\n" "" "    [TEST] ASSERT" ""
-if grep -q 'export FINCH_IMAGE="birdhouse/finch:version-0.5.4"' "last-diff-result.log"; then
-    printf "${GREEN}[INFO] [bump_finch_to_version-0.5.4] The commit content looks good"
+if grep -q 'export FINCH_IMAGE="birdhouse/finch:version-0.5.5"' "last-diff-result.log"; then
+    printf "${GREEN}[INFO] [bump_finch_to_version-0.5.5] The commit content looks good"
     echo
     echo
     cat last-diff-result.log
     printf "${NC}"
     ((SUCCESS_COUNT++))
 else
-    printf "${RED}[ERROR] [bump_finch_to_version-0.5.4] wrong commit content."
+    printf "${RED}[ERROR] [bump_finch_to_version-0.5.5] wrong commit content."
     echo
     echo
     cat last-diff-result.log
@@ -140,92 +165,12 @@ else
 fi
 
 
-# # run updater CLI
-# printf "%s\n" "" "    [TEST] Running updater - need to create a PR for [bump_weaver-worker_to_1.13.3-worker]" ""
-# rm -f last-diff-result.log
-# ./main.sh
-
-
-# ### Asserts that diff contains the right thing
-# printf "%s\n" "" "    [TEST] ASSERT" ""
-# if grep -q 'export WEAVER_WORKER_IMAGE="pavics/weaver:1.13.3-worker"' "last-diff-result.log"; then
-#     printf "${GREEN}[INFO] [bump_weaver-worker_to_1.13.3-worker] The commit content looks good"
-#     echo
-#     echo
-#     cat last-diff-result.log
-#     printf "${NC}"
-#     ((SUCCESS_COUNT++))
-# else
-#     printf "${RED}[ERROR] [bump_weaver-worker_to_1.13.3-worker] wrong commit content."
-#     echo
-#     echo
-#     cat last-diff-result.log
-#     printf "${NC}"
-#     ((FAILURE_COUNT++))
-# fi
-
-
-
-# push ALL images
-printf "%s\n" "" "    [INFO] Pushing all initial tags to DockerHub" ""
-printf "${BLUE}"
-curl -s -XPOST $DOCKERHUB_HOST_TEST/birdhouse/finch/version-0.5.4
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/canarieapi/0.3.5
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/pavics-frontend/1.0.5
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/pavics-project-api/0.9.0
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/pyramid-phoenix/pavics-0.2.3
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/pavics-datacatalog/0.6.11
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/geoserver/2.9.3
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/malleefowl/pavics-0.3.5
-curl -s -XPOST $DOCKERHUB_HOST_TEST/birdhouse/flyingpigeon/1.6
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/raven/0.10.0
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/hummingbird/0.5_dev
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/solr/5.2.1
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/ncwms2/2.0.4
-curl -s -XPOST $DOCKERHUB_HOST_TEST/unidata/thredds-docker/4.6.14
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/postgis/2.2
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/magpie/1.7.3
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/twitcher/magpie-1.7.3
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/jupyterhub/1.0.0-20200130
-
-# extra components
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.3-worker
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.3-manager
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.3
-printf "${NC}"
-echo
+push_initial_tags_all_images
 
 # tag snapshot
 ONLY_UPDATE_TAGS_HISTORY=true ./main.sh
 
-# update ALL images
-printf "%s\n" "" "    [INFO] Pushing all tags to DockerHub" ""
-printf "${BLUE}"
-curl -s -XPOST $DOCKERHUB_HOST_TEST/birdhouse/finch/version-0.5.5
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/canarieapi/0.3.6
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/pavics-frontend/1.0.6
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/pavics-project-api/0.9.1
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/pyramid-phoenix/pavics-0.2.4
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/pavics-datacatalog/0.6.12
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/geoserver/2.9.4
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/malleefowl/pavics-0.3.6
-curl -s -XPOST $DOCKERHUB_HOST_TEST/birdhouse/flyingpigeon/1.7
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/raven/0.10.1
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/hummingbird/0.6_dev
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/solr/5.2.2
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/ncwms2/2.0.5
-curl -s -XPOST $DOCKERHUB_HOST_TEST/unidata/thredds-docker/4.6.15
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/postgis/2.3
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/magpie/1.7.4
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/twitcher/magpie-1.7.4
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/jupyterhub/1.0.0-20200131
-
-# extra components
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.4-worker
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.4-manager
-curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.4
-printf "${NC}"
-echo
+update_all_images
 
 PUSHED_TAGS_COUNT=18
 
