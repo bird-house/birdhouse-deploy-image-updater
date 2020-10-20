@@ -74,6 +74,14 @@ ONLY_UPDATE_TAGS_HISTORY=true ./main.sh
 # fi
 
 
+# pushing initial tag to repositories
+printf "%s\n" "" "    [INFO] Pushing initial tags to DockerHub" ""
+printf "${BLUE}"
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.3-worker         # not used
+curl -s -XPOST $DOCKERHUB_HOST_TEST/birdhouse/finch/version-0.5.2
+curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/canarieapi/0.3.5
+printf "${NC}"
+
 # run updater CLI
 printf "%s\n" "" "    [TEST] Running updater - no PR to create" ""
 rm -f last-diff-result.log

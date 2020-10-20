@@ -10,7 +10,7 @@
 # REPO_URL=https://github.com/bird-house/birdhouse-deploy
 # PROJECT_NAME=birdhouse-deploy
 # IMAGE_ID="weaver-worker"
-# BUMP_TAG="WEAVER_WORKER_IMAGE"
+# BUMP_TAG="s/(.*pavics\/canarieapi:).*/\\1NEW_TAG_VALUE/"
 # NEW_TAG_VALUE="1.13.2-worker"
 # BUMP_FILE="birdhouse/default.env"
 # GITHUB_TOKEN=""
