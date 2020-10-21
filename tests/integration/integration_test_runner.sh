@@ -115,55 +115,39 @@ ONLY_UPDATE_TAGS_HISTORY=true ./main.sh
 
 update_all_images
 
-# run updater CLI
-printf "%s\n" "" "    [TEST] Running updater - need to create a PR" ""
-rm -f last-diff-result.log
-./main.sh
+IMAGE_COUNT=$(cat ./tests/integration/test.json | jq '.images | length')
+
+for ((n=0; n<$IMAGE_COUNT; n++))
+do
+    CURRENT_IMAGE=$(cat ./tests/integration/test.json | jq '.images['$n']')
+    BUMP_STATEMENT=$(echo $CURRENT_IMAGE | jq '.bump_statement' | tr -d '\"')
+    DIFF_EXPECTATION=$(echo $CURRENT_IMAGE | jq '.diff_expectation')
+    DIFF_EXPECTATION=${DIFF_EXPECTATION:1:-1}    # remove first and last string quotes
+
+    # run updater CLI
+    printf "%s\n" "" "    [TEST] Running updater - need to create a PR" ""
+    rm -f last-diff-result.log
+    ./main.sh
 
 
-### Asserts that diff contains the right thing
-printf "%s\n" "" "    [TEST] ASSERT" ""
-if grep -q 'export FINCH_IMAGE="birdhouse/finch:version-0.5.5"' "last-diff-result.log"; then
-    printf "${GREEN}[INFO] [bump_finch_to_version-0.5.5] The commit content looks good"
-    echo
-    echo
-    cat last-diff-result.log
-    printf "${NC}"
-    ((SUCCESS_COUNT++))
-else
-    printf "${RED}[ERROR] [bump_finch_to_version-0.5.5] wrong commit content."
-    echo
-    echo
-    cat last-diff-result.log
-    printf "${NC}"
-    ((FAILURE_COUNT++))
-fi
-
-
-# run updater CLI
-printf "%s\n" "" "    [TEST] Running updater - need to create a PR for [bump_canarieapi_to_0.3.6]" ""
-rm -f last-diff-result.log
-./main.sh
-
-
-### Asserts that diff contains the right thing
-printf "%s\n" "" "    [TEST] ASSERT" ""
-if grep -q 'image: pavics/canarieapi:0.3.6' "last-diff-result.log"; then
-    printf "${GREEN}[INFO] [bump_canarieapi_to_0.3.6] The commit content looks good"
-    echo
-    echo
-    cat last-diff-result.log
-    printf "${NC}"
-    ((SUCCESS_COUNT++))
-else
-    printf "${RED}[ERROR] [bump_canarieapi_to_0.3.6] wrong commit content."
-    echo
-    echo
-    cat last-diff-result.log
-    printf "${NC}"
-    ((FAILURE_COUNT++))
-fi
-
+    ### Asserts that diff contains the right thing
+    printf "%s\n" "" "    [TEST] ASSERT" ""
+    if grep -q "$DIFF_EXPECTATION" "last-diff-result.log"; then
+        printf "${GREEN}[INFO] [$BUMP_STATEMENT] The commit content looks good"
+        echo
+        echo
+        cat last-diff-result.log
+        printf "${NC}"
+        ((SUCCESS_COUNT++))
+    else
+        printf "${RED}[ERROR] [$BUMP_STATEMENT] wrong commit content."
+        echo
+        echo
+        cat last-diff-result.log
+        printf "${NC}"
+        ((FAILURE_COUNT++))
+    fi
+done
 
 push_initial_tags_all_images
 
