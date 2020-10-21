@@ -9,6 +9,86 @@
             "name" : "canarieapi",
 			"bump_statement" : "bump_canarieapi_to_0.3.6",
 			"diff_expectation" : "image: pavics/canarieapi:0.3.6"
+		},
+		{
+            "name" : "pavics-frontend",
+			"bump_statement" : "bump_pavics-frontend_to_1.0.6",
+			"diff_expectation" : "image: pavics/pavics-frontend:1.0.6"
+		},
+		{
+            "name" : "pavics-project-api",
+			"bump_statement" : "bump_pavics-project-api_to_0.9.1",
+			"diff_expectation" : "image: pavics/pavics-project-api:0.9.1"
+		},
+		{
+            "name" : "pyramid-phoenix",
+			"bump_statement" : "bump_pyramid-phoenix_to_pavics-0.2.4",
+			"diff_expectation" : "image: pavics/pyramid-phoenix:pavics-0.2.4"
+		},
+		{
+            "name" : "pavics-datacatalog",
+			"bump_statement" : "bump_pavics-datacatalog_to_0.6.12",
+			"diff_expectation" : "image: pavics/pavics-datacatalog:0.6.12"
+		},
+		{
+            "name" : "geoserver",
+			"bump_statement" : "bump_geoserver_to_2.9.4",
+			"diff_expectation" : "image: pavics/geoserver:2.9.4"
+		},
+		{
+            "name" : "malleefowl",
+			"bump_statement" : "bump_malleefowl_to_pavics-0.3.6",
+			"diff_expectation" : "image: pavics/malleefowl:pavics-0.3.6"
+		},
+		{
+            "name" : "flyingpigeon",
+			"bump_statement" : "bump_flyingpigeon_to_1.7",
+			"diff_expectation" : "image: birdhouse/flyingpigeon:1.7"
+		},
+		{
+            "name" : "raven",
+			"bump_statement" : "bump_raven_to_0.10.1",
+			"diff_expectation" : "image: pavics/raven:0.10.1"
+		},
+		{
+            "name" : "hummingbird",
+			"bump_statement" : "bump_hummingbird_to_0.6_dev",
+			"diff_expectation" : "image: pavics/hummingbird:0.6_dev"
+		},
+		{
+            "name" : "solr",
+			"bump_statement" : "bump_solr_to_5.2.2",
+			"diff_expectation" : "image: pavics/solr:5.2.2"
+		},
+		{
+            "name" : "ncwms2",
+			"bump_statement" : "bump_ncwms2_to_2.0.5",
+			"diff_expectation" : "image: pavics/ncwms2:2.0.5"
+		},
+		{
+            "name" : "thredds-docker",
+			"bump_statement" : "bump_thredds-docker_to_4.6.15",
+			"diff_expectation" : "export THREDDS_IMAGE=\"unidata/thredds-docker:4.6.15\""
+		},
+		{
+            "name" : "postgis",
+			"bump_statement" : "bump_postgis_to_2.3",
+			"diff_expectation" : "image: pavics/postgis:2.3"
+		},
+		{
+            "name" : "magpie",
+			"bump_statement" : "bump_magpie_to_1.7.4",
+			"diff_expectation" : "image: pavics/magpie:1.7.4"
+		},
+		{
+            "name" : "twitcher",
+			"bump_statement" : "bump_twitcher_to_magpie-1.7.4",
+			"diff_expectation" : "image: pavics/twitcher:magpie-1.7.4"
+		},
+		{
+            "name" : "jupyterhub",
+			"bump_statement" : "bump_jupyterhub_to_1.0.0-20200131",
+			"diff_expectation" : "image: pavics/jupyterhub:1.0.0-20200131"
 		}
     ]
 }
