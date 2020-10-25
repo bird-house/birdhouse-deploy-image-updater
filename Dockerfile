@@ -27,7 +27,7 @@ RUN tar -xvf hub.tgz -C /hub --strip-components 1
 RUN bash /hub/install
 
 # configure github account. Defaults, overridden by GITHUB_USER
-RUN git config --global user.email "bot@crim.ca"
+RUN git config --global user.email "daccs-list@crim.ca"
 RUN git config --global user.name "birdhouse-deploy updater bot"
 RUN hub config --global hub.protocol https
 
