@@ -98,7 +98,7 @@ NEW_TAG_FOUND=false
 if [ ! -f "$OLD_FILEPATH" ]; then
     CURRENT_BUMP_FILE_CONTENT=$(curl --silent $RAW_REPO/$BUMP_FILE)
     TRIMMED_TAG_FILTER=${TAG_FILTER:1:-1}    # remove first and last string chars (^ and $). TODO: cleaner way to do this
-    CURRENT_DEFAULT_TAG=$(echo "$CURRENT_BUMP_FILE_CONTENT" | grep "$DOCKERHUB_REPO" | grep -oE "$TRIMMED_TAG_FILTER")
+    CURRENT_DEFAULT_TAG=$(echo "$CURRENT_BUMP_FILE_CONTENT" | grep "$DOCKERHUB_REPO" | grep -oE "$TRIMMED_TAG_FILTER" | tail -1)
 
     echo "[INFO] [$0] [$IMAGE_ID] No old file found to compare with. Took [$CURRENT_DEFAULT_TAG]"
     echo $CURRENT_DEFAULT_TAG > $OLD_FILEPATH
