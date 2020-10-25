@@ -17,6 +17,7 @@
 # TAG_FILTER="^[0-9]+(\\.[0-9]+)*$"
 # BUMP_TAG="s/(.*pavics\/canarieapi:).*/\\1NEW_TAG_VALUE/"
 # BUMP_FILE="birdhouse/default.env"
+# RAW_REPO="https://raw.githubusercontent.com/Ouranosinc/birdhouse-deploy-for-testing/master"
 
 REQUIRED_ENV_VARS='
     IMAGE_ID
@@ -24,6 +25,7 @@ REQUIRED_ENV_VARS='
     TAG_FILTER
     BUMP_TAG
     BUMP_FILE
+    RAW_REPO
 '
 
 # args parsing
@@ -91,6 +93,23 @@ OLD_FILENAME=$NAME.old
 OLD_FILEPATH=$DATA_DIR/$OLD_FILENAME
 
 NEW_TAG_FOUND=false
+
+# TODO : default tag values
+if [ ! -f "$OLD_FILEPATH" ]; then
+    CURRENT_BUMP_FILE_CONTENT=$(curl --silent $RAW_REPO/$BUMP_FILE)
+    TRIMMED_TAG_FILTER=${TAG_FILTER:1:-1}    # remove first and last string chars (^ and $). TODO: cleaner way to do this
+
+    # echo $CURRENT_BUMP_FILE_CONTENT
+    # echo $DOCKERHUB_REPO
+    # echo $TRIMMED_TAG_FILTER
+    # exit
+
+    CURRENT_DEFAULT_TAG=$(echo $CURRENT_BUMP_FILE_CONTENT | grep "$DOCKERHUB_REPO" | grep -oE "$TRIMMED_TAG_FILTER")
+    echo "[INFO] [$0] [$IMAGE_ID] No old file found to compare with. Took [$CURRENT_DEFAULT_TAG]"
+    echo $CURRENT_DEFAULT_TAG > $OLD_FILEPATH
+fi
+
+exit
 
 if [ -f "$OLD_FILEPATH" ] && [ -f "$NEW_FILEPATH" ]; then
     if diff $OLD_FILEPATH $NEW_FILEPATH &> /dev/null; then

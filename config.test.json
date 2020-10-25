@@ -4,7 +4,8 @@
 
     "project": {
         "name": "birdhouse-deploy-for-testing",
-        "url": "https://github.com/Ouranosinc/birdhouse-deploy-for-testing"
+        "url": "https://github.com/Ouranosinc/birdhouse-deploy-for-testing",
+        "raw_repo": "https://raw.githubusercontent.com/Ouranosinc/birdhouse-deploy-for-testing/master"
     },
 
     "images": [
@@ -94,7 +95,7 @@
             "dockerhub_repo_name": "pavics/hummingbird",
             "bump_tag": "s@(.*pavics\\/hummingbird:).*@\\1NEW_TAG_VALUE@",
             "bump_file": "birdhouse/docker-compose.yml",
-            "tag_filter": "^[0-9]+(\\.[0-9]+)*_[a-z]+"
+            "tag_filter": "^[0-9]+(\\.[0-9]+)*_[a-z]+$"
         },
         {
             "id": "solr",
@@ -150,7 +151,7 @@
             "dockerhub_repo_name": "pavics/jupyterhub",
             "bump_tag": "s@(.*pavics\\/jupyterhub:).*@\\1NEW_TAG_VALUE@",
             "bump_file": "birdhouse/docker-compose.yml",
-            "tag_filter": "^[0-9]+(\\.[0-9]+)*-[0-9]+"
+            "tag_filter": "^[0-9]+(\\.[0-9]+)*-[0-9]+$"
         }
     ]
 }

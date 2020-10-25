@@ -43,6 +43,7 @@ echo "[INFO] USING ENVIRONMENT FILE ${ENV_FILE}"
 
 # set global variables, to be used accross the script call stack
 export REPO_URL=$(cat $CONFIG_FILE | jq '.project.url' | tr -d '\"')
+export RAW_REPO=$(cat $CONFIG_FILE | jq '.project.raw_repo' | tr -d '\"')
 export PROJECT_ORG_REPO=$(echo $REPO_URL | cut -d/ -f4-)
 export PROJECT_NAME=${REPO_URL##*/}
 export ONLY_UPDATE_TAGS_HISTORY=${ONLY_UPDATE_TAGS_HISTORY}
