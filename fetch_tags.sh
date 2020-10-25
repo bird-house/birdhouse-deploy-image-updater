@@ -104,8 +104,6 @@ if [ ! -f "$OLD_FILEPATH" ]; then
     echo $CURRENT_DEFAULT_TAG > $OLD_FILEPATH
 fi
 
-exit
-
 if [ -f "$OLD_FILEPATH" ] && [ -f "$NEW_FILEPATH" ]; then
     if diff $OLD_FILEPATH $NEW_FILEPATH &> /dev/null; then
         echo "[INFO] [$0] [$IMAGE_ID] No new tag found. Exiting."
