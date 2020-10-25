@@ -37,6 +37,9 @@ do
     fi
 done
 
+BLUE='\033[0;36m'
+NC='\033[0m'
+
 echo "[STEP] [$0] [$IMAGE_ID] Fetch tags"
 
 # get latest image tag from dockerhub
@@ -113,7 +116,9 @@ if [ -f "$OLD_FILEPATH" ] && [ -f "$NEW_FILEPATH" ]; then
         NEW_TAG_FOUND=true
 
         # dry run
+        printf "${BLUE}"
         echo "[INFO] [$0] [$IMAGE_ID] Found new tag: $LATEST_TAG"
+        printf "${NC}"
         if [[ $DRY_RUN == 1 ]]; then
             exit 0
         fi
