@@ -94,7 +94,7 @@ OLD_FILEPATH=$DATA_DIR/$OLD_FILENAME
 
 NEW_TAG_FOUND=false
 
-# default tag values, if .old file does not exists
+# default tag values, sync with real repo values, if .old file does not exists
 if [ ! -f "$OLD_FILEPATH" ]; then
     CURRENT_BUMP_FILE_CONTENT=$(curl --silent $RAW_REPO/$BUMP_FILE)
     TRIMMED_TAG_FILTER=${TAG_FILTER:1:-1}    # remove first and last string chars (^ and $). TODO: cleaner way to do this
