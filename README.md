@@ -22,6 +22,8 @@ HISTORIC_TAG_DATA_PATH=/absolute-and-writable-path EXIT_BEFORE_PR=1 CONFIG_FILE=
 HISTORIC_TAG_DATA_PATH=/absolute-and-writable-path ./Taskfile clean-data
 ```
 
+
+
 To run the integration test via Docker:
 
 ```
@@ -30,6 +32,13 @@ HISTORIC_TAG_DATA_PATH=/absolute-and-writable-path ENV_FILE=env.test CONFIG_FILE
 ```
 
 Add the `DRY_RUN=1` parameter, to only list all the images that have new tags available.
+
+
+
+To remove content of HISTORIC_TAG_DATA_PATH:
+```
+HISTORIC_TAG_DATA_PATH=/home/vagrant/projects/_daccs-docker-volume-test ./Taskfile clean-data
+```
 
 
 
