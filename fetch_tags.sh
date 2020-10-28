@@ -114,11 +114,13 @@ if [ -f "$OLD_FILEPATH" ] && [ -f "$NEW_FILEPATH" ]; then
         exit 0
     else
         NEW_TAG_FOUND=true
+        OLD_TAG=$(cat $OLD_FILEPATH)
+
+        printf "${BLUE}"
+        echo "[INFO] [$0] [$IMAGE_ID] Found new tag: $LATEST_TAG, old tag was $OLD_TAG"
+        printf "${NC}"
 
         # dry run
-        printf "${BLUE}"
-        echo "[INFO] [$0] [$IMAGE_ID] Found new tag: $LATEST_TAG"
-        printf "${NC}"
         if [[ $DRY_RUN == 1 ]]; then
             exit 0
         fi
