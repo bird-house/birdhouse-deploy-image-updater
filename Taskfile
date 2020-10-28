@@ -6,6 +6,7 @@ if [[ -z "${HISTORIC_TAG_DATA_PATH}" ]]; then
 fi
 
 function build {
+    docker rm daccs-image-updater:0.1
     docker build -t daccs-image-updater:0.1 .
 }
 
