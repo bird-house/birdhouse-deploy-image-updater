@@ -6,7 +6,11 @@ if [[ -z "${HISTORIC_TAG_DATA_PATH}" ]]; then
 fi
 
 function build {
-    docker rm daccs-image-updater:0.1
+    # clean old container/images, to avoid using too much space
+    docker stop daccs-image-updater:0.1
+    docker rm  $(docker ps -q -a)
+    docker rmi daccs-image-updater:0.1
+
     docker build -t daccs-image-updater:0.1 .
 }
 
