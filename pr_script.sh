@@ -50,8 +50,6 @@ cd $WORKING_DIR
 if [[ ! -d "$PROJECT_NAME" ]]
 then
     echo "[INFO] Not existing project directory, cloning"
-    echo $PROJECT_ORG_REPO
-    exit
     hub clone $PROJECT_ORG_REPO
     cd $PROJECT_NAME
 else
