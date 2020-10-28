@@ -7,8 +7,8 @@ fi
 
 function build {
     # clean old container/images, to avoid using too much space
-    docker stop daccs-image-updater:0.1
-    docker rm  $(docker ps -q -a)
+    # docker stop daccs-image-updater:0.1
+    # docker rm  $(docker ps -q -a)
     docker rmi daccs-image-updater:0.1
 
     docker build -t daccs-image-updater:0.1 .
@@ -20,7 +20,7 @@ function run {
         exit 1
     fi
 
-    docker run -v ${HISTORIC_TAG_DATA_PATH}:/opt/local/src/daccs-image-updater/data \
+    docker run --rm -v ${HISTORIC_TAG_DATA_PATH}:/opt/local/src/daccs-image-updater/data \
      -e GITHUB_TOKEN=$GITHUB_TOKEN \
      -e ENV_FILE=$ENV_FILE \
      -e CONFIG_FILE=$CONFIG_FILE \
@@ -31,7 +31,7 @@ function run {
 }
 
 function test {
-    docker run -v ${HISTORIC_TAG_DATA_PATH}:/opt/local/src/daccs-image-updater/data \
+    docker run --rm -v ${HISTORIC_TAG_DATA_PATH}:/opt/local/src/daccs-image-updater/data \
      -e GITHUB_TOKEN=$GITHUB_TOKEN \
      -e ENV_FILE=$ENV_FILE \
      -e CONFIG_FILE=$CONFIG_FILE \
