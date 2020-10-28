@@ -4,7 +4,7 @@
 
     "project": {
         "name": "birdhouse-deploy",
-        "url": "https://github.com/Ouranosinc/birdhouse-deploy",
+        "url": "https://github.com/bird-house/birdhouse-deploy",
         "raw_repo": "https://raw.githubusercontent.com/bird-house/birdhouse-deploy/master"
     },
 
