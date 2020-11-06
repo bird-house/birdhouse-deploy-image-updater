@@ -152,6 +152,14 @@
             "bump_tag": "s@(.*pavics\\/jupyterhub:).*@\\1NEW_TAG_VALUE@",
             "bump_file": "birdhouse/docker-compose.yml",
             "tag_filter": "^[0-9]+(\\.[0-9]+)*-[0-9]+$"
+        },
+        {
+            "id": "workflow-tests",
+            "url": "https://hub.docker.com/r/pavics/workflow-tests",
+            "dockerhub_repo_name": "pavics/workflow-tests",
+            "bump_tag": "s@(.*pavics\\/workflow-tests:).*@\\1NEW_TAG_VALUE\"@",
+            "bump_file": "birdhouse/default.env",
+            "tag_filter": "^\\d+$"
         }
     ]
 }
