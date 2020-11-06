@@ -63,6 +63,7 @@ function push_initial_tags_all_images {
     curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/magpie/1.7.3
     curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/twitcher/magpie-1.7.3
     curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/jupyterhub/1.0.0-20200130
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/workflow-tests/201026
 
     # extra components
     curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.3-worker
@@ -95,6 +96,7 @@ function update_all_images {
     curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/magpie/1.7.4
     curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/twitcher/magpie-1.7.4
     curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/jupyterhub/1.0.0-20200131
+    curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/workflow-tests/201027
 
     # extra components
     curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/weaver/1.13.4-worker
