@@ -119,7 +119,7 @@
             "dockerhub_repo_name": "unidata/thredds-docker",
             "bump_tag": "s@(.*unidata\\/thredds-docker:).*@\\1NEW_TAG_VALUE\"@",
             "bump_file": "birdhouse/default.env",
-            "tag_filter": "^[0-9]+(\\.[0-9]+)*$"
+            "tag_filter": "^[0-9]+(\\.[0-9]+)$"
         },
         {
             "id": "postgis",
