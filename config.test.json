@@ -114,14 +114,6 @@
             "tag_filter": "^[0-9]+(\\.[0-9]+)*$"
         },
         {
-            "id": "thredds-docker",
-            "url": "https://hub.docker.com/r/unidata/thredds-docker",
-            "dockerhub_repo_name": "unidata/thredds-docker",
-            "bump_tag": "s@(.*unidata\\/thredds-docker:).*@\\1NEW_TAG_VALUE\"@",
-            "bump_file": "birdhouse/default.env",
-            "tag_filter": "^[0-9]+(\\.[0-9]+)$"
-        },
-        {
             "id": "postgis",
             "url": "https://hub.docker.com/r/pavics/postgis",
             "dockerhub_repo_name": "pavics/postgis",
@@ -159,7 +151,7 @@
             "dockerhub_repo_name": "pavics/workflow-tests",
             "bump_tag": "s@(.*pavics\\/workflow-tests:).*@\\1NEW_TAG_VALUE\"@",
             "bump_file": "birdhouse/default.env",
-            "tag_filter": "^\\d+$"
+            "tag_filter": "^[0-9]+$"
         }
     ]
 }

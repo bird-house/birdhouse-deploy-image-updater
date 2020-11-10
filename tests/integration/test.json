@@ -66,11 +66,6 @@
 			"diff_expectation" : "image: pavics/ncwms2:2.0.5"
 		},
 		{
-            "name" : "thredds-docker",
-			"bump_statement" : "bump_thredds-docker_to_4.6.15",
-			"diff_expectation" : "export THREDDS_IMAGE=\"unidata/thredds-docker:4.6.15\""
-		},
-		{
             "name" : "postgis",
 			"bump_statement" : "bump_postgis_to_2.3",
 			"diff_expectation" : "image: pavics/postgis:2.3"

@@ -4,9 +4,29 @@
 
 ## Priority
 
-modify the search & replace, since version tags won't always be structured the same way
-    suggestion : add second pattern, for current version replacement
-    handle multiple default.env file since each component now have their own default.env
+none
+
+
+## thredds-docker config
+
+seems to trigger false positive, so removed from configs
+
+        {
+            "id": "thredds-docker",
+            "url": "https://hub.docker.com/r/unidata/thredds-docker",
+            "dockerhub_repo_name": "unidata/thredds-docker",
+            "bump_tag": "s@(.*unidata\\/thredds-docker:).*@\\1NEW_TAG_VALUE\"@",
+            "bump_file": "birdhouse/default.env",
+            "tag_filter": "^[0-9]+(\\.[0-9]+)$"
+        }
+
+
+for tests:
+        {
+            "name" : "thredds-docker",
+			"bump_statement" : "bump_thredds-docker_to_4.6.15",
+			"diff_expectation" : "export THREDDS_IMAGE=\"unidata/thredds-docker:4.6.15\""
+		},
 
 
 

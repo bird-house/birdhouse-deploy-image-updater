@@ -58,7 +58,7 @@ function push_initial_tags_all_images {
     curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/hummingbird/0.5_dev
     curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/solr/5.2.1
     curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/ncwms2/2.0.4
-    curl -s -XPOST $DOCKERHUB_HOST_TEST/unidata/thredds-docker/4.6.14
+    # curl -s -XPOST $DOCKERHUB_HOST_TEST/unidata/thredds-docker/4.6.14
     curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/postgis/2.2
     curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/magpie/1.7.3
     curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/twitcher/magpie-1.7.3
@@ -91,7 +91,7 @@ function update_all_images {
     curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/hummingbird/0.6_dev
     curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/solr/5.2.2
     curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/ncwms2/2.0.5
-    curl -s -XPOST $DOCKERHUB_HOST_TEST/unidata/thredds-docker/4.6.15
+    # curl -s -XPOST $DOCKERHUB_HOST_TEST/unidata/thredds-docker/4.6.15
     curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/postgis/2.3
     curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/magpie/1.7.4
     curl -s -XPOST $DOCKERHUB_HOST_TEST/pavics/twitcher/magpie-1.7.4
