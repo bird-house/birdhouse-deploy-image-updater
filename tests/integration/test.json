@@ -84,6 +84,11 @@
             "name" : "jupyterhub",
 			"bump_statement" : "bump_jupyterhub_to_1.0.0-20200131",
 			"diff_expectation" : "image: pavics/jupyterhub:1.0.0-20200131"
+		},
+		{
+            "name" : "workflow-tests",
+			"bump_statement" : "bump_workflow-tests_to_201027",
+			"diff_expectation" : "export DOCKER_NOTEBOOK_IMAGE=\"pavics/workflow-tests:201027\""
 		}
     ]
 }
